@@ -1,0 +1,68 @@
+/* form */
+form {
+  padding-right: 20px;
+  margin-top: 12px;
+}
+#applicationForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+#applicationForm input,
+#applicationForm select {
+  box-shadow: none;
+  padding: 5px;
+  width: 100%;
+}
+
+form input,
+form select {
+  border-radius: 8px;
+  border: 1px solid black;
+  font-size: medium;
+  background-color: white;
+}
+#notes {
+  font-size: 17px;
+}
+#jobType,
+#status {
+  line-height: 18px;
+}
+/*validation error */
+.validation-error {
+  color: red;
+  line-height: 0.7;
+  font-size: small;
+}
+
+/*Button CSS */
+#submitBtn {
+  background-color: rgb(10, 10, 10);
+  color: white;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+#submitBtn:hover {
+  background-color: rgb(109, 109, 109);
+  cursor: pointer;
+}
+button {
+  background-color: rgb(10, 10, 10);
+  color: white;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 14px;
+  font-size: 12px;
+}
+button:hover {
+  background-color: rgb(109, 109, 109);
+  cursor: pointer;
+}

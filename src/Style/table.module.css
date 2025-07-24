@@ -1,0 +1,39 @@
+/* table css */
+
+td {
+  padding: 5px;
+  text-align: start;
+}
+tr {
+  border: 1px solid black;
+}
+th {
+  border-bottom: 2px solid black;
+  padding: 3px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  text-align: start;
+  min-width: 120px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+button.edit,
+button.delete {
+  margin-right: 5px;
+}
+#clearBtn {
+  display: none;
+}
+/*edit delete btn */
+.delete,
+.edit {
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 8px;
+  width: 70px;
+  height: 23px;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 2px 2px bisque;
+}
