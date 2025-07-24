@@ -2,8 +2,6 @@ import styles from "../Style/form.module.css";
 import { useState } from "react";
 
 const Form = () => {
-  const [formState, setFormState] = useState({});
-
   const handleSubmit = () => {
     console.log("submit");
   };
@@ -18,15 +16,9 @@ const Form = () => {
         <div id={styles.applicationForm}>
           <label>Company Name:</label>
           <input type="text" placeholder="Company name" />
-          <span className="validation-error" id="erorCompany">
-            Enter company name
-          </span>
 
           <label>Role:</label>
           <input type="text" id="role" placeholder="Enter role" />
-          <span className="validation-error" id="erorJobRole">
-            Enter job role
-          </span>
 
           <label>Job Type:</label>
           <select id="jobType">
@@ -37,21 +29,12 @@ const Form = () => {
             <option value="Onsite">Onsite</option>
             <option value="Hybrid">Hybrid</option>
           </select>
-          <span className="validation-error" id="erorJobType">
-            Select job type
-          </span>
 
           <label id="locationLabel">Location:</label>
           <input type="text" id="location" placeholder="Enter location" />
-          <span className="validation-error" id="erorLocation">
-            Enter location
-          </span>
 
           <label>Application Date:</label>
           <input type="date" id="date" />
-          <span className="validation-error" id="erorDate">
-            Select date
-          </span>
 
           <label>Application Status:</label>
           <select id="status" className="form-control">
@@ -63,9 +46,6 @@ const Form = () => {
             <option value="Rejected">Rejected</option>
             <option value="Hired">Hired</option>
           </select>
-          <span className="validation-error" id="erorJobStatus">
-            Select job status
-          </span>
 
           <label>Notes:</label>
           <textarea id="notes"></textarea>
