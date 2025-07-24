@@ -1,10 +1,29 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+}
+.hero-section {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.main-form {
+  flex: 0 0 20%;
+}
+.main-table {
+  flex: 0 0 80%;
+  overflow-x: auto;
 }
 
-.card {
-  padding: 2em;
+/* media queies */
+@media screen and (max-width: 600px) {
+  .hero-section {
+    flex-direction: column;
+  }
+  .main-form,
+  .main-table {
+    flex: 0 0 100%;
+  }
+  .main-table{
+    margin-top: 8px;
+  }
 }
