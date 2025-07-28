@@ -1,4 +1,4 @@
-export interface formInterFace {
+export interface formInterface {
   id: null | string;
   company: string;
   role: string;

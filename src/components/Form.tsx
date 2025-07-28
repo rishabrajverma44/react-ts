@@ -1,11 +1,15 @@
 import type React from "react";
 import styles from "../Style/form.module.css";
-import type { formInterFace } from "../types/types";
+import type { formInterface } from "../types/types";
 import { useState } from "react";
+import {
+  validationForForm,
+  validationForSingleField,
+} from "../formValidation/validation";
 
-const defaultForm: formInterFace = {
+const defaultForm: formInterface = {
   id: null,
-  company: "",
+  company: "sms",
   role: "",
   jobtype: "",
   location: "",
@@ -15,21 +19,32 @@ const defaultForm: formInterFace = {
 };
 
 const Form = () => {
-  const [form, setForm] = useState<formInterFace>(defaultForm);
+  const [form, setForm] = useState<formInterface>(defaultForm);
+  //instead of using null assertion we can use utility type partial of formInterface
+  const [errors, setErrors] = useState<Partial<formInterface>>({});
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => {
+  const handleChange = (e: React.ChangeEvent<any>) => {
     const { name, value } = e.target;
+    //set all form values based on there names via controlled react form handler function
     setForm((pervious) => ({ ...pervious, [name]: value }));
-    console.log(name);
   };
-
+  const validationCheck = (e: any) => {
+    const { name, value } = e.target;
+    const validationErrors = validationForSingleField(form, name, value);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors((errors) => ({ ...errors, ...validationErrors }));
+      return;
+    }
+  };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("submit");
+    const validationErrors = validationForForm(form);
+    console.log(validationErrors);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+    setErrors({});
   };
 
   return (
@@ -42,9 +57,13 @@ const Form = () => {
             placeholder="Company name"
             name="company"
             onChange={handleChange}
+            onBlur={validationCheck}
             value={form.company}
+            style={{ borderColor: errors.company ? "red" : "initial" }}
           />
-
+          {errors.company && (
+            <span style={{ color: "red" }}>{errors.company}</span>
+          )}
           <label>Role:</label>
           <input
             type="text"
@@ -53,14 +72,18 @@ const Form = () => {
             placeholder="Enter role"
             value={form.role}
             onChange={handleChange}
+            onBlur={validationCheck}
+            style={{ borderColor: errors.role ? "red" : "initial" }}
           />
-
+          {errors.role && <span style={{ color: "red" }}>{errors.role}</span>}
           <label>Job Type:</label>
           <select
             id="jobType"
             name="jobtype"
             onChange={handleChange}
-            value={form.jobtype}>
+            onBlur={validationCheck}
+            value={form.jobtype}
+            style={{ borderColor: errors.jobtype ? "red" : "initial" }}>
             <option value="" disabled>
               Select job type
             </option>
@@ -68,6 +91,9 @@ const Form = () => {
             <option value="Onsite">Onsite</option>
             <option value="Hybrid">Hybrid</option>
           </select>
+          {errors.jobtype && (
+            <span style={{ color: "red" }}>{errors.jobtype}</span>
+          )}
 
           <label id="locationLabel">Location:</label>
           <input
@@ -77,7 +103,12 @@ const Form = () => {
             placeholder="Enter location"
             value={form.location}
             onChange={handleChange}
+            onBlur={validationCheck}
+            style={{ borderColor: errors.location ? "red" : "initial" }}
           />
+          {errors.location && (
+            <span style={{ color: "red" }}>{errors.location}</span>
+          )}
 
           <label>Application Date:</label>
           <input
@@ -85,8 +116,11 @@ const Form = () => {
             id="date"
             name="date"
             onChange={handleChange}
+            onBlur={validationCheck}
             value={form.date}
+            style={{ borderColor: errors.date ? "red" : "initial" }}
           />
+          {errors.date && <span style={{ color: "red" }}>{errors.date}</span>}
 
           <label>Application Status:</label>
           <select
@@ -94,7 +128,9 @@ const Form = () => {
             className="form-control"
             name="status"
             onChange={handleChange}
-            value={form.status}>
+            onBlur={validationCheck}
+            value={form.status}
+            style={{ borderColor: errors.status ? "red" : "initial" }}>
             <option value="" disabled>
               Select status
             </option>
@@ -103,6 +139,9 @@ const Form = () => {
             <option value="Rejected">Rejected</option>
             <option value="Hired">Hired</option>
           </select>
+          {errors.status && (
+            <span style={{ color: "red" }}>{errors.status}</span>
+          )}
 
           <label>Notes:</label>
           <textarea
