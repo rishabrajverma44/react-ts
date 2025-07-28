@@ -21,7 +21,6 @@ export function validationForSingleField(
 ) {
   //partrial utility type used for giving types of an object wich accepts (key, type)
   const errors: Partial<Record<keyof formInterface, string>> = {};
-  console.log(name);
   switch (name) {
     case "company":
       !value.trim()
@@ -54,21 +53,5 @@ export function validationForSingleField(
         : (errors.status = "");
       break;
   }
-
-  // if (!form.company.trim() && name === "company") {
-  //   errors.company = "Company is required !";
-  // }
-  // if (!form.role.trim() && name === "role") {
-  //   errors.role = "Role is required !";
-  // }
-  // if (form.jobtype !== "Remote" && !form.location.trim())
-  //   errors.location = "Location is required !";
-  // if (!form.date.trim()) errors.date = "Date is required !";
-  // if (!form.status.trim()) errors.status = "Status is required !";
-
-  // if (form.jobtype !== "Remote" && !form.location.trim())
-  //   errors.location = "Location is required !";
-  // if (!form.date.trim()) errors.date = "Date is required !";
-  // if (!form.status.trim()) errors.status = "Status is required !";
   return errors;
 }

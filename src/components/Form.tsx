@@ -1,15 +1,16 @@
 import type React from "react";
 import styles from "../Style/form.module.css";
 import type { formInterface } from "../types/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   validationForForm,
   validationForSingleField,
 } from "../formValidation/validation";
+import { useFormContext } from "../context/FormContext";
 
 const defaultForm: formInterface = {
   id: null,
-  company: "sms",
+  company: "",
   role: "",
   jobtype: "",
   location: "",
@@ -19,6 +20,7 @@ const defaultForm: formInterface = {
 };
 
 const Form = () => {
+  const formsCtx = useFormContext();
   const [form, setForm] = useState<formInterface>(defaultForm);
   //instead of using null assertion we can use utility type partial of formInterface
   const [errors, setErrors] = useState<Partial<formInterface>>({});
@@ -38,13 +40,17 @@ const Form = () => {
   };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const validationErrors = validationForForm(form);
-    console.log(validationErrors);
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
+    // const validationErrors = validationForForm(form);
+    // if (Object.keys(validationErrors).length > 0) {
+    //   setErrors(validationErrors);
+    //   return;
+    // }
     setErrors({});
+    console.log(form);
+    if (formsCtx.createForms) {
+      formsCtx.createForms(form);
+    }
+    console.log("forms...", formsCtx.forms);
   };
 
   return (

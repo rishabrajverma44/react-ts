@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useFormContext } from "../context/FormContext";
 import styles from "../Style/table.module.css";
 const Table = () => {
   return (
