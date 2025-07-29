@@ -5,7 +5,7 @@ form {
 #applicationForm {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 2px;
   margin-top: 10px;
 }
 #applicationForm input,
@@ -15,6 +15,9 @@ form {
   width: 100%;
 }
 
+label {
+  margin-top: 7px;
+}
 form input,
 form select {
   border-radius: 8px;
@@ -22,9 +25,9 @@ form select {
   font-size: medium;
 }
 .notes {
-  font-size: 15px;
+  font-size: 17px;
   padding: 5px;
-  height: 50px;
+  min-height: 50px;
   border-radius: 8px;
   border: 1px solid black;
   field-sizing: content;
@@ -34,10 +37,10 @@ form select {
   line-height: 18px;
 }
 /*validation error */
-.validation-error {
+.validation_error {
   color: red;
   line-height: 0.7;
-  font-size: small;
+  font-size: medium;
 }
 
 /*Button CSS */
@@ -46,6 +49,7 @@ form select {
   color: white;
   padding-left: 4px;
   padding-right: 4px;
+  margin-top: 12px;
   padding-top: 6px;
   padding-bottom: 6px;
   border-radius: 8px;

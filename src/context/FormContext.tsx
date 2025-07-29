@@ -7,6 +7,12 @@ import React, {
 } from "react";
 import type { formInterface } from "../types/types";
 import { getFromStorage, saveToStorage } from "../DataBase/localStorage";
+import "../DataBase/indexDB";
+import {
+  addFormINDEXDB,
+  deleteFormsINDEXDB,
+  updateFormINDEX,
+} from "../DataBase/indexDB";
 
 //context types
 type FormContextType = {
@@ -15,7 +21,7 @@ type FormContextType = {
   setCurrentForm: React.Dispatch<SetStateAction<formInterface | null>>;
   setterFunction: (formID?: string) => void;
   createForms: (form: Omit<formInterface, "id">) => void;
-  updateForm: (id: string, form: Omit<formInterface, "id">) => void;
+  updateForm: (id: string, form: formInterface) => void;
   deleteForm: (id: string) => void;
 };
 
@@ -57,18 +63,22 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
     setForms((prev) => {
       return [...prev, newForm];
     });
+    addFormINDEXDB(newForm);
     setCurrentForm(null);
   };
 
   const deleteForm = (formID: string) => {
     setForms((prev) => prev.filter((form) => form.id !== formID));
+    deleteFormsINDEXDB(formID);
   };
 
-  const updateForm = (id: string, updatedForm: Omit<formInterface, "id">) => {
+  const updateForm = (id: string, updateForm: formInterface) => {
     setForms((pre) =>
-      pre.map((form) => (form.id === id ? { ...form, ...updatedForm } : form))
+      pre.map((form) => (form.id === id ? { ...form, ...updateForm } : form))
     );
     setCurrentForm(null);
+    console.log(updateForm);
+    updateFormINDEX(updateForm);
   };
 
   useEffect(() => {

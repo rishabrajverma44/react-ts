@@ -38,8 +38,7 @@ const Form = () => {
       return;
     }
   };
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     const validationErrors = validationForForm(form);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -55,21 +54,21 @@ const Form = () => {
     ) {
       formsCtx.updateForm(form.id, form);
     }
+    setForm(defaultForm);
   };
   useEffect(() => {
-    if (formsCtx.currentForm) {
+    if (formsCtx.currentForm !== null) {
       setForm(formsCtx.currentForm);
-    } else if (formsCtx.currentForm === null) {
-      setForm(defaultForm);
     }
   }, [formsCtx.currentForm]);
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <div id={styles.applicationForm}>
-          <label>Company Name:</label>
+      <form>
+        <div aria-label="Job application form" id={styles.applicationForm}>
+          <label htmlFor="company">Company Name:</label>
           <input
+            id="company"
             type="text"
             placeholder="Company name"
             name="company"
@@ -79,12 +78,12 @@ const Form = () => {
             style={{ borderColor: errors.company ? "red" : "initial" }}
           />
           {errors.company && (
-            <span style={{ color: "red" }}>{errors.company}</span>
+            <span className={styles.validation_error}>{errors.company}</span>
           )}
-          <label>Role:</label>
+          <label htmlFor="role">Role:</label>
           <input
-            type="text"
             id="role"
+            type="text"
             name="role"
             placeholder="Enter role"
             value={form.role}
@@ -92,10 +91,12 @@ const Form = () => {
             onBlur={validationCheck}
             style={{ borderColor: errors.role ? "red" : "initial" }}
           />
-          {errors.role && <span style={{ color: "red" }}>{errors.role}</span>}
-          <label>Job Type:</label>
+          {errors.role && (
+            <span className={styles.validation_error}>{errors.role}</span>
+          )}
+          <label htmlFor="jobtype">Job Type:</label>
           <select
-            id="jobType"
+            id="jobtype"
             name="jobtype"
             onChange={handleChange}
             onBlur={validationCheck}
@@ -109,13 +110,13 @@ const Form = () => {
             <option value="Hybrid">Hybrid</option>
           </select>
           {errors.jobtype && (
-            <span style={{ color: "red" }}>{errors.jobtype}</span>
+            <span className={styles.validation_error}>{errors.jobtype}</span>
           )}
 
-          <label id="locationLabel">Location:</label>
+          <label htmlFor="location">Location:</label>
           <input
-            type="text"
             id="location"
+            type="text"
             name="location"
             placeholder="Enter location"
             value={form.location}
@@ -124,22 +125,24 @@ const Form = () => {
             style={{ borderColor: errors.location ? "red" : "initial" }}
           />
           {errors.location && (
-            <span style={{ color: "red" }}>{errors.location}</span>
+            <span className={styles.validation_error}>{errors.location}</span>
           )}
 
-          <label>Application Date:</label>
+          <label htmlFor="date">Application Date:</label>
           <input
-            type="date"
             id="date"
+            type="date"
             name="date"
             onChange={handleChange}
             onBlur={validationCheck}
             value={form.date}
             style={{ borderColor: errors.date ? "red" : "initial" }}
           />
-          {errors.date && <span style={{ color: "red" }}>{errors.date}</span>}
+          {errors.date && (
+            <span className={styles.validation_error}>{errors.date}</span>
+          )}
 
-          <label>Application Status:</label>
+          <label htmlFor="status">Application Status:</label>
           <select
             id="status"
             name="status"
@@ -156,17 +159,17 @@ const Form = () => {
             <option value="Hired">Hired</option>
           </select>
           {errors.status && (
-            <span style={{ color: "red" }}>{errors.status}</span>
+            <span className={styles.validation_error}>{errors.status}</span>
           )}
 
-          <label>Notes:</label>
+          <label htmlFor="notes">Notes:</label>
           <textarea
             id="notes"
             className={styles.notes}
             name="notes"
             value={form.notes}
             onChange={handleChange}></textarea>
-          <button type="submit" id="submitBtn">
+          <button type="button" onClick={handleSubmit} id={styles.submitBtn}>
             {form.id ? "Update" : "Add"} Application
           </button>
         </div>
