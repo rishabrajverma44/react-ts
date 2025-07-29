@@ -122,6 +122,7 @@ const Form = () => {
             value={form.location}
             onChange={handleChange}
             onBlur={validationCheck}
+            disabled={form.jobtype === "Remote" ? true : false}
             style={{ borderColor: errors.location ? "red" : "initial" }}
           />
           {errors.location && (

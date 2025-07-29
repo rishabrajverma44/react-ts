@@ -36,7 +36,9 @@ const Table = () => {
                 <td role="cell">{item.company}</td>
                 <td role="cell">{item.date}</td>
                 <td role="cell">{item.jobtype}</td>
-                <td role="cell">{item.location}</td>
+                <td role="cell">
+                  {item.location === "" ? "N/A" : item.location}
+                </td>
                 <td role="cell">{item.role}</td>
                 <td role="cell">{item.status}</td>
                 <td role="cell">{item.notes}</td>

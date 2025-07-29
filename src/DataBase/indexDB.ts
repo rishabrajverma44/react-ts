@@ -1,8 +1,8 @@
 import type { formInterface } from "../types/types";
 
 const DB_NAME = "JobAplication_ts";
-const STORE_NAME = "forms";
-
+const STORE_NAME = "JobAplicationForms";
+//creation of DB table(store)
 const openINDEXDB = (): Promise<IDBDatabase> => {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(DB_NAME, 1);
@@ -20,6 +20,7 @@ const openINDEXDB = (): Promise<IDBDatabase> => {
     };
   });
 };
+
 // Add a new form
 const addFormINDEXDB = async (form: formInterface): Promise<formInterface> => {
   const db = await openINDEXDB();
