@@ -1,14 +1,13 @@
 /* table css */
 
 td {
-  padding: 5px;
+  padding: 2px;
   text-align: start;
-}
-tr {
   border: 1px solid black;
 }
+
 th {
-  border-bottom: 2px solid black;
+  border: 2px solid black;
   padding: 3px;
   padding-top: 9px;
   padding-bottom: 9px;
@@ -27,13 +26,19 @@ button.delete {
   display: none;
 }
 /*edit delete btn */
-.delete,
-.edit {
+.action {
+  min-width: 120px;
+  display: flex;
+  justify-content: space-around;
+  gap: 2px;
+}
+.delete_btn,
+.edit_btn {
   border: 1px solid rgb(0, 0, 0);
   border-radius: 8px;
-  width: 70px;
+  width: 60px;
   height: 23px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   box-shadow: 0 2px 2px bisque;
 }
