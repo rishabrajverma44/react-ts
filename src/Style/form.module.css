@@ -1,7 +1,6 @@
 /* form */
 form {
   padding-right: 20px;
-  margin-top: 12px;
 }
 #applicationForm {
   display: flex;
@@ -21,10 +20,14 @@ form select {
   border-radius: 8px;
   border: 1px solid black;
   font-size: medium;
-  background-color: white;
 }
-#notes {
-  font-size: 17px;
+.notes {
+  font-size: 15px;
+  padding: 5px;
+  height: 50px;
+  border-radius: 8px;
+  border: 1px solid black;
+  field-sizing: content;
 }
 #jobType,
 #status {

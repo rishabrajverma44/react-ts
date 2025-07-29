@@ -1,0 +1,11 @@
+.header {
+  text-align: center;
+}
+.header > h2 {
+  line-height: normal;
+  margin: 0%;
+}
+.header > p {
+  margin: 0px;
+  margin-bottom: 10px;
+}

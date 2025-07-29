@@ -1,7 +1,7 @@
 import type React from "react";
 import styles from "../Style/form.module.css";
 import type { formInterface } from "../types/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   validationForForm,
   validationForSingleField,
@@ -40,16 +40,29 @@ const Form = () => {
   };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // const validationErrors = validationForForm(form);
-    // if (Object.keys(validationErrors).length > 0) {
-    //   setErrors(validationErrors);
-    //   return;
-    // }
+    const validationErrors = validationForForm(form);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
     setErrors({});
-    if (formsCtx.createForms) {
+    if (formsCtx.createForms && form.id === null) {
       formsCtx.createForms(form);
+    } else if (
+      form.id !== null &&
+      form.id !== undefined &&
+      form.id.length > 0
+    ) {
+      formsCtx.updateForm(form.id, form);
     }
   };
+  useEffect(() => {
+    if (formsCtx.currentForm) {
+      setForm(formsCtx.currentForm);
+    } else if (formsCtx.currentForm === null) {
+      setForm(defaultForm);
+    }
+  }, [formsCtx.currentForm]);
 
   return (
     <div>
@@ -129,7 +142,6 @@ const Form = () => {
           <label>Application Status:</label>
           <select
             id="status"
-            className="form-control"
             name="status"
             onChange={handleChange}
             onBlur={validationCheck}
@@ -150,12 +162,12 @@ const Form = () => {
           <label>Notes:</label>
           <textarea
             id="notes"
+            className={styles.notes}
             name="notes"
             value={form.notes}
             onChange={handleChange}></textarea>
-
           <button type="submit" id="submitBtn">
-            Add Application
+            {form.id ? "Update" : "Add"} Application
           </button>
         </div>
       </form>

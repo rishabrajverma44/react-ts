@@ -43,7 +43,13 @@ const Table = () => {
                 <td>{item.status}</td>
                 <td>{item.notes}</td>
                 <td>
-                  <button className={styles.edit_btn}>Edit</button>
+                  <button
+                    onClick={() =>
+                      formCtx.setterFunction(item.id !== null ? item.id : "")
+                    }
+                    className={styles.edit_btn}>
+                    Edit
+                  </button>
                   <button className={styles.delete_btn}>Delete</button>
                 </td>
               </tr>

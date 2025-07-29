@@ -1,10 +1,19 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type SetStateAction,
+} from "react";
 import type { formInterface } from "../types/types";
 import { getFromStorage, saveToStorage } from "../DataBase/localStorage";
 
 //context types
 type FormContextType = {
   forms: formInterface[];
+  currentForm: formInterface | null;
+  setCurrentForm: React.Dispatch<SetStateAction<formInterface | null>>;
+  setterFunction: (formID?: string) => void;
   createForms: (form: Omit<formInterface, "id">) => void;
   updateForm: (id: string, form: Omit<formInterface, "id">) => void;
   deleteForm: (id: string) => void;
@@ -25,25 +34,30 @@ interface FormContextProps {
 }
 
 export const FormContextProvider: React.FC<FormContextProps> = (props) => {
+  const [currentForm, setCurrentForm] = useState<formInterface | null>(null);
   const [forms, setForms] = useState<formInterface[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const generateId = (): string => {
     return `${Math.random().toString(36).slice(2, 9)}`;
   };
-
-  const setForm = (formID: string) => {};
-
+  const setterFunction = (formID?: string) => {
+    if (formID) {
+      setCurrentForm(() => {
+        return forms.find((item) => item.id === formID) || null;
+      });
+    }
+  };
   const createForms = (currentForm: Omit<formInterface, "id">) => {
     const id = generateId();
     const newForm: formInterface = {
-      id: id,
       ...currentForm,
+      id: id,
     };
-
     setForms((prev) => {
       return [...prev, newForm];
     });
+    setCurrentForm(null);
   };
 
   const deleteForm = (formID: string) => {
@@ -54,6 +68,7 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
     setForms((pre) =>
       pre.map((form) => (form.id === id ? { ...form, ...updatedForm } : form))
     );
+    setCurrentForm(null);
   };
 
   useEffect(() => {
@@ -67,7 +82,15 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
 
   return (
     <FormContext.Provider
-      value={{ forms, createForms, updateForm, deleteForm }}>
+      value={{
+        forms,
+        currentForm,
+        setCurrentForm,
+        setterFunction,
+        createForms,
+        updateForm,
+        deleteForm,
+      }}>
       {props.children}
     </FormContext.Provider>
   );
