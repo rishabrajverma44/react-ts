@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import type { formInterface } from "../types/types";
+import { getFromStorage, saveToStorage } from "../DataBase/localStorage";
 
 //context types
 type FormContextType = {
@@ -25,17 +26,24 @@ interface FormContextProps {
 
 export const FormContextProvider: React.FC<FormContextProps> = (props) => {
   const [forms, setForms] = useState<formInterface[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const generateId = (): string => {
     return `${Math.random().toString(36).slice(2, 9)}`;
   };
 
-  const createForms = (form: Omit<formInterface, "id">) => {
+  const setForm = (formID: string) => {};
+
+  const createForms = (currentForm: Omit<formInterface, "id">) => {
+    const id = generateId();
     const newForm: formInterface = {
-      id: generateId(),
-      ...form,
+      id: id,
+      ...currentForm,
     };
-    setForms((prev) => [...prev, newForm]);
+
+    setForms((prev) => {
+      return [...prev, newForm];
+    });
   };
 
   const deleteForm = (formID: string) => {
@@ -47,6 +55,16 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
       pre.map((form) => (form.id === id ? { ...form, ...updatedForm } : form))
     );
   };
+
+  useEffect(() => {
+    setForms(getFromStorage());
+    setIsLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (isLoaded) saveToStorage(forms);
+  }, [forms, isLoaded]);
+
   return (
     <FormContext.Provider
       value={{ forms, createForms, updateForm, deleteForm }}>

@@ -1,7 +1,7 @@
 import type React from "react";
 import styles from "../Style/form.module.css";
 import type { formInterface } from "../types/types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   validationForForm,
   validationForSingleField,
@@ -46,11 +46,9 @@ const Form = () => {
     //   return;
     // }
     setErrors({});
-    console.log(form);
     if (formsCtx.createForms) {
       formsCtx.createForms(form);
     }
-    console.log("forms...", formsCtx.forms);
   };
 
   return (

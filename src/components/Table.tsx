@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { useFormContext } from "../context/FormContext";
 import styles from "../Style/table.module.css";
+import { useFormContext } from "../context/FormContext";
 const Table = () => {
+  const formCtx = useFormContext();
   return (
     <div>
       <table>
@@ -18,7 +19,7 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
+          {/* <tr>
             <td>company</td>
             <td>role</td>
             <td>jobType</td>
@@ -30,7 +31,24 @@ const Table = () => {
               <button className={styles.edit_btn}>Edit</button>
               <button className={styles.delete_btn}>Delete</button>
             </td>
-          </tr>
+          </tr> */}
+          {formCtx.forms.map((item, index) => {
+            return (
+              <tr key={index}>
+                <td>{item.company}</td>
+                <td>{item.date}</td>
+                <td>{item.jobtype}</td>
+                <td>{item.location}</td>
+                <td>{item.role}</td>
+                <td>{item.status}</td>
+                <td>{item.notes}</td>
+                <td>
+                  <button className={styles.edit_btn}>Edit</button>
+                  <button className={styles.delete_btn}>Delete</button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
