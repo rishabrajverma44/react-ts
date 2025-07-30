@@ -90,22 +90,24 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
     }
   };
   //header sum data
-  const headerSumData = () => {
+  const headerSumData = (data: formInterface[]) => {
     const headerObject = {
-      totalApplication: forms.length,
-      totalApplied: forms.filter((form) => form.status === "Applied").length,
-      totalInterviewing: forms.filter((form) => form.status === "Interviewing")
+      totalApplication: data.length,
+      totalApplied: data.filter((form) => form.status === "Applied").length,
+      totalInterviewing: data.filter((form) => form.status === "Interviewing")
         .length,
-      totalHired: forms.filter((form) => form.status === "Rejected").length,
-      totalRejected: forms.filter((form) => form.status === "Rejected").length,
+      totalHired: data.filter((form) => form.status === "Rejected").length,
+      totalRejected: data.filter((form) => form.status === "Rejected").length,
     };
     setHeaderData(headerObject);
   };
   //index db call
   async function getINDEXDBData() {
-    const data = await getAllFormsINDEXDB();
+    const data: formInterface[] = await getAllFormsINDEXDB();
     setForms(data);
     setFilterdData(data);
+    headerSumData(data);
+    console.log("called");
   }
 
   useEffect(() => {

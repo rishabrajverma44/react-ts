@@ -6,7 +6,7 @@ const STORE_NAME = "JobAplicationForms";
 const openINDEXDB = (): Promise<IDBDatabase> => {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(DB_NAME, 1);
-    request.onupgradeneeded = (e) => {
+    request.onupgradeneeded = (e: any) => {
       const db = e.target?.result;
       if (!db.objectStoreNames.contains(STORE_NAME)) {
         db.createObjectStore(STORE_NAME, { keyPath: "id" });
