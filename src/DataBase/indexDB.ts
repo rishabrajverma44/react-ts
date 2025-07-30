@@ -1,4 +1,4 @@
-import type { formInterface } from "../types/types";
+import type { formInterface } from "../Types/Types";
 
 const DB_NAME = "JobAplication_ts";
 const STORE_NAME = "JobAplicationForms";

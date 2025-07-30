@@ -1,12 +1,12 @@
 import type React from "react";
 import styles from "../Style/form.module.css";
-import type { formInterface } from "../types/types";
+import type { formInterface } from "../Types/Types";
 import { useEffect, useState } from "react";
 import {
   validationForForm,
   validationForSingleField,
 } from "../formValidation/validation";
-import { useFormContext } from "../context/UseContext";
+import { UseFormContext } from "../context/UseFormContext";
 
 const defaultForm: formInterface = {
   id: null,
@@ -20,7 +20,7 @@ const defaultForm: formInterface = {
 };
 
 const Form = () => {
-  const formsCtx = useFormContext();
+  const formsCtx = UseFormContext();
   const [form, setForm] = useState<formInterface>(defaultForm);
   //instead of using null assertion we can use utility type partial of formInterface
   const [errors, setErrors] = useState<Partial<formInterface>>({});

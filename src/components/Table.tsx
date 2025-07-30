@@ -1,19 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "../Style/table.module.css";
-import { getAllFormsINDEXDB } from "../DataBase/indexDB";
-import type { formInterface } from "../types/types";
-import { useFormContext } from "../context/UseContext";
+import { UseFormContext } from "../context/UseFormContext";
 const Table = () => {
-  const formCtx = useFormContext();
+  const formCtx = UseFormContext();
   const [openModel, setOpenModel] = useState(false);
   const [currentId, setCurrentId] = useState<string | null>(null);
-  async function getFormsIndexDb() {
-    const data: formInterface[] = await getAllFormsINDEXDB();
-    console.log(data);
-  }
-  useEffect(() => {
-    getFormsIndexDb();
-  }, []);
+
   return (
     <div>
       <table>
@@ -30,7 +22,7 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {formCtx.forms.map((item, index) => {
+          {formCtx.filteredData.map((item, index) => {
             return (
               <tr role="row" key={index}>
                 <td role="cell">{item.company}</td>
