@@ -1,10 +1,11 @@
 import { useState } from "react";
 import styles from "../Style/table.module.css";
 import { UseFormContext } from "../context/UseFormContext";
+import type { formInterface } from "../types";
 const Table = () => {
   const formCtx = UseFormContext();
   const [openModel, setOpenModel] = useState(false);
-  const [currentId, setCurrentId] = useState<string | null>(null);
+  const [currentId, setCurrentId] = useState<string | null | undefined>(null);
 
   return (
     <div>
@@ -22,7 +23,7 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {formCtx?.filteredData.map((item, index) => {
+          {formCtx?.filteredData.map((item: formInterface, index: number) => {
             return (
               <tr role="row" key={index}>
                 <td role="cell">{item.company}</td>

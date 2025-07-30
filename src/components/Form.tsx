@@ -22,8 +22,8 @@ const defaultForm: formInterface = {
 const Form = () => {
   const formsCtx = UseFormContext();
   const [form, setForm] = useState<formInterface>(defaultForm);
-  //instead of using null assertion we can use utility type partial of formInterface
-  const [errors, setErrors] = useState<Partial<formInterface>>({});
+  //formInterface
+  const [errors, setErrors] = useState<Partial<formInterface>>();
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -32,7 +32,10 @@ const Form = () => {
   ) => {
     const { name, value } = e.target;
     //set all form values based on there names via controlled react form handler function
-    setForm((pervious) => ({ ...pervious, [name]: value }));
+    setForm((pervious: formInterface) => ({
+      ...pervious,
+      [name]: value,
+    }));
   };
   const validationCheck = (
     e: React.FocusEvent<
@@ -40,16 +43,20 @@ const Form = () => {
     >
   ) => {
     const { name, value } = e.target;
-    const validationErrors = validationForSingleField(form, name, value);
+    const validationErrors: Partial<formInterface> = validationForSingleField(
+      form,
+      name,
+      value
+    );
     if (Object.keys(validationErrors).length > 0) {
-      setErrors((errors) => ({ ...errors, ...validationErrors }));
+      if (errors) setErrors((errors) => ({ ...errors, ...validationErrors }));
       return;
     }
   };
   const handleSubmit = () => {
     const validationErrors = validationForForm(form);
     if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
+      if (validationErrors) setErrors(validationErrors);
       return;
     }
     setErrors({});
@@ -82,10 +89,10 @@ const Form = () => {
             onChange={handleChange}
             onBlur={validationCheck}
             value={form.company}
-            style={{ borderColor: errors.company ? "red" : "initial" }}
+            style={{ borderColor: errors?.company ? "red" : "initial" }}
           />
-          {errors.company && (
-            <span className={styles.validation_error}>{errors.company}</span>
+          {errors?.company && (
+            <span className={styles.validation_error}>{errors?.company}</span>
           )}
           <label htmlFor="role">Role:</label>
           <input
@@ -96,10 +103,10 @@ const Form = () => {
             value={form.role}
             onChange={handleChange}
             onBlur={validationCheck}
-            style={{ borderColor: errors.role ? "red" : "initial" }}
+            style={{ borderColor: errors?.role ? "red" : "initial" }}
           />
-          {errors.role && (
-            <span className={styles.validation_error}>{errors.role}</span>
+          {errors?.role && (
+            <span className={styles.validation_error}>{errors?.role}</span>
           )}
           <label htmlFor="jobtype">Job Type:</label>
           <select
@@ -108,7 +115,7 @@ const Form = () => {
             onChange={handleChange}
             onBlur={validationCheck}
             value={form.jobtype}
-            style={{ borderColor: errors.jobtype ? "red" : "initial" }}>
+            style={{ borderColor: errors?.jobtype ? "red" : "initial" }}>
             <option value="" disabled>
               Select job type
             </option>
@@ -116,8 +123,8 @@ const Form = () => {
             <option value="Onsite">Onsite</option>
             <option value="Hybrid">Hybrid</option>
           </select>
-          {errors.jobtype && (
-            <span className={styles.validation_error}>{errors.jobtype}</span>
+          {errors?.jobtype && (
+            <span className={styles.validation_error}>{errors?.jobtype}</span>
           )}
 
           <label htmlFor="location">Location:</label>
@@ -130,10 +137,10 @@ const Form = () => {
             onChange={handleChange}
             onBlur={validationCheck}
             disabled={form.jobtype === "Remote" ? true : false}
-            style={{ borderColor: errors.location ? "red" : "initial" }}
+            style={{ borderColor: errors?.location ? "red" : "initial" }}
           />
-          {errors.location && (
-            <span className={styles.validation_error}>{errors.location}</span>
+          {errors?.location && (
+            <span className={styles.validation_error}>{errors?.location}</span>
           )}
 
           <label htmlFor="date">Application Date:</label>
@@ -144,10 +151,10 @@ const Form = () => {
             onChange={handleChange}
             onBlur={validationCheck}
             value={form.date}
-            style={{ borderColor: errors.date ? "red" : "initial" }}
+            style={{ borderColor: errors?.date ? "red" : "initial" }}
           />
-          {errors.date && (
-            <span className={styles.validation_error}>{errors.date}</span>
+          {errors?.date && (
+            <span className={styles.validation_error}>{errors?.date}</span>
           )}
 
           <label htmlFor="status">Application Status:</label>
@@ -157,7 +164,7 @@ const Form = () => {
             onChange={handleChange}
             onBlur={validationCheck}
             value={form.status}
-            style={{ borderColor: errors.status ? "red" : "initial" }}>
+            style={{ borderColor: errors?.status ? "red" : "initial" }}>
             <option value="" disabled>
               Select status
             </option>
@@ -166,7 +173,7 @@ const Form = () => {
             <option value="Rejected">Rejected</option>
             <option value="Hired">Hired</option>
           </select>
-          {errors.status && (
+          {errors?.status && (
             <span className={styles.validation_error}>{errors.status}</span>
           )}
 

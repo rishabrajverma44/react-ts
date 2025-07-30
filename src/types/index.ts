@@ -1,7 +1,7 @@
 import type { SetStateAction } from "react";
 
 export interface formInterface {
-  id: null | string;
+  id: string | null |undefined;
   company: string;
   role: string;
   jobtype: string;
@@ -24,7 +24,7 @@ export interface FormContextType {
   currentForm: formInterface | null;
   setCurrentForm: React.Dispatch<SetStateAction<formInterface | null>>;
   setterFunction: (formID?: string) => void;
-  createForms: (form: Omit<formInterface, "id">) => void;
+  createForms: (form: formInterface) => void;
   updateForm: (id: string, form: formInterface) => void;
   deleteForm: (id: string) => void;
   searchedQuery: string;

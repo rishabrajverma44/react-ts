@@ -8,7 +8,6 @@ const openINDEXDB = (): Promise<IDBDatabase> => {
     const request = indexedDB.open(DB_NAME, 1);
     request.onupgradeneeded = (e: any) => {
       const db = e.target?.result;
-      console.log(db);
       if (!db.objectStoreNames.contains(STORE_NAME)) {
         db.createObjectStore(STORE_NAME, { keyPath: "id" });
       }

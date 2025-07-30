@@ -45,7 +45,8 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
       });
     }
   };
-  const createForms = (currentForm: Omit<formInterface, "id">) => {
+  const createForms = (currentForm: formInterface) => {
+    console.log(currentForm);
     const id = generateId();
     const newForm: formInterface = {
       ...currentForm,
@@ -56,11 +57,13 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
     });
     addFormINDEXDB(newForm);
     setCurrentForm(null);
+    getINDEXDBData();
   };
 
   const deleteForm = (formID: string) => {
     setForms((prev) => prev.filter((form) => form.id !== formID));
     deleteFormsINDEXDB(formID);
+    getINDEXDBData();
   };
 
   const updateForm = (id: string, updateForm: formInterface) => {
@@ -69,6 +72,7 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
     );
     setCurrentForm(null);
     updateFormINDEX(updateForm);
+    getINDEXDBData();
   };
   //search context
   const searchContext = () => {
@@ -108,8 +112,8 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
       setForms(data);
       setFilterdData(data);
       headerSumData(data);
-      console.log(data);
     }
+    console.log(data);
   }
 
   useEffect(() => {
