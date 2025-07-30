@@ -57,6 +57,14 @@ const Table = () => {
           })}
         </tbody>
       </table>
+      {formCtx?.filteredData.length === 0 && (
+        <>
+          <div className="no_forms">
+            <h2>No forms !</h2>
+          </div>
+        </>
+      )}
+
       {openModel && (
         <>
           <div role="alert" id="myModal" className="modal">

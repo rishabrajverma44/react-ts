@@ -8,26 +8,23 @@ form {
   gap: 2px;
 }
 #applicationForm input,
-#applicationForm select {
+#applicationForm select,
+.notes {
   box-shadow: none;
   padding: 5px;
-  width: 100%;
+  font-size: 17px;
+  border-radius: 8px;
+  border: 1px solid black;
+  font-size: medium;
 }
 
 label {
   margin-top: 7px;
 }
-form input,
-form select {
-  border-radius: 8px;
-  border: 1px solid black;
-  font-size: medium;
-}
+
 .notes {
   font-size: 17px;
-  padding: 5px;
   min-height: 50px;
-  border-radius: 8px;
   border: 1px solid black;
   field-sizing: content;
 }
