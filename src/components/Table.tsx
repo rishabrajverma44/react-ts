@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import styles from "../Style/table.module.css";
-import { useFormContext } from "../context/FormContext";
 import { getAllFormsINDEXDB } from "../DataBase/indexDB";
 import type { formInterface } from "../types/types";
+import { useFormContext } from "../context/UseContext";
 const Table = () => {
   const formCtx = useFormContext();
   const [openModel, setOpenModel] = useState(false);
