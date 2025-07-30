@@ -25,12 +25,20 @@ const Form = () => {
   //instead of using null assertion we can use utility type partial of formInterface
   const [errors, setErrors] = useState<Partial<formInterface>>({});
 
-  const handleChange = (e: React.ChangeEvent<any>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     const { name, value } = e.target;
     //set all form values based on there names via controlled react form handler function
     setForm((pervious) => ({ ...pervious, [name]: value }));
   };
-  const validationCheck = (e: any) => {
+  const validationCheck = (
+    e: React.FocusEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     const { name, value } = e.target;
     const validationErrors = validationForSingleField(form, name, value);
     if (Object.keys(validationErrors).length > 0) {

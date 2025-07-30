@@ -77,7 +77,6 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
       pre.map((form) => (form.id === id ? { ...form, ...updateForm } : form))
     );
     setCurrentForm(null);
-    console.log(updateForm);
     updateFormINDEX(updateForm);
   };
 
