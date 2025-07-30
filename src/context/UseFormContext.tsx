@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import type { FormContextType, formInterface } from "../Types/Types";
-import { getFromStorage, saveToStorage } from "../DataBase/localStorage";
 import {
   addFormINDEXDB,
   deleteFormsINDEXDB,
@@ -33,7 +32,6 @@ export const UseFormContext = () => {
 export const FormContextProvider: React.FC<FormContextProps> = (props) => {
   const [currentForm, setCurrentForm] = useState<formInterface | null>(null);
   const [forms, setForms] = useState<formInterface[]>([]);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [searchedQuery, setSearchedQuery] = useState<string>("");
   const [filteredData, setFilterdData] = useState<formInterface[]>([]);
   const [headerData, setHeaderData] = useState<Header | null>(null);
@@ -104,8 +102,7 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
     };
     setHeaderData(headerObject);
   };
-  //index db
-
+  //index db call
   async function getINDEXDBData() {
     const data = await getAllFormsINDEXDB();
     setForms(data);
@@ -117,18 +114,8 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
   }, [searchedQuery]);
 
   useEffect(() => {
-    //setForms(getFromStorage());
     getINDEXDBData();
-    setIsLoaded(true);
   }, []);
-
-  useEffect(() => {
-    if (isLoaded) {
-      //saveToStorage(forms);
-      //setFilterdData(getFromStorage());
-      headerSumData();
-    }
-  }, [forms, isLoaded]);
 
   return (
     <FormContext.Provider
