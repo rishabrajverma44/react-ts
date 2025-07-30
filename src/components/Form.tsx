@@ -1,12 +1,12 @@
 import type React from "react";
 import styles from "../Style/form.module.css";
-import type { formInterface } from "../types/types";
+import type { formInterface } from "../Types/Types";
 import { useEffect, useState } from "react";
 import {
   validationForForm,
   validationForSingleField,
 } from "../formValidation/validation";
-import { useFormContext } from "../context/FormContext";
+import { UseFormContext } from "../context/UseFormContext";
 
 const defaultForm: formInterface = {
   id: null,
@@ -20,17 +20,25 @@ const defaultForm: formInterface = {
 };
 
 const Form = () => {
-  const formsCtx = useFormContext();
+  const formsCtx = UseFormContext();
   const [form, setForm] = useState<formInterface>(defaultForm);
   //instead of using null assertion we can use utility type partial of formInterface
   const [errors, setErrors] = useState<Partial<formInterface>>({});
 
-  const handleChange = (e: React.ChangeEvent<any>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     const { name, value } = e.target;
     //set all form values based on there names via controlled react form handler function
     setForm((pervious) => ({ ...pervious, [name]: value }));
   };
-  const validationCheck = (e: any) => {
+  const validationCheck = (
+    e: React.FocusEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     const { name, value } = e.target;
     const validationErrors = validationForSingleField(form, name, value);
     if (Object.keys(validationErrors).length > 0) {
@@ -45,22 +53,21 @@ const Form = () => {
       return;
     }
     setErrors({});
-    if (formsCtx.createForms && form.id === null) {
+    if (formsCtx?.createForms && form.id === null) {
       formsCtx.createForms(form);
     } else if (
       form.id !== null &&
       form.id !== undefined &&
       form.id.length > 0
     ) {
-      formsCtx.updateForm(form.id, form);
+      formsCtx?.updateForm(form.id, form);
     }
     setForm(defaultForm);
   };
   useEffect(() => {
-    if (formsCtx.currentForm !== null) {
+    if (formsCtx !== undefined && formsCtx.currentForm)
       setForm(formsCtx.currentForm);
-    }
-  }, [formsCtx.currentForm]);
+  }, [formsCtx?.currentForm]);
 
   return (
     <div>
@@ -122,6 +129,7 @@ const Form = () => {
             value={form.location}
             onChange={handleChange}
             onBlur={validationCheck}
+            disabled={form.jobtype === "Remote" ? true : false}
             style={{ borderColor: errors.location ? "red" : "initial" }}
           />
           {errors.location && (

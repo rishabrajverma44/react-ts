@@ -55,6 +55,7 @@ body {
 @media screen and (max-width: 600px) {
   .hero-section {
     flex-direction: column;
+    padding: 3px;
   }
   .main-form,
   .main-table {

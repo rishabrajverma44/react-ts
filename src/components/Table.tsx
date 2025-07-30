@@ -1,19 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "../Style/table.module.css";
-import { useFormContext } from "../context/FormContext";
-import { getAllFormsINDEXDB } from "../DataBase/indexDB";
-import type { formInterface } from "../types/types";
+import { UseFormContext } from "../context/UseFormContext";
 const Table = () => {
-  const formCtx = useFormContext();
+  const formCtx = UseFormContext();
   const [openModel, setOpenModel] = useState(false);
   const [currentId, setCurrentId] = useState<string | null>(null);
-  async function getFormsIndexDb() {
-    const data: formInterface[] = await getAllFormsINDEXDB();
-    console.log(data);
-  }
-  useEffect(() => {
-    getFormsIndexDb();
-  }, []);
+
   return (
     <div>
       <table>
@@ -30,13 +22,15 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {formCtx.forms.map((item, index) => {
+          {formCtx?.filteredData.map((item, index) => {
             return (
               <tr role="row" key={index}>
                 <td role="cell">{item.company}</td>
                 <td role="cell">{item.date}</td>
                 <td role="cell">{item.jobtype}</td>
-                <td role="cell">{item.location}</td>
+                <td role="cell">
+                  {item.location === "" ? "N/A" : item.location}
+                </td>
                 <td role="cell">{item.role}</td>
                 <td role="cell">{item.status}</td>
                 <td role="cell">{item.notes}</td>
@@ -71,7 +65,7 @@ const Table = () => {
                 <button onClick={() => setOpenModel(false)}>No</button>
                 <button
                   onClick={() => {
-                    formCtx.deleteForm(currentId!);
+                    formCtx?.deleteForm(currentId!);
                     setOpenModel(false);
                   }}>
                   Yes

@@ -1,12 +1,12 @@
-import type { formInterface } from "../types/types";
+import type { formInterface } from "../Types/Types";
 
 const DB_NAME = "JobAplication_ts";
-const STORE_NAME = "forms";
-
+const STORE_NAME = "JobAplicationForms";
+//creation of DB table(store)
 const openINDEXDB = (): Promise<IDBDatabase> => {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(DB_NAME, 1);
-    request.onupgradeneeded = (e: any) => {
+    request.onupgradeneeded = (e) => {
       const db = e.target?.result;
       if (!db.objectStoreNames.contains(STORE_NAME)) {
         db.createObjectStore(STORE_NAME, { keyPath: "id" });
@@ -20,6 +20,7 @@ const openINDEXDB = (): Promise<IDBDatabase> => {
     };
   });
 };
+
 // Add a new form
 const addFormINDEXDB = async (form: formInterface): Promise<formInterface> => {
   const db = await openINDEXDB();

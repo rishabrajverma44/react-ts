@@ -1,0 +1,10 @@
+.searchFileld {
+  height: 25px;
+  width: 220px;
+  margin-bottom: 5px;
+  border-radius: 7px;
+  border: 1px solid black;
+}
+.clear {
+  margin-left: 5px;
+}

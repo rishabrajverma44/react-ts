@@ -1,5 +1,4 @@
-import type { formInterface } from "../types/types";
-
+import type { formInterface } from "../Types/Types";
 export function validationForForm(form: formInterface) {
   //partrial utility type used for giving types of an object wich accepts (key, type)
   const errors: Partial<Record<keyof formInterface, string>> = {};
@@ -23,34 +22,46 @@ export function validationForSingleField(
   const errors: Partial<Record<keyof formInterface, string>> = {};
   switch (name) {
     case "company":
-      !value.trim()
-        ? (errors.company = "Company is required !")
-        : (errors.company = "");
+      if (!value.trim()) {
+        errors.company = "Company is required !";
+      } else {
+        errors.company = "";
+      }
       break;
     case "role":
-      !form.role.trim()
-        ? (errors.role = "Role is required !")
-        : (errors.role = "");
+      if (!form.role.trim()) {
+        errors.role = "Role is required !";
+      } else {
+        errors.role = "";
+      }
       break;
     case "jobtype":
-      !form.jobtype.trim()
-        ? (errors.jobtype = "Jobtype is required !")
-        : (errors.jobtype = "");
+      if (!form.jobtype.trim()) {
+        errors.jobtype = "Jobtype is required !";
+      } else {
+        errors.jobtype = "";
+      }
       break;
     case "location":
-      !form.location.trim() && form.jobtype !== "Remote"
-        ? (errors.location = "Location is required !")
-        : (errors.location = "");
+      if (!form.location.trim() && form.jobtype !== "Remote") {
+        errors.location = "Location is required !";
+      } else {
+        errors.location = "";
+      }
       break;
     case "date":
-      !form.date.trim()
-        ? (errors.date = "Date is required !")
-        : (errors.date = "");
+      if (!form.date.trim()) {
+        errors.date = "Date is required !";
+      } else {
+        errors.date = "";
+      }
       break;
     case "status":
-      !form.status.trim()
-        ? (errors.status = "Status is required !")
-        : (errors.status = "");
+      if (!form.status.trim()) {
+        errors.status = "Status is required !";
+      } else {
+        errors.status = "";
+      }
       break;
   }
   return errors;
