@@ -22,10 +22,9 @@ type Header = {
 const FormContext = createContext<FormContextType | null>(null);
 export const UseFormContext = () => {
   const context = useContext(FormContext);
-  if (!context) {
-    throw new Error("component must be used within a provider");
+  if (context) {
+    return context;
   }
-  return context;
 };
 
 //use context as a higer order component function and attach provider to each component

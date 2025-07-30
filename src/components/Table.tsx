@@ -22,7 +22,7 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {formCtx.filteredData.map((item, index) => {
+          {formCtx?.filteredData.map((item, index) => {
             return (
               <tr role="row" key={index}>
                 <td role="cell">{item.company}</td>
@@ -65,7 +65,7 @@ const Table = () => {
                 <button onClick={() => setOpenModel(false)}>No</button>
                 <button
                   onClick={() => {
-                    formCtx.deleteForm(currentId!);
+                    formCtx?.deleteForm(currentId!);
                     setOpenModel(false);
                   }}>
                   Yes

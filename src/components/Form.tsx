@@ -53,22 +53,21 @@ const Form = () => {
       return;
     }
     setErrors({});
-    if (formsCtx.createForms && form.id === null) {
+    if (formsCtx?.createForms && form.id === null) {
       formsCtx.createForms(form);
     } else if (
       form.id !== null &&
       form.id !== undefined &&
       form.id.length > 0
     ) {
-      formsCtx.updateForm(form.id, form);
+      formsCtx?.updateForm(form.id, form);
     }
     setForm(defaultForm);
   };
   useEffect(() => {
-    if (formsCtx.currentForm !== null) {
+    if (formsCtx !== undefined && formsCtx.currentForm)
       setForm(formsCtx.currentForm);
-    }
-  }, [formsCtx.currentForm]);
+  }, [formsCtx?.currentForm]);
 
   return (
     <div>

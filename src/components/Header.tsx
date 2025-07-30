@@ -2,7 +2,7 @@ import { UseFormContext } from "../context/UseFormContext";
 import style from "../Style/header.module.css";
 const Header = () => {
   const formCtx = UseFormContext();
-  const data = formCtx.headerData;
+  const data = formCtx?.headerData;
   return (
     <nav role="banner" className={style.header}>
       <h2>Job Application Tracker</h2>

@@ -11,12 +11,12 @@ const Filter = () => {
           className={styles.searchFileld}
           type="input"
           placeholder="Search "
-          value={formCTX.searchedQuery}
-          onChange={(e) => formCTX.setSearchedQuery(e.target.value)}
+          value={formCTX?.searchedQuery}
+          onChange={(e) => formCTX?.setSearchedQuery(e.target.value)}
         />
         <button
           className={styles.clear}
-          onClick={() => formCTX.setSearchedQuery("")}>
+          onClick={() => formCTX?.setSearchedQuery("")}>
           X
         </button>
       </div>
