@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import type { FormContextType, formInterface } from "../Types/Types";
+import type { FormContextType, formInterface } from "../types/Types";
 import {
   addFormINDEXDB,
   deleteFormsINDEXDB,
@@ -104,10 +104,12 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
   //index db call
   async function getINDEXDBData() {
     const data: formInterface[] = await getAllFormsINDEXDB();
-    setForms(data);
-    setFilterdData(data);
-    headerSumData(data);
-    console.log("called");
+    if (data) {
+      setForms(data);
+      setFilterdData(data);
+      headerSumData(data);
+      console.log(data);
+    }
   }
 
   useEffect(() => {

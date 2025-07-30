@@ -1,4 +1,4 @@
-import type { formInterface } from "../Types/Types";
+import type { formInterface } from "../types/Types";
 export function validationForForm(form: formInterface) {
   //partrial utility type used for giving types of an object wich accepts (key, type)
   const errors: Partial<Record<keyof formInterface, string>> = {};

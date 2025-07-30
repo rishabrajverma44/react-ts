@@ -1,4 +1,4 @@
-import type { formInterface } from "../Types/Types";
+import type { formInterface } from "../types/Types";
 
 export function saveToStorage(data: formInterface[]) {
   localStorage.setItem("jobTracker_applications_new", JSON.stringify(data));
