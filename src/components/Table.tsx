@@ -5,7 +5,7 @@ import type { formInterface } from "../types";
 const Table = () => {
   const formCtx = UseFormContext();
   const [openModel, setOpenModel] = useState(false);
-  const [currentId, setCurrentId] = useState<string | null>(null);
+  const [currentId, setCurrentId] = useState<string | null | undefined>(null);
 
   return (
     <div>
