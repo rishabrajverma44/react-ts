@@ -1,6 +1,6 @@
 import type React from "react";
 import styles from "../Style/form.module.css";
-import type { formInterface } from "../types/Types";
+import type { formInterface } from "../types";
 import { useEffect, useState } from "react";
 import {
   validationForForm,

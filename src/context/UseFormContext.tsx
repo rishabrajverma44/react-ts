@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import type { FormContextType, formInterface } from "../types/Types";
+import type { FormContextType, formInterface } from "../types";
 import {
   addFormINDEXDB,
   deleteFormsINDEXDB,
