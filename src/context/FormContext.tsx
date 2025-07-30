@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type SetStateAction,
-} from "react";
+import React, { useEffect, useState } from "react";
 import type { formInterface } from "../types/types";
 import { getFromStorage, saveToStorage } from "../DataBase/localStorage";
 import "../DataBase/indexDB";
@@ -13,27 +7,7 @@ import {
   deleteFormsINDEXDB,
   updateFormINDEX,
 } from "../DataBase/indexDB";
-
-//context types
-type FormContextType = {
-  forms: formInterface[];
-  currentForm: formInterface | null;
-  setCurrentForm: React.Dispatch<SetStateAction<formInterface | null>>;
-  setterFunction: (formID?: string) => void;
-  createForms: (form: Omit<formInterface, "id">) => void;
-  updateForm: (id: string, form: formInterface) => void;
-  deleteForm: (id: string) => void;
-};
-
-//context creation and attach to usecontext
-const FormContext = createContext<FormContextType | null>(null);
-export const useFormContext = () => {
-  const context = useContext(FormContext);
-  if (!context) {
-    throw new Error("component must be used within a provider");
-  }
-  return context;
-};
+import { FormContext } from "./UseContext";
 
 interface FormContextProps {
   children: React.ReactNode;
