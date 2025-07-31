@@ -31,7 +31,9 @@ const Form = () => {
     >
   ) => {
     const { name, value } = e.target;
-    form.jobtype === "Remote" ? true : false;
+    if (name === "jobtype" && value === "Remote") {
+      form.location = "";
+    }
     //set all form values based on there names via controlled react form handler function
     setForm((pervious: formInterface) => ({
       ...pervious,
