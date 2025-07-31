@@ -1,7 +1,7 @@
 import type { SetStateAction } from "react";
 
 export interface formInterface {
-  id: string | null |undefined;
+  id: string | null | undefined;
   company: string;
   role: string;
   jobtype: string;
@@ -31,4 +31,5 @@ export interface FormContextType {
   setSearchedQuery: React.Dispatch<SetStateAction<string>>;
   filteredData: formInterface[];
   headerData: Header | null;
+  isFormDirty: boolean;
 }

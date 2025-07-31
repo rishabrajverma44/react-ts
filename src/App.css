@@ -8,19 +8,20 @@ body {
   margin: 0 auto;
 }
 .hero-section {
-  margin: 1px;
+  margin: 7px;
   border: 1px solid;
   display: flex;
   justify-content: space-around;
   padding: 7px;
+  overflow: hidden;
 }
 .main-form {
   flex: 0 0 20%;
 }
 .main-table {
   flex: 0 0 80%;
-  padding: 3px;
-  overflow-x: auto;
+  width: 100%;
+  overflow: auto;
 }
 /* no forms */
 .no_forms {
@@ -64,9 +65,7 @@ body {
   }
   .main-form,
   .main-table {
-    flex: 0 0 100%;
-  }
-  .main-table {
     margin-top: 8px;
+    flex: 0 0 100%;
   }
 }

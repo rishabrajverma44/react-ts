@@ -1,5 +1,4 @@
 /* table css */
-
 td {
   padding: 2px;
   text-align: start;
@@ -22,10 +21,12 @@ table {
   display: none;
 }
 /*edit delete btn */
-.action {
+.action_inner {
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
-  gap: 2px;
+  align-items: center;
+  gap: 5px;
 }
 .delete_btn,
 .edit_btn {
@@ -36,4 +37,11 @@ table {
   cursor: pointer;
   font-size: 12px;
   box-shadow: 0 2px 2px bisque;
+}
+
+/* media queies */
+@media screen and (max-width: 1000px) {
+  .action {
+    padding-right: 70px;
+  }
 }

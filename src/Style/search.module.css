@@ -1,10 +1,17 @@
 .searchFileld {
-  height: 25px;
+  height: 28px;
   width: 220px;
   margin-bottom: 5px;
   border-radius: 7px;
   border: 1px solid black;
+  padding-left: 10px;
+}
+.search_box {
+  position: relative;
 }
 .clear {
   margin-left: 5px;
+  position: absolute;
+  left: 180px;
+  top: 4px;
 }

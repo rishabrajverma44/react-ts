@@ -1,11 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../Style/table.module.css";
 import { UseFormContext } from "../context/UseFormContext";
 import type { formInterface } from "../types";
 const Table = () => {
   const formCtx = UseFormContext();
-  const [openModel, setOpenModel] = useState(false);
+  const [openDeleteModel, setOpenDeleteModel] = useState(false);
+  const [openWarnModel, setOpenWarnModel] = useState(false);
   const [currentId, setCurrentId] = useState<string | null | undefined>(null);
+  const isFormDirty = formCtx?.isFormDirty;
+
+  function chechDurty(id: string | null | undefined, option: string) {
+    if (isFormDirty) {
+      setOpenWarnModel(true);
+      return;
+    } else if (option === "edit" && formCtx) {
+      formCtx.setterFunction(id !== null ? id : "");
+    } else if (option === "delete" && formCtx) {
+      setCurrentId(id !== null ? id : null);
+      setOpenDeleteModel(true);
+    }
+  }
 
   return (
     <div>
@@ -36,21 +50,22 @@ const Table = () => {
                 <td role="cell">{item.status}</td>
                 <td role="cell">{item.notes}</td>
                 <td role="cell" className={styles.action}>
-                  <button
-                    onClick={() =>
-                      formCtx.setterFunction(item.id !== null ? item.id : "")
-                    }
-                    className={styles.edit_btn}>
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => {
-                      setCurrentId(item.id !== null ? item.id : null);
-                      setOpenModel(true);
-                    }}
-                    className={styles.delete_btn}>
-                    Delete
-                  </button>
+                  <div className={styles.action_inner}>
+                    <button
+                      onClick={() => {
+                        chechDurty(item.id, "edit");
+                      }}
+                      className={styles.edit_btn}>
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => {
+                        chechDurty(item.id, "delete");
+                      }}
+                      className={styles.delete_btn}>
+                      Delete
+                    </button>
+                  </div>
                 </td>
               </tr>
             );
@@ -64,21 +79,32 @@ const Table = () => {
           </div>
         </>
       )}
-
-      {openModel && (
+      {openDeleteModel && (
         <>
           <div role="alert" id="myModal" className="modal">
             <div className="modal-content">
               <h2>Want to delete ?</h2>
               <div className="buttons">
-                <button onClick={() => setOpenModel(false)}>No</button>
+                <button onClick={() => setOpenDeleteModel(false)}>No</button>
                 <button
                   onClick={() => {
                     formCtx?.deleteForm(currentId!);
-                    setOpenModel(false);
+                    setOpenDeleteModel(false);
                   }}>
                   Yes
                 </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+      {openWarnModel && (
+        <>
+          <div role="alert" id="myModal" className="modal">
+            <div className="modal-content">
+              <h2>Save your form first ! </h2>
+              <div className="buttons">
+                <button onClick={() => setOpenWarnModel(false)}>Close</button>
               </div>
             </div>
           </div>
