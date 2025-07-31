@@ -8,12 +8,12 @@ body {
   margin: 0 auto;
 }
 .hero-section {
-  padding: 5px;
-  margin: 5px;
+  margin: 7px;
   border: 1px solid;
   display: flex;
   justify-content: space-around;
-  padding: 16px;
+  padding: 7px;
+  overflow: hidden;
 }
 .main-form {
   flex: 0 0 20%;
@@ -21,8 +21,16 @@ body {
 .main-table {
   flex: 0 0 80%;
   width: 100%;
-  overflow-x: auto;
+  overflow: auto;
 }
+/* no forms */
+.no_forms {
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* model */
 .modal {
   position: fixed;
   z-index: 1;
@@ -32,7 +40,6 @@ body {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
 }
-
 .modal-content {
   border-radius: 12px;
   background-color: #fefefe;
@@ -46,7 +53,6 @@ body {
   display: flex;
   justify-content: space-around;
 }
-
 .modal-content > h2 {
   text-align: center;
   margin-top: 0px;
@@ -59,9 +65,7 @@ body {
   }
   .main-form,
   .main-table {
-    flex: 0 0 100%;
-  }
-  .main-table {
     margin-top: 8px;
+    flex: 0 0 100%;
   }
 }

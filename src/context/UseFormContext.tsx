@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import type { FormContextType, formInterface } from "../types";
+import type { FormContextType, formInterface, Header } from "../types";
 import {
   addFormINDEXDB,
   deleteFormsINDEXDB,
@@ -10,13 +10,6 @@ import {
 interface FormContextProps {
   children: React.ReactNode;
 }
-type Header = {
-  totalApplication: number;
-  totalApplied: number;
-  totalInterviewing: number;
-  totalHired: number;
-  totalRejected: number;
-};
 
 //wrap our context with usecontext hook to each component
 const FormContext = createContext<FormContextType | null>(null);
@@ -34,6 +27,7 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
   const [searchedQuery, setSearchedQuery] = useState<string>("");
   const [filteredData, setFilterdData] = useState<formInterface[]>([]);
   const [headerData, setHeaderData] = useState<Header | null>(null);
+  const [isFormDirty, setIsDirty] = useState<boolean>(true);
 
   const generateId = (): string => {
     return `${Math.random().toString(36).slice(2, 9)}`;
@@ -46,7 +40,6 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
     }
   };
   const createForms = (currentForm: formInterface) => {
-    console.log(currentForm);
     const id = generateId();
     const newForm: formInterface = {
       ...currentForm,
@@ -113,7 +106,6 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
       setFilterdData(data);
       headerSumData(data);
     }
-    console.log(data);
   }
 
   useEffect(() => {
@@ -123,6 +115,14 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
   useEffect(() => {
     getINDEXDBData();
   }, []);
+  useEffect(() => {
+    if (currentForm) {
+      setIsDirty(true);
+    } else {
+      setIsDirty(false);
+    }
+    console.log(currentForm);
+  }, [currentForm]);
 
   return (
     <FormContext.Provider
@@ -138,6 +138,7 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
         setSearchedQuery,
         filteredData,
         headerData,
+        isFormDirty,
       }}>
       {props.children}
     </FormContext.Provider>

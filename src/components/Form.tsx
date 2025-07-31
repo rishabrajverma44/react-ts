@@ -31,6 +31,7 @@ const Form = () => {
     >
   ) => {
     const { name, value } = e.target;
+    form.jobtype === "Remote" ? true : false;
     //set all form values based on there names via controlled react form handler function
     setForm((pervious: formInterface) => ({
       ...pervious,
