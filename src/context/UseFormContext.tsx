@@ -121,7 +121,6 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
     } else {
       setIsDirty(false);
     }
-    console.log(currentForm);
   }, [currentForm]);
 
   return (
