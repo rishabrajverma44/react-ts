@@ -33,3 +33,15 @@ export interface FormContextType {
   headerData: Header | null;
   isFormDirty: boolean;
 }
+
+export interface LoginForm {
+  userEmail: string;
+  password: string;
+}
+
+export interface RegistrationForm {
+  userName: string;
+  role: string;
+  userEmail: string;
+  password: string;
+}

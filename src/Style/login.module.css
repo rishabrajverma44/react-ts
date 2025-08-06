@@ -1,0 +1,43 @@
+.container {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+form {
+  border: 2px solid black;
+  border-radius: 12px;
+  padding: 10px;
+}
+#applicationForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+#applicationForm input,
+#applicationForm select {
+  box-shadow: none;
+  min-width: 240px;
+  padding: 5px;
+  font-size: 17px;
+  border-radius: 8px;
+  border: 1px solid black;
+  font-size: medium;
+}
+/*validation error */
+.validation_error {
+  color: red;
+  line-height: 0.7;
+  font-size: medium;
+}
+button {
+  margin-top: 10px;
+}
+#footer {
+  display: flex;
+  justify-content: center;
+}

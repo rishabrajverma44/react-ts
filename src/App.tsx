@@ -1,22 +1,13 @@
+import { RouterProvider } from "react-router-dom";
 import "./App.css";
-import Filter from "./components/Filter";
-import Form from "./components/Form";
-import Header from "./components/Header";
-import Table from "./components/Table";
+import router from "./Routes/Routes";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <>
-      <Header />
-      <div className="hero-section">
-        <div className="main-form">
-          <Form />
-        </div>
-        <div className="main-table">
-          <Filter />
-          <Table />
-        </div>
-      </div>
+      <RouterProvider router={router} />
+      <ToastContainer />
     </>
   );
 }
