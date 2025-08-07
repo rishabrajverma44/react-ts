@@ -1,10 +1,10 @@
 import type { SetStateAction } from "react";
 
 export interface formInterface {
-  id: string | null | undefined;
+  formID?: string | null | undefined;
   company: string;
   role: string;
-  jobtype: string;
+  jobType: string;
   location: string;
   status: string;
   date: string;
@@ -50,7 +50,7 @@ export interface JobSeeker {
   formID: string;
   company: string;
   role: string;
-  jobtype: string;
+  jobType: string;
   location: string;
   status: string;
   date: string;

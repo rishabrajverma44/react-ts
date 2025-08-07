@@ -9,10 +9,10 @@ import {
 import { UseFormContext } from "../../context/FormContextProvider";
 
 const defaultForm: formInterface = {
-  id: null,
+  formID: null,
   company: "",
   role: "",
-  jobtype: "",
+  jobType: "",
   location: "",
   status: "",
   date: "",
@@ -31,7 +31,7 @@ const Form = () => {
     >
   ) => {
     const { name, value } = e.target;
-    if (name === "jobtype" && value === "Remote") {
+    if (name === "jobType" && value === "Remote") {
       form.location = "";
     }
     //set all form values based on there names via controlled react form handler function
@@ -63,14 +63,14 @@ const Form = () => {
       return;
     }
     setErrors({});
-    if (formsCtx?.createForms && form.id === null) {
+    if (formsCtx?.createForms && form.formID === null) {
       formsCtx.createForms(form);
     } else if (
-      form.id !== null &&
-      form.id !== undefined &&
-      form.id.length > 0
+      form.formID !== null &&
+      form.formID !== undefined &&
+      form.formID.length > 0
     ) {
-      formsCtx?.updateForm(form.id, form);
+      formsCtx?.updateForm(form.formID, form);
     }
     setForm(defaultForm);
   };
@@ -114,11 +114,11 @@ const Form = () => {
           <label htmlFor="jobtype">Job Type:</label>
           <select
             id="jobtype"
-            name="jobtype"
+            name="jobType"
             onChange={handleChange}
             onBlur={validationCheck}
-            value={form.jobtype}
-            style={{ borderColor: errors?.jobtype ? "red" : "initial" }}>
+            value={form.jobType}
+            style={{ borderColor: errors?.jobType ? "red" : "initial" }}>
             <option value="" disabled>
               Select job type
             </option>
@@ -126,8 +126,8 @@ const Form = () => {
             <option value="Onsite">Onsite</option>
             <option value="Hybrid">Hybrid</option>
           </select>
-          {errors?.jobtype && (
-            <span className={styles.validation_error}>{errors?.jobtype}</span>
+          {errors?.jobType && (
+            <span className={styles.validation_error}>{errors?.jobType}</span>
           )}
 
           <label htmlFor="location">Location:</label>
@@ -139,7 +139,7 @@ const Form = () => {
             value={form.location}
             onChange={handleChange}
             onBlur={validationCheck}
-            disabled={form.jobtype === "Remote" ? true : false}
+            disabled={form.jobType === "Remote" ? true : false}
             style={{ borderColor: errors?.location ? "red" : "initial" }}
           />
           {errors?.location && (
@@ -188,7 +188,7 @@ const Form = () => {
             value={form.notes}
             onChange={handleChange}></textarea>
           <button type="button" onClick={handleSubmit} id={styles.submitBtn}>
-            {form.id ? "Update" : "Add"} Application
+            {form.formID ? "Update" : "Add"} Application
           </button>
         </div>
       </form>
