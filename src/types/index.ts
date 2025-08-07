@@ -45,3 +45,15 @@ export interface RegistrationForm {
   userEmail: string;
   password: string;
 }
+//job seeker types
+export interface JobSeeker {
+  formID: string;
+  company: string;
+  role: string;
+  jobtype: string;
+  location: string;
+  status: string;
+  date: string;
+  notes: string;
+  applyed: boolean;
+}
