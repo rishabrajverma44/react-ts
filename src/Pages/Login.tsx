@@ -76,8 +76,7 @@ const Login = () => {
       .catch((error) => {
         if (error.response?.status >= 400 || error.response?.status < 500) {
           toast.error(error.response.data);
-        }
-        toast("Somthing went wrong !");
+        } else toast("Somthing went wrong !");
         console.log("error", error);
       });
   };

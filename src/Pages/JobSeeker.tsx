@@ -1,5 +1,15 @@
+import Table from "../components/Jobseeker/Table";
+import Header from "../components/Jobseeker/Header";
+
 const Jobseeker = () => {
-  return <div>Jobseeker</div>;
+  return (
+    <>
+      <div>
+        <Header />
+        <Table />
+      </div>
+    </>
+  );
 };
 
 export default Jobseeker;
