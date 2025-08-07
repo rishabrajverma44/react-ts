@@ -99,14 +99,14 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
     setHeaderData(headerObject);
   };
   //index db call
-  async function getINDEXDBData() {
+  const getINDEXDBData = async () => {
     const data: formInterface[] = await getAllFormsINDEXDB();
     if (data) {
       setForms(data);
       setFilterdData(data);
       headerSumData(data);
     }
-  }
+  };
 
   useEffect(() => {
     searchContext();
