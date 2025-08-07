@@ -53,6 +53,24 @@ body {
   display: flex;
   justify-content: space-around;
 }
+button {
+  background-color: rgb(10, 10, 10);
+  color: white;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 14px;
+  font-size: 12px;
+}
+button:hover {
+  background-color: rgb(109, 109, 109);
+  cursor: pointer;
+}
+
+label {
+  margin-top: 7px;
+}
 .modal-content > h2 {
   text-align: center;
   margin-top: 0px;

@@ -1,12 +1,12 @@
 import type React from "react";
-import styles from "../Style/form.module.css";
-import type { formInterface } from "../types";
+import styles from "../../Style/form.module.css";
+import type { formInterface } from "../../types";
 import { useEffect, useState } from "react";
 import {
   validationForForm,
   validationForSingleField,
-} from "../formValidation/validation";
-import { UseFormContext } from "../context/UseFormContext";
+} from "../../formValidation/validation";
+import { UseFormContext } from "../../context/UseFormContext";
 
 const defaultForm: formInterface = {
   id: null,

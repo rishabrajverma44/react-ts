@@ -17,6 +17,7 @@ const defaultForm: RegistrationForm = {
 };
 
 const Registration = () => {
+  const baseUrl = import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
   const [form, setForm] = useState<RegistrationForm>(defaultForm);
   //RegistrationForm
@@ -55,7 +56,7 @@ const Registration = () => {
   };
   const sendRegistration = async (data: RegistrationForm) => {
     axios
-      .post("http://localhost:3000/user/register", data)
+      .post(`${baseUrl}/user/register`, data)
       .then((res) => {
         if (res.status !== 201) {
           toast.warn(res.data);
@@ -71,7 +72,7 @@ const Registration = () => {
   };
   return (
     <div className={styles.container}>
-      <form>
+      <form id={styles.form}>
         <div>
           <h2>Registration form</h2>
         </div>
@@ -139,14 +140,14 @@ const Registration = () => {
             <span className={styles.validation_error}>{errors?.password}</span>
           )}
 
-          <button type="button" onClick={handleSubmit} id={styles.submitBtn}>
+          <button type="button" onClick={handleSubmit} id={styles.submitBtn1}>
             Submit
           </button>
           <div id={styles.footer}>
             <button
               type="button"
               onClick={() => navigate("/")}
-              id={styles.submitBtn}>
+              id={styles.submitBtn2}>
               Login
             </button>
           </div>

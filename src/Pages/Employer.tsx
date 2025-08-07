@@ -1,7 +1,7 @@
-import Filter from "../components/Filter";
-import Form from "../components/Form";
-import Header from "../components/Header";
-import Table from "../components/Table";
+import Header from "../components/Company/Header";
+import Filter from "../components/Company/Filter";
+import Table from "../components/Company/Table";
+import Form from "../components/Company/Form";
 
 const Employer = () => {
   return (

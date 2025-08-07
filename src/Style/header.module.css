@@ -1,5 +1,16 @@
+.banner {
+  display: flex;
+}
 .header {
   text-align: center;
+  width: 100%;
+}
+.LogoutBtn {
+  margin-left: auto;
+  width: fit-content;
+  display: flex;
+  margin-right: 30px;
+  align-items: center;
 }
 .header > h2 {
   line-height: normal;
@@ -8,4 +19,9 @@
 .header > p {
   margin: 0px;
   margin-bottom: 10px;
+}
+@media screen and (max-width: 600px) {
+  .banner {
+    flex-direction: column;
+  }
 }

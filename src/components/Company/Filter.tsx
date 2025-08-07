@@ -1,5 +1,5 @@
-import { UseFormContext } from "../context/UseFormContext";
-import styles from "../Style/search.module.css";
+import { UseFormContext } from "../../context/UseFormContext";
+import styles from "../../Style/search.module.css";
 
 const Filter = () => {
   //controlled search field

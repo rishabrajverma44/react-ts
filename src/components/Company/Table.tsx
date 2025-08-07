@@ -1,7 +1,7 @@
 import { useState } from "react";
-import styles from "../Style/table.module.css";
-import { UseFormContext } from "../context/UseFormContext";
-import type { formInterface } from "../types";
+import styles from "../../Style/table.module.css";
+import { UseFormContext } from "../../context/UseFormContext";
+import type { formInterface } from "../../types";
 const Table = () => {
   const formCtx = UseFormContext();
   const [openDeleteModel, setOpenDeleteModel] = useState(false);

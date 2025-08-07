@@ -4,7 +4,7 @@ import Employer from "../Pages/Employer";
 import Jobseeker from "../Pages/JobSeeker";
 import NotFound from "../Pages/NotFound";
 import Registration from "../Pages/Registration";
-import AuthCheck from "../Auth/CompanyAuth";
+import AuthCheck from "../Auth/AuthCheck";
 
 // route configurations
 const Routes = [
@@ -19,7 +19,7 @@ const Routes = [
   {
     path: "/company",
     element: (
-      <AuthCheck>
+      <AuthCheck allowedRoles={["company"]}>
         <Employer />
       </AuthCheck>
     ),
@@ -27,7 +27,7 @@ const Routes = [
   {
     path: "/Jobseeker",
     element: (
-      <AuthCheck>
+      <AuthCheck allowedRoles={["job_seeker"]}>
         <Jobseeker />
       </AuthCheck>
     ),

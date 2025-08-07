@@ -15,6 +15,7 @@ const defaultForm: LoginForm = {
 };
 
 const Login = () => {
+  const baseUrl = import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
   const [form, setForm] = useState<LoginForm>(defaultForm);
   //LoginForm
@@ -56,17 +57,21 @@ const Login = () => {
 
   const sendLogin = async (data: LoginForm) => {
     axios
-      .post("https://node-js-t3c4.vercel.app/user/login", data)
+      .post(`${baseUrl}/user/login`, data)
       .then((res) => {
         if (res.status !== 200) {
           toast.warn(res.data);
-        } else if (res.status === 200 && res.data.bearer !== undefined) {
-          toast("Login successfully !");
-          const token = res.data.bearer;
-          if (token) {
-            localStorage.setItem("JOB_APP_TOKEN", token);
-          }
-          setForm(defaultForm);
+        } else if (res.status === 200) {
+          toast(res.data.message);
+          const tokenResp = res.headers["authorization"]?.toString();
+          const token = tokenResp && tokenResp.split(" ")[1];
+          token && localStorage.setItem("JOB_APP_TOKEN", token);
+          const userRole = res.data?.role;
+          userRole && localStorage.setItem("JOB_APP_ROLE", userRole);
+          userRole === "company"
+            ? navigate("/company")
+            : navigate("/Jobseeker");
+          //setForm(defaultForm);
         }
       })
       .catch((error) => {
@@ -79,7 +84,7 @@ const Login = () => {
 
   return (
     <div className={styles.container}>
-      <form>
+      <form id={styles.form}>
         <div>
           <h2>Login form</h2>
         </div>
@@ -114,14 +119,14 @@ const Login = () => {
             <span className={styles.validation_error}>{errors?.password}</span>
           )}
 
-          <button type="button" onClick={handleSubmit} id={styles.submitBtn}>
+          <button type="button" onClick={handleSubmit} id={styles.submitBtn1}>
             Submit
           </button>
           <div id={styles.footer}>
             <button
               type="button"
               onClick={() => navigate("/registration")}
-              id={styles.submitBtn}>
+              id={styles.submitBtn2}>
               Register
             </button>
           </div>
