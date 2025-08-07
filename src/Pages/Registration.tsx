@@ -36,9 +36,9 @@ const Registration = () => {
   const validationCheck = (
     e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value } = e.target;
+    const { name } = e.target;
     const validationErrors: Partial<RegistrationForm> =
-      validationForSingleFieldRegister(form, name, value);
+      validationForSingleFieldRegister(form, name);
     if (Object.keys(validationErrors).length > 0) {
       if (errors) setErrors((errors) => ({ ...errors, ...validationErrors }));
       return;
