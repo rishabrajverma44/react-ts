@@ -13,14 +13,13 @@ export function validationRegisterForm(form: RegistrationForm) {
 
 export function validationForSingleFieldRegister(
   form: RegistrationForm,
-  name: string,
-  value: string
+  name: string
 ) {
   //partrial utility type used for giving types of an object wich accepts (key, type)
   const errors: Partial<Record<keyof RegistrationForm, string>> = {};
   switch (name) {
     case "userName":
-      if (!value.trim()) {
+      if (!form.userName.trim()) {
         errors.userName = "userName is required !";
       } else {
         errors.userName = "";
@@ -61,11 +60,7 @@ export function validationLoginForm(form: LoginForm) {
   return errors;
 }
 
-export function validationForSingleFieldLogin(
-  form: LoginForm,
-  name: string,
-  value: string
-) {
+export function validationForSingleFieldLogin(form: LoginForm, name: string) {
   //partrial utility type used for giving types of an object wich accepts (key, type)
   const errors: Partial<Record<keyof LoginForm, string>> = {};
   switch (name) {

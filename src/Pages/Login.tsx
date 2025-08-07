@@ -34,11 +34,10 @@ const Login = () => {
   const validationCheck = (
     e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value } = e.target;
+    const { name } = e.target;
     const validationErrors: Partial<LoginForm> = validationForSingleFieldLogin(
       form,
-      name,
-      value
+      name
     );
     if (Object.keys(validationErrors).length > 0) {
       if (errors) setErrors((errors) => ({ ...errors, ...validationErrors }));
