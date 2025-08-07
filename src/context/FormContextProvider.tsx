@@ -1,11 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import type { FormContextType, formInterface, Header } from "../types";
-import {
-  addFormINDEXDB,
-  deleteFormsINDEXDB,
-  getAllFormsINDEXDB,
-  updateFormINDEX,
-} from "../DataBase/indexDB";
+import { addFormINDEXDB, deleteFormsINDEXDB } from "../DataBase/indexDB";
+import { getAllForms } from "../Api/company/companyApl";
 
 interface FormContextProps {
   children: React.ReactNode;
@@ -35,7 +31,7 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
   const setterFunction = (formID?: string) => {
     if (formID) {
       setCurrentForm(() => {
-        return forms.find((item) => item.id === formID) || null;
+        return forms.find((item) => item.formID === formID) || null;
       });
     }
   };
@@ -43,29 +39,28 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
     const id = generateId();
     const newForm: formInterface = {
       ...currentForm,
-      id: id,
+      formID: id,
     };
     setForms((prev) => {
       return [...prev, newForm];
     });
     addFormINDEXDB(newForm);
     setCurrentForm(null);
-    getINDEXDBData();
+    //getINDEXDBData();
   };
 
   const deleteForm = (formID: string) => {
-    setForms((prev) => prev.filter((form) => form.id !== formID));
+    setForms((prev) => prev.filter((form) => form.formID !== formID));
     deleteFormsINDEXDB(formID);
-    getINDEXDBData();
+    // getINDEXDBData();
   };
 
-  const updateForm = (id: string, updateForm: formInterface) => {
-    setForms((pre) =>
-      pre.map((form) => (form.id === id ? { ...form, ...updateForm } : form))
-    );
+  const updateForm = (id: string, form: formInterface) => {
     setCurrentForm(null);
-    updateFormINDEX(updateForm);
-    getINDEXDBData();
+    const response = updateForm(id, form);
+    console.log(response);
+    //updateFormINDEX(updateForm);
+    // getINDEXDBData();
   };
   //search context
   const searchContext = () => {
@@ -74,7 +69,7 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
       const filteredData = allTableData.filter((element: formInterface) => {
         return (
           element.company.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-          element.jobtype.toLowerCase().includes(searchedQuery.toLowerCase()) ||
+          element.jobType.toLowerCase().includes(searchedQuery.toLowerCase()) ||
           element.location
             .toLowerCase()
             .includes(searchedQuery.toLowerCase()) ||
@@ -99,8 +94,8 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
     setHeaderData(headerObject);
   };
   //index db call
-  const getINDEXDBData = async () => {
-    const data: formInterface[] = await getAllFormsINDEXDB();
+  const getFormData = async () => {
+    const data: formInterface[] = await getAllForms();
     if (data) {
       setForms(data);
       setFilterdData(data);
@@ -113,7 +108,7 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
   }, [searchedQuery]);
 
   useEffect(() => {
-    getINDEXDBData();
+    getFormData();
   }, []);
   useEffect(() => {
     if (currentForm) {

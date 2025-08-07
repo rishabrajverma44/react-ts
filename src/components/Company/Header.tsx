@@ -1,16 +1,9 @@
-import { useNavigate } from "react-router-dom";
 import style from "../../Style/header.module.css";
 import { UseFormContext } from "../../context/FormContextProvider";
+import { handleLogout } from "../../utils/logout";
 const Header = () => {
   const formCtx = UseFormContext();
   const data = formCtx?.headerData;
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem("JOB_APP_TOKEN");
-    localStorage.removeItem("JOB_APP_ROLE");
-    navigate("/");
-  };
   return (
     <nav role="banner" className={style.banner}>
       <div className={style.header}>
