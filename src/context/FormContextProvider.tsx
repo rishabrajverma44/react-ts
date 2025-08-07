@@ -1,7 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import type { FormContextType, formInterface, Header } from "../types";
-import { addFormINDEXDB, deleteFormsINDEXDB } from "../DataBase/indexDB";
-import { getAllForms } from "../Api/company/companyApl";
+import {
+  addFormData,
+  deleteFormData,
+  getAllForms,
+  updateFormData,
+} from "../Api/company/companyApl";
 
 interface FormContextProps {
   children: React.ReactNode;
@@ -25,9 +29,6 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
   const [headerData, setHeaderData] = useState<Header | null>(null);
   const [isFormDirty, setIsDirty] = useState<boolean>(true);
 
-  const generateId = (): string => {
-    return `${Math.random().toString(36).slice(2, 9)}`;
-  };
   const setterFunction = (formID?: string) => {
     if (formID) {
       setCurrentForm(() => {
@@ -35,32 +36,21 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
       });
     }
   };
-  const createForms = (currentForm: formInterface) => {
-    const id = generateId();
-    const newForm: formInterface = {
-      ...currentForm,
-      formID: id,
-    };
-    setForms((prev) => {
-      return [...prev, newForm];
-    });
-    addFormINDEXDB(newForm);
-    setCurrentForm(null);
-    //getINDEXDBData();
+  const createForms = async (currentForm: formInterface) => {
+    await addFormData(currentForm);
+    getFormData();
   };
 
   const deleteForm = (formID: string) => {
-    setForms((prev) => prev.filter((form) => form.formID !== formID));
-    deleteFormsINDEXDB(formID);
-    // getINDEXDBData();
+    deleteFormData(formID);
+    getFormData();
   };
 
   const updateForm = (id: string, form: formInterface) => {
+    const { formID, ...FormData } = form;
+    updateFormData(id, FormData);
     setCurrentForm(null);
-    const response = updateForm(id, form);
-    console.log(response);
-    //updateFormINDEX(updateForm);
-    // getINDEXDBData();
+    getFormData();
   };
   //search context
   const searchContext = () => {
@@ -93,7 +83,7 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
     };
     setHeaderData(headerObject);
   };
-  //index db call
+  // db call
   const getFormData = async () => {
     const data: formInterface[] = await getAllForms();
     if (data) {

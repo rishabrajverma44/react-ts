@@ -1,8 +1,21 @@
 import type { formInterface } from "../../types";
 import axiosInstance from "../axiosInstance";
 
+export const addFormData = async (formData: formInterface) => {
+  const response = await axiosInstance
+    .post("/company", formData)
+    .then((res) => {
+      if (res.status === 201) return res.data;
+    })
+    .catch((error) => {
+      console.log("error addform", error);
+      return null;
+    });
+  return response;
+};
+
 export const getAllForms = async () => {
-  var formData = await axiosInstance
+  const response = await axiosInstance
     .get("/company")
     .then((res) => {
       if (res.status === 200) {
@@ -13,17 +26,37 @@ export const getAllForms = async () => {
       console.log("error in getting forms", error);
       return null;
     });
-  return formData;
+  return response;
 };
 
-export const updateForm = async (formID: string, formData: formInterface) => {
-  var response = await axiosInstance
+export const updateFormData = async (
+  formID: string,
+  formData: formInterface
+) => {
+  const response = await axiosInstance
     .put(`/company/${formID}`, formData)
     .then((res) => {
-      console.log(res);
+      if (res.status === 200) {
+        return res.data;
+      }
     })
     .catch((error) => {
       console.log("error in updateform", error);
+      return null;
     });
   return response;
+};
+
+export const deleteFormData = async (formID: string) => {
+  axiosInstance
+    .delete(`/company/${formID}`)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      }
+    })
+    .catch((error) => {
+      console.log("error in delete", error);
+      return null;
+    });
 };

@@ -9,7 +9,6 @@ import {
 import { UseFormContext } from "../../context/FormContextProvider";
 
 const defaultForm: formInterface = {
-  formID: null,
   company: "",
   role: "",
   jobType: "",
@@ -63,13 +62,9 @@ const Form = () => {
       return;
     }
     setErrors({});
-    if (formsCtx?.createForms && form.formID === null) {
+    if (formsCtx?.createForms && !form.formID) {
       formsCtx.createForms(form);
-    } else if (
-      form.formID !== null &&
-      form.formID !== undefined &&
-      form.formID.length > 0
-    ) {
+    } else if (form.formID) {
       formsCtx?.updateForm(form.formID, form);
     }
     setForm(defaultForm);
