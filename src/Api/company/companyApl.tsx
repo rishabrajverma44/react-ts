@@ -25,4 +25,5 @@ export const updateForm = async (formID: string, formData: formInterface) => {
     .catch((error) => {
       console.log("error in updateform", error);
     });
+  return response;
 };

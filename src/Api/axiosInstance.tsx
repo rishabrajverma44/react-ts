@@ -1,4 +1,5 @@
 import axios from "axios";
+import { handleLogout } from "../utils/logout";
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const axiosInstance = axios.create({
@@ -15,6 +16,15 @@ axiosInstance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
+  }
+);
+
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.status === 404) handleLogout();
   }
 );
 

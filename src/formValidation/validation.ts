@@ -5,8 +5,8 @@ export function validationForForm(form: formInterface) {
 
   if (!form.company.trim()) errors.company = "Company is required !";
   if (!form.role.trim()) errors.role = "Role is required !";
-  if (!form.jobtype.trim()) errors.jobtype = "Job Type is required !";
-  if (form.jobtype !== "Remote" && !form.location.trim())
+  if (!form.jobType.trim()) errors.jobType = "Job Type is required !";
+  if (form.jobType !== "Remote" && !form.location.trim())
     errors.location = "Location is required !";
   if (!form.date.trim()) errors.date = "Date is required !";
   if (!form.status.trim()) errors.status = "Status is required !";
@@ -35,15 +35,15 @@ export function validationForSingleField(
         errors.role = "";
       }
       break;
-    case "jobtype":
-      if (!form.jobtype.trim()) {
-        errors.jobtype = "Jobtype is required !";
+    case "jobType":
+      if (!form.jobType.trim()) {
+        errors.jobType = "Jobtype is required !";
       } else {
-        errors.jobtype = "";
+        errors.jobType = "";
       }
       break;
     case "location":
-      if (!form.location.trim() && form.jobtype !== "Remote") {
+      if (!form.location.trim() && form.jobType !== "Remote") {
         errors.location = "Location is required !";
       } else {
         errors.location = "";

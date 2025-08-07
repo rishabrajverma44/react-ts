@@ -1,12 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import type { FormContextType, formInterface, Header } from "../types";
-import {
-  addFormINDEXDB,
-  deleteFormsINDEXDB,
-  getAllFormsINDEXDB,
-  updateFormINDEX,
-} from "../DataBase/indexDB";
-import { getAllForms, updateForm } from "../Api/company/companyApl";
+import { addFormINDEXDB, deleteFormsINDEXDB } from "../DataBase/indexDB";
+import { getAllForms } from "../Api/company/companyApl";
 
 interface FormContextProps {
   children: React.ReactNode;
