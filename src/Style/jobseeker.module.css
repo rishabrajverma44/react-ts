@@ -80,6 +80,9 @@ table {
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 10px;
+  border: 1px solid;
+  padding: 7px;
+  min-height: 85vh;
 }
 .card {
   width: 300px;

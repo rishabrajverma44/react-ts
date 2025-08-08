@@ -127,7 +127,11 @@ const Jobseekermain = () => {
                   </div>
                 </div>
                 <div className={styles.footer}>
-                  {form.notes}
+                  <div>
+                    <div style={{ fontWeight: "bold" }}>Description:</div>
+                    <div>{form.notes}</div>
+                  </div>
+
                   <button
                     disabled={form.applied}
                     style={{
