@@ -18,7 +18,9 @@ export const applyFormByFormID = async (formId: string) => {
   const response = await axiosInstance
     .post(`job_seeker/apply/${formId}`)
     .then((res) => {
-      console.log(res);
+      if (res.status === 200) {
+        return true;
+      }
     })
     .catch((error) => {
       console.log(error);

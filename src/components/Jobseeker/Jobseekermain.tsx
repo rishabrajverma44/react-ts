@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import styles from "../../Style/table.module.css";
+import styles from "../../Style/jobseeker.module.css";
 import type { JobSeeker } from "../../types";
 import { applyFormByFormID, getAllForms } from "../../Api/ApiCall/jobSeekers";
-const Table = () => {
+import { handleLogout } from "../../utils/logout";
+const Jobseekermain = () => {
   const [userTableData, setUserTableData] = useState<JobSeeker[]>([]);
+
   const applyForm = async function (formId: string | null | undefined) {
     if (formId) {
       await applyFormByFormID(formId);
@@ -14,6 +16,7 @@ const Table = () => {
   const getTableData = async () => {
     const data = await getAllForms();
     setUserTableData(data);
+    console.log(data);
   };
 
   useEffect(() => {
@@ -22,6 +25,17 @@ const Table = () => {
 
   return (
     <div>
+      <nav role="banner" className={styles.banner}>
+        <div className={styles.header}>
+          <h2>Job Application Tracker</h2>
+          <p>
+            <span>Total Applied Jobs :</span>
+          </p>
+        </div>
+        <div className={styles.LogoutBtn}>
+          <button onClick={handleLogout}>logout</button>
+        </div>
+      </nav>
       {userTableData.length > 0 ? (
         <table>
           <thead>
@@ -81,4 +95,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default Jobseekermain;
