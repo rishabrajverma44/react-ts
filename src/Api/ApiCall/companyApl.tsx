@@ -29,6 +29,21 @@ export const getAllForms = async () => {
   return response;
 };
 
+export const getUserDetails = async () => {
+  const response = await axiosInstance
+    .get("/company/user/userDetails")
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      }
+    })
+    .catch((error) => {
+      console.log("error in getting forms", error);
+      return null;
+    });
+  return response;
+};
+
 export const updateFormData = async (
   formID: string,
   formData: formInterface

@@ -1,39 +1,25 @@
 import { useEffect, useState } from "react";
 import styles from "../../Style/table.module.css";
 import type { JobSeeker } from "../../types";
-import axiosInstance from "../../Api/axiosInstance";
-import { handleLogout } from "../../utils/logout";
+import { applyFormByFormID, getAllForms } from "../../Api/ApiCall/jobSeekers";
 const Table = () => {
   const [userTableData, setUserTableData] = useState<JobSeeker[]>([]);
-  const applyForm = function (formId: string | null | undefined) {
-    console.log(formId);
+  const applyForm = async function (formId: string | null | undefined) {
     if (formId) {
-      axiosInstance
-        .post(`job_seeker/apply/${formId}`)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      await applyFormByFormID(formId);
+      await getTableData();
     }
   };
 
-  const getTableData = () => {
-    axiosInstance
-      .get("job_seeker")
-      .then((res) => {
-        res.status === 200 && setUserTableData(res.data);
-        console.log(res.data);
-      })
-      .catch((error) => {
-        handleLogout();
-        console.log("error", error);
-      });
+  const getTableData = async () => {
+    const data = await getAllForms();
+    setUserTableData(data);
   };
+
   useEffect(() => {
     getTableData();
   }, []);
+
   return (
     <div>
       {userTableData.length > 0 ? (
@@ -66,7 +52,12 @@ const Table = () => {
                     <td role="cell">{form.notes}</td>
                     <td role="cell" className={styles.action}>
                       <div className={styles.action_inner}>
-                        <button onClick={() => applyForm(form.formID)}>
+                        <button
+                          disabled={form.applied}
+                          style={{
+                            background: form.applied ? "gray" : "",
+                          }}
+                          onClick={() => applyForm(form.formID)}>
                           Easy Apply
                         </button>
                       </div>

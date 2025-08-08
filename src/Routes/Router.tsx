@@ -38,5 +38,5 @@ const Routes = [
 ];
 
 // Create the router instance
-const router = createBrowserRouter(Routes);
-export default router;
+const Router = createBrowserRouter(Routes);
+export default Router;

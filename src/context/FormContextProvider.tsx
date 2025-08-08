@@ -4,8 +4,9 @@ import {
   addFormData,
   deleteFormData,
   getAllForms,
+  getUserDetails,
   updateFormData,
-} from "../Api/company/companyApl";
+} from "../Api/ApiCall/companyApl";
 
 interface FormContextProps {
   children: React.ReactNode;
@@ -47,8 +48,8 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
   };
 
   const updateForm = (id: string, form: formInterface) => {
-    const { formID, ...FormData } = form;
-    updateFormData(id, FormData);
+    delete form.formID;
+    updateFormData(id, form);
     setCurrentForm(null);
     getFormData();
   };
@@ -72,7 +73,7 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
     }
   };
   //header sum data
-  const headerSumData = (data: formInterface[]) => {
+  const headerDetails = (data: formInterface[], companyName: string) => {
     const headerObject = {
       totalApplication: data.length,
       totalApplied: data.filter((form) => form.status === "Applied").length,
@@ -80,16 +81,18 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
         .length,
       totalHired: data.filter((form) => form.status === "Rejected").length,
       totalRejected: data.filter((form) => form.status === "Rejected").length,
+      companyName: companyName,
     };
     setHeaderData(headerObject);
   };
   // db call
   const getFormData = async () => {
     const data: formInterface[] = await getAllForms();
-    if (data) {
+    const companyName: string = await getUserDetails();
+    if (data && companyName) {
       setForms(data);
       setFilterdData(data);
-      headerSumData(data);
+      headerDetails(data, companyName);
     }
   };
 
