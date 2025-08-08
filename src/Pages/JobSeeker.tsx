@@ -1,7 +1,7 @@
 import Table from "../components/Jobseeker/Table";
 import Header from "../components/Jobseeker/Header";
 
-const Jobseeker = () => {
+const JobSeeker = () => {
   return (
     <>
       <div>
@@ -12,4 +12,4 @@ const Jobseeker = () => {
   );
 };
 
-export default Jobseeker;
+export default JobSeeker;

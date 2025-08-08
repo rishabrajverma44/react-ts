@@ -17,6 +17,7 @@ export interface Header {
   totalInterviewing: number;
   totalHired: number;
   totalRejected: number;
+  companyName: string;
 }
 //context types
 export interface FormContextType {
@@ -55,5 +56,5 @@ export interface JobSeeker {
   status: string;
   date: string;
   notes: string;
-  applyed: boolean;
+  applied: boolean;
 }

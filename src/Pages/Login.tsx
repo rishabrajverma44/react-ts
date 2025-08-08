@@ -70,7 +70,6 @@ const Login = () => {
           userRole === "company"
             ? navigate("/company")
             : navigate("/Jobseeker");
-          //setForm(defaultForm);
         }
       })
       .catch((error) => {

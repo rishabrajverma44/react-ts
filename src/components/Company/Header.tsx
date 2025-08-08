@@ -29,7 +29,10 @@ const Header = () => {
         </p>
       </div>
       <div className={style.LogoutBtn}>
-        <button onClick={handleLogout}>logout</button>
+        <div style={{ textAlign: "center" }}>
+          <span>Employer name : {data?.companyName}</span>
+          <button onClick={handleLogout}>logout</button>
+        </div>
       </div>
     </nav>
   );
