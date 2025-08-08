@@ -1,12 +1,10 @@
-import Table from "../components/Jobseeker/Table";
-import Header from "../components/Jobseeker/Header";
+import Jobseekermain from "../components/Jobseeker/Jobseekermain";
 
 const JobSeeker = () => {
   return (
     <>
       <div>
-        <Header />
-        <Table />
+        <Jobseekermain />
       </div>
     </>
   );
