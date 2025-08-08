@@ -1,26 +1,45 @@
 import { useEffect, useState } from "react";
 import styles from "../../Style/jobseeker.module.css";
 import type { JobSeeker } from "../../types";
-import { applyFormByFormID, getAllForms } from "../../Api/ApiCall/jobSeekers";
+import {
+  applyFormByFormID,
+  getAllForms,
+  getUserAppliedForm,
+  getUserName,
+} from "../../Api/ApiCall/jobSeekers";
 import { handleLogout } from "../../utils/logout";
+import { toast } from "react-toastify";
 const Jobseekermain = () => {
   const [userTableData, setUserTableData] = useState<JobSeeker[]>([]);
+  const [userName, setUserName] = useState();
+  const [userAppliedForm, setUserAppliedForm] = useState();
 
   const applyForm = async function (formId: string | null | undefined) {
     if (formId) {
-      await applyFormByFormID(formId);
-      await getTableData();
+      const res = await applyFormByFormID(formId);
+      await getData();
+      await getAppliedForms();
+      if (res) toast("Successfully applied !");
     }
   };
 
-  const getTableData = async () => {
+  const getData = async () => {
     const data = await getAllForms();
     setUserTableData(data);
-    console.log(data);
+  };
+  const getUser = async () => {
+    const user = await getUserName();
+    setUserName(user);
+  };
+  const getAppliedForms = async () => {
+    const appliedForm = await getUserAppliedForm();
+    setUserAppliedForm(appliedForm);
   };
 
   useEffect(() => {
-    getTableData();
+    getData();
+    getUser();
+    getAppliedForms();
   }, []);
 
   return (
@@ -29,14 +48,17 @@ const Jobseekermain = () => {
         <div className={styles.header}>
           <h2>Job Application Tracker</h2>
           <p>
-            <span>Total Applied Jobs :</span>
+            <span>Total Applied Jobs : {userAppliedForm}</span>
           </p>
         </div>
         <div className={styles.LogoutBtn}>
-          <button onClick={handleLogout}>logout</button>
+          <div style={{ textAlign: "center" }}>
+            <span>Employer name : {userName}</span>
+            <button onClick={handleLogout}>logout</button>
+          </div>
         </div>
       </nav>
-      {userTableData.length > 0 ? (
+      {/* {userTableData.length > 0 ? (
         <table>
           <thead>
             <tr>
@@ -90,7 +112,42 @@ const Jobseekermain = () => {
             <h2>No forms !</h2>
           </div>
         </>
-      )}
+      )} */}
+      <div className={styles.card_container}>
+        {userTableData.length > 0 ? (
+          userTableData.map((form: JobSeeker, index: number) => {
+            return (
+              <div className={styles.card} key={index}>
+                <div className={styles.inner_card}>
+                  <div className={styles.left}>{form.company}</div>
+                  <div className={styles.right}>
+                    <div>{form.role}</div>
+                    <div>{form.jobType}</div>
+                    <div>{form.location}</div>
+                  </div>
+                </div>
+                <div className={styles.footer}>
+                  {form.notes}
+                  <button
+                    disabled={form.applied}
+                    style={{
+                      background: form.applied ? "gray" : "",
+                    }}
+                    onClick={() => applyForm(form.formID)}>
+                    Easy Apply
+                  </button>
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <>
+            <div className="no_forms">
+              <h2>No forms !</h2>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };

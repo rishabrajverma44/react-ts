@@ -7,8 +7,7 @@ export const addFormData = async (formData: formInterface) => {
     .then((res) => {
       if (res.status === 201) return res.data;
     })
-    .catch((error) => {
-      console.log("error addform", error);
+    .catch(() => {
       return null;
     });
   return response;
@@ -22,8 +21,7 @@ export const getAllForms = async () => {
         return res.data;
       }
     })
-    .catch((error) => {
-      console.log("error in getting forms", error);
+    .catch(() => {
       return null;
     });
   return response;
@@ -37,8 +35,7 @@ export const getUserDetails = async () => {
         return res.data;
       }
     })
-    .catch((error) => {
-      console.log("error in getting forms", error);
+    .catch(() => {
       return null;
     });
   return response;
@@ -55,8 +52,7 @@ export const updateFormData = async (
         return res.data;
       }
     })
-    .catch((error) => {
-      console.log("error in updateform", error);
+    .catch(() => {
       return null;
     });
   return response;
@@ -70,8 +66,7 @@ export const deleteFormData = async (formID: string) => {
         return res.data;
       }
     })
-    .catch((error) => {
-      console.log("error in delete", error);
+    .catch(() => {
       return null;
     });
 };

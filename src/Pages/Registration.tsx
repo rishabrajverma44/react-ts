@@ -66,8 +66,8 @@ const Registration = () => {
           navigate("/");
         }
       })
-      .catch((error) => {
-        console.log("error", error);
+      .catch(() => {
+        return null;
       });
   };
   return (

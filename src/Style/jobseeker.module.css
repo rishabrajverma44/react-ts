@@ -73,3 +73,36 @@ table {
     padding-right: 70px;
   }
 }
+/* card design */
+.card_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+.card {
+  width: 300px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  height: max-content;
+  border-radius: 8px;
+}
+
+.inner_card {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.left {
+  font-size: larger;
+}
+.right {
+  height: 100%;
+}
+.footer {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+}
