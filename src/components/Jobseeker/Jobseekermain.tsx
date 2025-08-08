@@ -53,7 +53,7 @@ const Jobseekermain = () => {
         </div>
         <div className={styles.LogoutBtn}>
           <div style={{ textAlign: "center" }}>
-            <span>Employer name : {userName}</span>
+            <span>Jonseeker name : {userName}</span>
             <button onClick={handleLogout}>logout</button>
           </div>
         </div>
