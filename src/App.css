@@ -7,6 +7,30 @@ body {
 #root {
   margin: 0 auto;
 }
+/* Header */
+.banner {
+  display: flex;
+  border-bottom: 2px solid black;
+  padding-bottom: 3px;
+}
+.header {
+  text-align: center;
+  width: 100%;
+}
+
+.header > h2 {
+  line-height: normal;
+  margin: 0%;
+}
+.header > p {
+  margin: 2px;
+}
+@media screen and (max-width: 600px) {
+  .banner {
+    flex-direction: column;
+  }
+}
+/* hero */
 .hero-section {
   margin: 7px;
   border: 1px solid;
@@ -86,4 +110,28 @@ label {
     margin-top: 8px;
     flex: 0 0 100%;
   }
+}
+.hidden {
+  display: none;
+}
+.show {
+  color: blue;
+}
+.show:hover {
+  cursor: pointer;
+}
+#read-more-text {
+  margin: 0;
+}
+
+.LogoutBtn {
+  margin-left: auto;
+  margin-right: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.emp-name {
+  min-width: max-content;
 }

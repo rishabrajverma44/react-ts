@@ -5,13 +5,7 @@
   text-align: center;
   width: 100%;
 }
-.LogoutBtn {
-  margin-left: auto;
-  width: fit-content;
-  display: flex;
-  margin-right: 30px;
-  align-items: center;
-}
+
 .header > h2 {
   line-height: normal;
   margin: 0%;

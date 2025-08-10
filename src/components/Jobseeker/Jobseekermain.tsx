@@ -9,6 +9,8 @@ import {
 } from "../../Api/ApiCall/jobSeekers";
 import { handleLogout } from "../../utils/logout";
 import { toast } from "react-toastify";
+import { ReadMore } from "../../utils/ReadMore";
+import location from "../../utils/location.png";
 const Jobseekermain = () => {
   const [userTableData, setUserTableData] = useState<JobSeeker[]>([]);
   const [userName, setUserName] = useState();
@@ -44,96 +46,55 @@ const Jobseekermain = () => {
 
   return (
     <div>
-      <nav role="banner" className={styles.banner}>
-        <div className={styles.header}>
+      <nav role="banner" className="banner">
+        <div className="header">
           <h2>Job Application Tracker</h2>
-          <p>
-            <span>Total Applied Jobs : {userAppliedForm}</span>
-          </p>
+          <p>Total Applied Jobs : {userAppliedForm}</p>
         </div>
-        <div className={styles.LogoutBtn}>
-          <div style={{ textAlign: "center" }}>
-            <span>Jonseeker name : {userName}</span>
-            <button onClick={handleLogout}>logout</button>
+        <div className="LogoutBtn">
+          <div className="emp-name">
+            <span style={{ fontWeight: "bolder" }}>Jobseeker :</span>
+            <span>{userName}</span>
           </div>
+          <button onClick={handleLogout}>logout</button>
         </div>
       </nav>
-      {/* {userTableData.length > 0 ? (
-        <table>
-          <thead>
-            <tr>
-              <th>Company</th>
-              <th>Role</th>
-              <th>Job-Type</th>
-              <th>Location</th>
-              <th>Date</th>
-              <th>status</th>
-              <th>notes</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {userTableData.length > 0 &&
-              userTableData.map((form: JobSeeker, index: number) => {
-                return (
-                  <tr role="row" key={index}>
-                    <td role="cell">{form.company}</td>
-                    <td role="cell">{form.role}</td>
-                    <td role="cell">{form.jobType}</td>
-                    <td role="cell">
-                      {form.location === "" ? "N/A" : form.location}
-                    </td>
-                    <td role="cell">{form.date}</td>
-                    <td role="cell">{form.status}</td>
-                    <td role="cell">{form.notes}</td>
-                    <td role="cell" className={styles.action}>
-                      <div className={styles.action_inner}>
-                        <button
-                          disabled={form.applied}
-                          style={{
-                            background: form.applied ? "gray" : "",
-                          }}
-                          onClick={() => applyForm(form.formID)}>
-                          Easy Apply
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-          </tbody>
-        </table>
-      ) : (
-        ""
-      )}
-      {userTableData?.length === 0 && (
-        <>
-          <div className="no_forms">
-            <h2>No forms !</h2>
-          </div>
-        </>
-      )} */}
+
       <div className={styles.card_container}>
         {userTableData.length > 0 ? (
           userTableData.map((form: JobSeeker, index: number) => {
             return (
               <div className={styles.card} key={index}>
-                <div className={styles.inner_card}>
-                  <div className={styles.left}>{form.company}</div>
-                  <div className={styles.right}>
-                    <div>{form.role}</div>
-                    <div>{form.jobType}</div>
-                    <div>{form.location}</div>
+                <div>
+                  <div>
+                    <span className={styles.role}> {form.role}</span>
+                  </div>
+                  <div className={styles.inner_card}>
+                    <div>
+                      <span>{form.jobType}</span>
+                    </div>
+                    <div className={styles.right}>
+                      <div>
+                        <img
+                          className={styles.location_img}
+                          src={location}
+                          alt="location"
+                        />
+                        {form.location}
+                      </div>
+                    </div>
                   </div>
                 </div>
+                <div className={styles.company}>{form.company}</div>
                 <div className={styles.footer}>
-                  <div>
-                    <div style={{ fontWeight: "bold" }}>Description:</div>
-                    <div>{form.notes}</div>
+                  <div className={styles.description}>
+                    <div>Description:</div>
+                    <ReadMore id="ReadMore" text={form.notes} />
                   </div>
 
                   <button
                     disabled={form.applied}
+                    className={styles.applyBtn}
                     style={{
                       background: form.applied ? "gray" : "",
                     }}

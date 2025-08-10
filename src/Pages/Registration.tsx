@@ -58,12 +58,12 @@ const Registration = () => {
     axios
       .post(`${baseUrl}/user/register`, data)
       .then((res) => {
-        if (res.status !== 201) {
-          toast.warn(res.data);
-        } else if (res.status === 201) {
+        if (res.status === 201) {
           toast("Registed successfully !");
           setForm(defaultForm);
           navigate("/");
+        } else if (res.status !== 201) {
+          toast.warn(res.data);
         }
       })
       .catch(() => {
