@@ -33,7 +33,7 @@ export const ReadMore = ({ id, text, amountOfWords = 10 }: ReadMoreProps) => {
             aria-expanded={isExpanded}
             aria-controls={id}
             onClick={() => setIsExpanded(!isExpanded)}>
-            {isExpanded ? "show less" : "show more"}
+            {isExpanded ? " show less" : "show more"}
           </span>
         </>
       )}
