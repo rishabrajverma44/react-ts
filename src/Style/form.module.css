@@ -1,11 +1,7 @@
 /* form */
-form {
-  padding-right: 20px;
-}
 #applicationForm {
   display: flex;
   flex-direction: column;
-  gap: 2px;
 }
 #applicationForm input,
 #applicationForm select,
@@ -14,8 +10,8 @@ form {
   padding: 5px;
   font-size: 17px;
   border-radius: 8px;
-  border: 1px solid black;
   font-size: medium;
+  border: 1px solid;
 }
 
 .notes {
@@ -31,20 +27,15 @@ form {
 /*validation error */
 .validation_error {
   color: red;
+  margin-top: 6px;
   line-height: 0.7;
   font-size: medium;
 }
 
 /*Button CSS */
 #submitBtn {
-  background-color: rgb(10, 10, 10);
   color: white;
-  padding-left: 4px;
-  padding-right: 4px;
-  margin-top: 12px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  border-radius: 8px;
+  margin-top: 4px;
   font-size: 16px;
 }
 #submitBtn:hover {

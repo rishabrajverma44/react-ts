@@ -35,11 +35,11 @@ body {
 }
 /* hero */
 .hero-section {
-  margin: 7px;
   border: 1px solid;
   display: flex;
   justify-content: space-around;
-  padding: 7px;
+  gap: 8px;
+  padding: 5px;
   overflow: hidden;
 }
 .main-form {
@@ -87,8 +87,10 @@ button {
   padding: 7px;
   border-radius: 5px;
   font-size: 12px;
+  transition: all 0.3s ease-in-out;
 }
 button:hover {
+  transform: scale(0.9);
   background-color: #004be0;
   cursor: pointer;
 }

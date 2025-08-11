@@ -11,6 +11,7 @@ import { handleLogout } from "../../utils/logout";
 import { toast } from "react-toastify";
 import { ReadMore } from "../../utils/ReadMore";
 import location from "../../utils/location.png";
+import company from "../../utils/office.png";
 const Jobseekermain = () => {
   const [userTableData, setUserTableData] = useState<JobSeeker[]>([]);
   const [userName, setUserName] = useState();
@@ -71,7 +72,7 @@ const Jobseekermain = () => {
                   </div>
                   <div className={styles.inner_card}>
                     <div>
-                      <span>{form.jobType}</span>
+                      <span className={styles.jobTypeBox}>{form.jobType}</span>
                     </div>
                     <div className={styles.right}>
                       <div>
@@ -88,7 +89,10 @@ const Jobseekermain = () => {
                     </div>
                   </div>
                 </div>
-                <div className={styles.company}>{form.company}</div>
+                <div className={styles.company}>
+                  <img className={styles.company_img} src={company} />
+                  {form.company}
+                </div>
                 <div className={styles.footer}>
                   <div className={styles.description}>
                     <div>Description:</div>

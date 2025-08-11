@@ -50,28 +50,45 @@ table {
 .card_container {
   padding: 2%;
   display: grid;
-  gap: 5px;
+  gap: 13px;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 }
 .card {
-  margin-bottom: 20px;
   border: 1px solid #ccc;
   padding: 5px;
   height: max-content;
   border-radius: 8px;
+  transition: ease-in, 0.3s;
+}
+.card:hover {
+  transform: scale(1.02);
+  cursor: pointer;
 }
 .applyBtn {
   font-weight: 600;
   height: fit-content;
 }
+.jobTypeBox {
+  padding-left: 9px;
+  padding-right: 9px;
+  border-radius: 3px;
+  color: green;
+  font-weight: 500;
+  background-color: rgb(122, 212, 122, 0.2);
+}
 .role {
-  font-size: x-large;
+  font-size: large;
+  color: #003296;
 }
 .company {
   font-size: xx-large;
 }
+
 .location_img {
   height: 12px;
+}
+.company_img {
+  height: 22px;
 }
 .inner_card {
   padding: 2px;
