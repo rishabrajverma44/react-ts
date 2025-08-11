@@ -79,6 +79,9 @@ const Jobseekermain = () => {
                           className={styles.location_img}
                           src={location}
                           alt="location"
+                          style={{
+                            display: form.jobType === "Remote" ? "none" : "",
+                          }}
                         />
                         {form.location}
                       </div>
@@ -99,7 +102,7 @@ const Jobseekermain = () => {
                       background: form.applied ? "gray" : "",
                     }}
                     onClick={() => applyForm(form.formID)}>
-                    Easy Apply
+                    {form.applied ? "Applied" : "Easy Apply"}
                   </button>
                 </div>
               </div>
