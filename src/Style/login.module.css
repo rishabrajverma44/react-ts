@@ -3,14 +3,37 @@
   padding: 0;
   height: 100vh;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  background-color: #f1f5ff;
+}
+.logo {
+  height: 30px;
+}
+.loginHeader {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.loginHeader > h2 {
+  font-weight: 500;
+  font-size: x-large;
+  color: #003296;
+}
+.loginHeader > p {
+  color: #8794ad;
+  margin-top: 4px;
+  font-size: small;
+}
+.loginHeader > h2,
+p {
+  margin: 0px;
 }
 #form {
-  border: 2px solid black;
+  width: 300px;
+  background-color: white;
   border-radius: 12px;
-  padding: 10px;
+  padding: 15px;
 }
 #applicationForm {
   display: flex;
@@ -22,24 +45,28 @@
 #applicationForm select {
   box-shadow: none;
   min-width: 240px;
-  padding: 5px;
+  padding: 9px;
   font-size: 17px;
   border-radius: 8px;
-  border: 1px solid black;
+  border: 1px solid;
   font-size: medium;
 }
-#submitBtn1 {
-  margin-top: 12px;
-  font-size: large;
+#loginBtn {
+  margin-top: 8px;
+  font-size: medium;
 }
-#submitBtn2 {
-  margin-top: 2px;
+#register {
+  margin-top: 4px;
+  padding: 22px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 /*validation error */
 .validation_error {
+  margin-top: 2px;
   color: red;
   line-height: 0.7;
-  font-size: medium;
+  font-size: small;
 }
 #footer {
   display: flex;

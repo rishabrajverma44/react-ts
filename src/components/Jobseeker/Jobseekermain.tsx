@@ -4,7 +4,7 @@ import type { JobSeeker } from "../../types";
 import {
   applyFormByFormID,
   getAllForms,
-  getUserAppliedForm,
+  getUserAppliedFormNumber,
   getUserName,
 } from "../../Api/ApiCall/jobSeekers";
 import { handleLogout } from "../../utils/logout";
@@ -14,7 +14,7 @@ import location from "../../utils/location.png";
 const Jobseekermain = () => {
   const [userTableData, setUserTableData] = useState<JobSeeker[]>([]);
   const [userName, setUserName] = useState();
-  const [userAppliedForm, setUserAppliedForm] = useState();
+  const [userAppliedFormNumber, setUserAppliedFormNumber] = useState<number>();
 
   const applyForm = async function (formId: string | null | undefined) {
     if (formId) {
@@ -34,8 +34,8 @@ const Jobseekermain = () => {
     setUserName(user);
   };
   const getAppliedForms = async () => {
-    const appliedForm = await getUserAppliedForm();
-    setUserAppliedForm(appliedForm);
+    const appliedForm = await getUserAppliedFormNumber();
+    setUserAppliedFormNumber(appliedForm);
   };
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const Jobseekermain = () => {
       <nav role="banner" className="banner">
         <div className="header">
           <h2>Job Application Tracker</h2>
-          <p>Total Applied Jobs : {userAppliedForm}</p>
+          <p>Total Applied Jobs : {userAppliedFormNumber}</p>
         </div>
         <div className="LogoutBtn">
           <div className="emp-name">
