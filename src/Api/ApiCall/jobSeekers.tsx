@@ -41,9 +41,9 @@ export const getUserName = async () => {
   return response;
 };
 
-export const getUserAppliedForm = async () => {
+export const getUserAppliedFormNumber = async () => {
   const response = await axiosInstance
-    .get("/job_seeker/formDetails")
+    .get("/job_seeker/appliedForms")
     .then((res) => {
       if (res.status === 200) {
         return res.data;
