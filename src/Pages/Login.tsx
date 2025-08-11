@@ -8,6 +8,7 @@ import styles from "../Style/login.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import logo from "../utils/logo.png";
 
 const defaultForm: LoginForm = {
   userEmail: "",
@@ -17,6 +18,7 @@ const defaultForm: LoginForm = {
 const Login = () => {
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>();
   const [form, setForm] = useState<LoginForm>(defaultForm);
   //LoginForm
   const [errors, setErrors] = useState<Partial<LoginForm>>();
@@ -52,15 +54,18 @@ const Login = () => {
     }
     setErrors({});
     sendLogin(form);
+    setLoading(true);
   };
 
   const sendLogin = async (data: LoginForm) => {
     axios
       .post(`${baseUrl}/user/login`, data)
       .then((res) => {
+        setLoading(false);
         if (res.status !== 200) {
           toast.warn(res.data);
         } else if (res.status === 200) {
+          toast.dismiss();
           toast(res.data.message);
           const tokenResp = res.headers["authorization"]?.toString();
           const token = tokenResp && tokenResp.split(" ")[1];
@@ -73,6 +78,7 @@ const Login = () => {
         }
       })
       .catch((error) => {
+        setLoading(false);
         if (error.response?.status >= 400 || error.response?.status < 500) {
           toast.error(error.response.data);
         } else toast("Somthing went wrong !");
@@ -82,12 +88,16 @@ const Login = () => {
 
   return (
     <div className={styles.container}>
+      <div>
+        <img src={logo} alt="logo" className={styles.logo} />
+      </div>
       <form id={styles.form}>
-        <div>
-          <h2>Login form</h2>
+        <div className={styles.loginHeader} style={{ marginBottom: "40px" }}>
+          <h2>Welcome Back</h2>
+          <p>Enter your credentials to acssess your account.</p>
         </div>
         <div aria-label="Registartion form" id={styles.applicationForm}>
-          <label htmlFor="userEmail">Enter your email :</label>
+          <label htmlFor="userEmail">Enter your email</label>
           <input
             id="userEmail"
             type="email"
@@ -102,7 +112,7 @@ const Login = () => {
             <span className={styles.validation_error}>{errors?.userEmail}</span>
           )}
 
-          <label htmlFor="password">Enter password:</label>
+          <label htmlFor="password">Enter password</label>
           <input
             id="password"
             type="password"
@@ -117,14 +127,18 @@ const Login = () => {
             <span className={styles.validation_error}>{errors?.password}</span>
           )}
 
-          <button type="button" onClick={handleSubmit} id={styles.submitBtn1}>
-            Submit
+          <button
+            type="button"
+            onClick={handleSubmit}
+            id={styles.loginBtn}
+            disabled={loading}>
+            Sign in
           </button>
           <div id={styles.footer}>
             <button
               type="button"
               onClick={() => navigate("/registration")}
-              id={styles.submitBtn2}>
+              id={styles.register}>
               Register
             </button>
           </div>

@@ -8,6 +8,7 @@ import styles from "../Style/login.module.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import logo from "../utils/logo.png";
 
 const defaultForm: RegistrationForm = {
   userName: "",
@@ -59,6 +60,7 @@ const Registration = () => {
       .post(`${baseUrl}/user/register`, data)
       .then((res) => {
         if (res.status === 201) {
+          toast.dismiss();
           toast("Registed successfully !");
           setForm(defaultForm);
           navigate("/");
@@ -72,9 +74,12 @@ const Registration = () => {
   };
   return (
     <div className={styles.container}>
+      <div>
+        <img src={logo} alt="logo" className={styles.logo} />
+      </div>
       <form id={styles.form}>
-        <div>
-          <h2>Registration form</h2>
+        <div className={styles.loginHeader}>
+          <h2>Register your self</h2>
         </div>
         <div aria-label="Registration form" id={styles.applicationForm}>
           <label htmlFor="">User Name:</label>
@@ -140,14 +145,14 @@ const Registration = () => {
             <span className={styles.validation_error}>{errors?.password}</span>
           )}
 
-          <button type="button" onClick={handleSubmit} id={styles.submitBtn1}>
+          <button type="button" onClick={handleSubmit} id={styles.loginBtn}>
             Submit
           </button>
           <div id={styles.footer}>
             <button
               type="button"
               onClick={() => navigate("/")}
-              id={styles.submitBtn2}>
+              id={styles.register}>
               Login
             </button>
           </div>

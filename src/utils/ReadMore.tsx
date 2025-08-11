@@ -24,6 +24,7 @@ export const ReadMore = ({ id, text, amountOfWords = 10 }: ReadMoreProps) => {
           <span
             className={`${!isExpanded && "hidden"}`}
             aria-hidden={!isExpanded}>
+            {" "}
             {endText}
           </span>
           <span

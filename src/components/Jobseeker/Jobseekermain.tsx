@@ -14,7 +14,7 @@ import location from "../../utils/location.png";
 const Jobseekermain = () => {
   const [userTableData, setUserTableData] = useState<JobSeeker[]>([]);
   const [userName, setUserName] = useState();
-  const [userAppliedForm, setUserAppliedForm] = useState();
+  const [userAppliedForm, setUserAppliedForm] = useState<number>();
 
   const applyForm = async function (formId: string | null | undefined) {
     if (formId) {
