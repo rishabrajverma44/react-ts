@@ -3,6 +3,7 @@ import JobseekerNav from "../components/NavBar/Jobseeker";
 import { useState } from "react";
 import right from "../utils/applyNotConflictsRight.svg";
 import left from "../utils/applyNotConflictsLeft.svg";
+import { handleLogout } from "../utils/logout";
 
 type Props = {
   children: React.ReactNode;
@@ -37,7 +38,9 @@ const JobSeekerAuth = ({ children, allowedRoles = [] }: Props) => {
           <Link to="/new" onClick={() => setMenu(false)}>
             new
           </Link>
-          <button type="submit">Sign out</button>
+          <button type="submit" onClick={handleLogout}>
+            Sign out
+          </button>
         </section>
         <div id="openSidebar">
           <button onClick={toggleSidebar} className="sidebar-open-btn none_btn">
@@ -51,7 +54,9 @@ const JobSeekerAuth = ({ children, allowedRoles = [] }: Props) => {
       </div>
       <JobseekerNav />
       <div className={`content ${isSideMenuOpen ? "squeezed" : ""}`}>
-        <div className="children">{children}</div>
+        <div className={`children ${isSideMenuOpen ? "squeezed" : ""}`}>
+          {children}
+        </div>
       </div>
     </div>
   );

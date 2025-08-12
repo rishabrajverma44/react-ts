@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../../utils/logo.png";
 import avatar from "../../utils/avatar.jpg";
 import { getUserDetails } from "../../Api/ApiCall/companyApl";
+import { handleLogout } from "../../utils/logout";
 
 const CompanyNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,9 +26,7 @@ const CompanyNav = () => {
                   <img src={logo} alt="logo" className="logo" />
                 </Link>
               </div>
-
-              <h3 className="site-title">Job App employer</h3>
-
+              <h3 className="site-title">Employer</h3>
               <div className="avatar">
                 <div className="avatar-container">
                   <span>{userName} </span>
@@ -40,7 +39,8 @@ const CompanyNav = () => {
                         <div className="dropdown-content">
                           <button
                             type="submit"
-                            className="dropdown-item none_btn">
+                            className="dropdown-item none_btn"
+                            onClick={handleLogout}>
                             Sign out
                           </button>
                         </div>

@@ -3,6 +3,8 @@ import CompanyNav from "../components/NavBar/Company";
 import { useState } from "react";
 import right from "../utils/applyNotConflictsRight.svg";
 import left from "../utils/applyNotConflictsLeft.svg";
+import { handleLogout } from "../utils/logout";
+import menu from "../utils/minimap.svg";
 
 type Props = {
   children: React.ReactNode;
@@ -36,7 +38,9 @@ const CompanyAuth = ({ children, allowedRoles = [] }: Props) => {
           <Link to="/new" onClick={() => setMenu(false)}>
             new
           </Link>
-          <button type="submit">Sign out</button>
+          <button type="submit" onClick={handleLogout}>
+            Sign out
+          </button>
         </section>
         <div id="openSidebar">
           <button onClick={toggleSidebar} className="sidebar-open-btn none_btn">
@@ -48,9 +52,20 @@ const CompanyAuth = ({ children, allowedRoles = [] }: Props) => {
           </button>
         </div>
       </div>
+      <div className="sidbarMobile">
+        <img
+          src={menu}
+          alt="menuBar"
+          className="mobilemenuimage"
+          onClick={toggleSidebar}
+        />
+      </div>
       <CompanyNav />
+
       <div className={`content ${isSideMenuOpen ? "squeezed" : ""}`}>
-        <div className="children">{children}</div>
+        <div className={`children ${isSideMenuOpen ? "squeezed" : ""}`}>
+          {children}
+        </div>
       </div>
     </div>
   );

@@ -5,16 +5,13 @@ import {
   applyFormByFormID,
   getAllForms,
   getUserAppliedFormNumber,
-  getUserName,
 } from "../../Api/ApiCall/jobSeekers";
-import { handleLogout } from "../../utils/logout";
 import { toast } from "react-toastify";
 import { ReadMore } from "../../utils/ReadMore";
 import location from "../../utils/location.png";
 import company from "../../utils/office.png";
 const Jobseekermain = () => {
   const [userTableData, setUserTableData] = useState<JobSeeker[]>([]);
-  const [userName, setUserName] = useState();
   const [userAppliedFormNumber, setUserAppliedFormNumber] = useState<number>();
 
   const applyForm = async function (formId: string | null | undefined) {
@@ -30,10 +27,7 @@ const Jobseekermain = () => {
     const data = await getAllForms();
     setUserTableData(data);
   };
-  const getUser = async () => {
-    const user = await getUserName();
-    setUserName(user);
-  };
+
   const getAppliedForms = async () => {
     const appliedForm = await getUserAppliedFormNumber();
     setUserAppliedFormNumber(appliedForm);
@@ -41,7 +35,6 @@ const Jobseekermain = () => {
 
   useEffect(() => {
     getData();
-    getUser();
     getAppliedForms();
   }, []);
 
@@ -51,13 +44,6 @@ const Jobseekermain = () => {
         <div className="header">
           <h2>Job Application Tracker</h2>
           <p>Total Applied Jobs : {userAppliedFormNumber}</p>
-        </div>
-        <div className="LogoutBtn">
-          <div className="emp-name">
-            <span style={{ fontWeight: "bolder" }}>Jobseeker :</span>
-            <span>{userName}</span>
-          </div>
-          <button onClick={handleLogout}>logout</button>
         </div>
       </nav>
 

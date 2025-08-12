@@ -1,5 +1,4 @@
 import { UseFormContext } from "../../context/FormContextProvider";
-import { handleLogout } from "../../utils/logout";
 const Header = () => {
   const formCtx = UseFormContext();
   const data = formCtx?.headerData;
@@ -26,13 +25,6 @@ const Header = () => {
             Rejected: <span>{data?.totalRejected}</span>
           </span>
         </p>
-      </div>
-      <div className="LogoutBtn">
-        <div className="emp-name">
-          <span style={{ fontWeight: "bolder" }}>Employer name :</span>
-          <span> {data?.companyName}</span>
-        </div>
-        <button onClick={handleLogout}>logout</button>
       </div>
     </nav>
   );

@@ -8,6 +8,9 @@
 }
 .search_box {
   position: relative;
+  margin-top: 5px;
+  margin-left: 13px;
+  z-index: -1;
 }
 .clear {
   margin-left: 5px;
