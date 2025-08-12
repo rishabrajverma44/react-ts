@@ -1,10 +1,18 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import logo from "../../utils/logo.png";
+import avatar from "../../utils/avatar.jpg";
+import { getUserDetails } from "../../Api/ApiCall/companyApl";
 
 const CompanyNav = () => {
-  const [isSideMenuOpen, setMenu] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => setIsOpen(!isOpen);
+  const [userName, setUserName] = useState();
+
+  (async () => {
+    const user = await getUserDetails();
+    setUserName(user);
+  })();
 
   return (
     <>
@@ -14,31 +22,25 @@ const CompanyNav = () => {
             <section className="navbar-section">
               <div className="logo-container">
                 <Link to="/mobilehome">
-                  <img src="logo" alt="logo" />
+                  <img src={logo} alt="logo" className="logo" />
                 </Link>
               </div>
 
-              <h2 className="site-title">Job App Company</h2>
+              <h3 className="site-title">Job App employer</h3>
 
-              <button onClick={() => setMenu(true)} className="menu-open-btn">
-                open icon
-              </button>
-
-              <div className="desktop-avatar">
+              <div className="avatar">
                 <div className="avatar-container">
+                  <span>{userName} </span>
                   <span>
-                    <button onClick={toggleDropdown}>
-                      <img
-                        src="/images/avatar-1.jpg"
-                        alt=""
-                        className="avatar-img"
-                      />
+                    <button className="none_btn" onClick={toggleDropdown}>
+                      <img src={avatar} alt="avatar" className="avatar-img" />
                     </button>
-
                     {isOpen && (
                       <div className="dropdown-menu">
                         <div className="dropdown-content">
-                          <button type="submit" className="dropdown-item">
+                          <button
+                            type="submit"
+                            className="dropdown-item none_btn">
                             Sign out
                           </button>
                         </div>
@@ -49,25 +51,6 @@ const CompanyNav = () => {
               </div>
             </section>
           </div>
-
-          {/* <div
-            className={`mobile-menu-overlay ${isSideMenuOpen ? "open" : ""}`}>
-            <section className="mobile-menu">
-              <button onClick={() => setMenu(false)} className="menu-close-btn">
-                close
-              </button>
-              <div className="mobile-links">
-                <Link to="/company" onClick={() => setMenu(false)}>
-                  Home
-                </Link>
-                <Link to="/new" onClick={() => setMenu(false)}>
-                  new
-                </Link>
-
-                <button type="submit">Sign out</button>
-              </div>
-            </section>
-          </div> */}
         </nav>
       </main>
     </>
