@@ -1,8 +1,8 @@
-const jobDetails = () => {
+const JobDetails = () => {
   return (
     <>
       <div>job details page</div>
     </>
   );
 };
-export default jobDetails;
+export default JobDetails;

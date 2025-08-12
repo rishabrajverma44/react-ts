@@ -1,16 +1,17 @@
 import { Navigate, useLocation } from "react-router-dom";
+import JobseekerNav from "../components/NavBar/Jobseeker";
 
 type Props = {
   children: React.ReactNode;
   allowedRoles?: string[];
 };
 
-const AuthCheck = ({ children, allowedRoles = [] }: Props) => {
+const JobSeekerAuth = ({ children, allowedRoles = [] }: Props) => {
   const location = useLocation();
   const token = localStorage.getItem("JOB_APP_TOKEN");
   const role = localStorage.getItem("JOB_APP_ROLE");
 
-  if (!token || !role) {
+  if (!token || !role || role !== "job_seeker") {
     return <Navigate to="/" replace state={{ from: location }} />;
   }
 
@@ -18,7 +19,12 @@ const AuthCheck = ({ children, allowedRoles = [] }: Props) => {
     return <Navigate to="/not-authorized" replace />;
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      <JobseekerNav />
+      {children}
+    </>
+  );
 };
 
-export default AuthCheck;
+export default JobSeekerAuth;
