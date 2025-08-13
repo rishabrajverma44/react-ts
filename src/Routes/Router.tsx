@@ -4,7 +4,6 @@ import Employer from "../Pages/Employer";
 import Jobseeker from "../Pages/JobSeeker";
 import NotFound from "../Pages/NotFound";
 import Registration from "../Pages/Registration";
-import JobDetails from "../components/Jobseeker/JobDetails";
 import CompanyAuth from "../Auth/CompanyAuth";
 import JobSeekerAuth from "../Auth/JobseekerAuth";
 import Form from "../components/Company/Form";
@@ -42,14 +41,6 @@ const Routes = [
     element: (
       <JobSeekerAuth allowedRoles={["job_seeker"]}>
         <Jobseeker />
-      </JobSeekerAuth>
-    ),
-  },
-  {
-    path: "/jobdetails",
-    element: (
-      <JobSeekerAuth allowedRoles={["job_seeker"]}>
-        <JobDetails />
       </JobSeekerAuth>
     ),
   },
