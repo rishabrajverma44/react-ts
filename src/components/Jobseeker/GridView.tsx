@@ -24,9 +24,7 @@ export default function GridView({ jobs }: { jobs: JobSeeker[] }) {
               </span>
             </div>
             <div className={styles.inner_card}>
-              <div>
-                <span className={styles.jobTypeBox}>{job.jobType}</span>
-              </div>
+              <span className={styles.jobTypeBox}>{job.jobType}</span>
               <div className={styles.right}>
                 <div>
                   <img
@@ -44,7 +42,7 @@ export default function GridView({ jobs }: { jobs: JobSeeker[] }) {
           </div>
           <div className={styles.company}>
             <img className={styles.company_img} src={company} />
-            {job.company}
+            <span>{job.company}</span>
           </div>
         </div>
       ))}

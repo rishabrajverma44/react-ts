@@ -1,5 +1,3 @@
-import { toast } from "react-toastify";
-import { applyFormByFormID } from "../../Api/ApiCall/jobSeekers";
 import styles from "../../Style/applyJob.module.css";
 
 const ApplyJob = () => {

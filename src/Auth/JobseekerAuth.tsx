@@ -33,12 +33,8 @@ const JobSeekerAuth = ({ children, allowedRoles = [] }: Props) => {
     <div className="layout">
       <div className={`transition ${isSideMenuOpen ? "open" : ""}`}>
         <section className="sidebar-menu">
-          <Link to="/dash-board-jobseeker" onClick={() => setMenu(false)}>
-            Home
-          </Link>
-          <Link to="/Jobseeker" onClick={() => setMenu(false)}>
-            Jobs
-          </Link>
+          <Link to="/dash-board-jobseeker">Home</Link>
+          <Link to="/Jobseeker">Jobs</Link>
           <button type="submit" onClick={handleLogout}>
             Sign out
           </button>

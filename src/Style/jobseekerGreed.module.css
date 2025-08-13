@@ -55,7 +55,7 @@ table {
 }
 .card {
   border: 1px solid #ccc;
-  padding: 5px;
+  padding: 8px;
   height: max-content;
   border-radius: 8px;
   transition: ease-in, 0.3s;
@@ -72,24 +72,22 @@ table {
   padding-left: 9px;
   padding-right: 9px;
   border-radius: 3px;
-  font-weight: 500;
   background-color: rgb(122, 212, 122, 0.2);
 }
 .jobTypeBox {
-  padding-left: 9px;
-  padding-right: 9px;
-  border-radius: 3px;
   color: rgb(13, 70, 13);
   font-weight: 500;
 }
 .role {
-  font-size: large;
+  font-size: 23px;
+  font-weight: 600;
   color: #003296;
 }
-.company {
-  font-size: x-large;
-}
 
+.company {
+  font-size: large;
+  display: flex;
+}
 .location_img {
   height: 12px;
 }
@@ -97,12 +95,9 @@ table {
   height: 22px;
 }
 .inner_card {
-  padding: 2px;
+  margin-top: 12px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-.right {
-  grid-column: span 2;
+  grid-template-columns: 1fr 2fr;
 }
 
 .description {
