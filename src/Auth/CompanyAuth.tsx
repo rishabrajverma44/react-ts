@@ -6,7 +6,6 @@ import left from "../utils/applyNotConflictsLeft.svg";
 import { handleLogout } from "../utils/logout";
 import menu from "../utils/minimap.svg";
 import { FormContextProvider } from "../context/FormContextProvider";
-
 type Props = {
   children: React.ReactNode;
   allowedRoles?: string[];

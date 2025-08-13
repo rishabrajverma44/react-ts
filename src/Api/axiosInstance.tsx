@@ -1,5 +1,4 @@
 import axios from "axios";
-import { toast } from "react-toastify";
 import { handleLogout } from "../utils/logout";
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -28,7 +27,6 @@ axiosInstance.interceptors.response.use(
     if (error.status === 405) {
       handleLogout();
     } else {
-      toast.error("somthing went wrong !");
       console.log(error);
     }
   }
