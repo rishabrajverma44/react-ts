@@ -7,6 +7,7 @@ import {
   getUserDetails,
   updateFormData,
 } from "../Api/ApiCall/companyApl";
+import { useNavigate } from "react-router-dom";
 
 interface FormContextProps {
   children: React.ReactNode;
@@ -23,12 +24,12 @@ export const UseFormContext = () => {
 
 //use context as a higer order component function and attach provider to each component
 export const FormContextProvider: React.FC<FormContextProps> = (props) => {
+  const navigate = useNavigate();
   const [currentForm, setCurrentForm] = useState<formInterface | null>(null);
   const [forms, setForms] = useState<formInterface[]>([]);
   const [searchedQuery, setSearchedQuery] = useState<string>("");
   const [filteredData, setFilterdData] = useState<formInterface[]>([]);
   const [headerData, setHeaderData] = useState<Header | null>(null);
-  const [isFormDirty, setIsDirty] = useState<boolean>(true);
 
   const setterFunction = (formID?: string) => {
     if (formID) {
@@ -38,8 +39,12 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
     }
   };
   const createForms = async (currentForm: formInterface) => {
-    await addFormData(currentForm);
-    getFormData();
+    const res = await addFormData(currentForm);
+    if (res.company) {
+      getFormData();
+      navigate("/company");
+    }
+    setCurrentForm(null);
   };
 
   const deleteForm = (formID: string) => {
@@ -52,6 +57,7 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
     updateFormData(id, form);
     setCurrentForm(null);
     getFormData();
+    navigate("/company");
   };
   //search context
   const searchContext = () => {
@@ -103,13 +109,6 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
   useEffect(() => {
     getFormData();
   }, []);
-  useEffect(() => {
-    if (currentForm) {
-      setIsDirty(true);
-    } else {
-      setIsDirty(false);
-    }
-  }, [currentForm]);
 
   return (
     <FormContext.Provider
@@ -125,7 +124,6 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
         setSearchedQuery,
         filteredData,
         headerData,
-        isFormDirty,
       }}>
       {props.children}
     </FormContext.Provider>

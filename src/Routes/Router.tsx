@@ -7,6 +7,7 @@ import Registration from "../Pages/Registration";
 import JobDetails from "../components/Jobseeker/JobDetails";
 import CompanyAuth from "../Auth/CompanyAuth";
 import JobSeekerAuth from "../Auth/JobseekerAuth";
+import Form from "../components/Company/Form";
 
 // route configurations
 const Routes = [
@@ -18,6 +19,7 @@ const Routes = [
     path: "/registration",
     element: <Registration />,
   },
+  //company routes
   {
     path: "/company",
     element: (
@@ -26,6 +28,15 @@ const Routes = [
       </CompanyAuth>
     ),
   },
+  {
+    path: "/addform/:id?",
+    element: (
+      <CompanyAuth allowedRoles={["company"]}>
+        <Form />
+      </CompanyAuth>
+    ),
+  },
+  //jobseekers routes
   {
     path: "/Jobseeker",
     element: (

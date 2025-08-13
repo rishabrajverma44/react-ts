@@ -5,6 +5,7 @@ import right from "../utils/applyNotConflictsRight.svg";
 import left from "../utils/applyNotConflictsLeft.svg";
 import { handleLogout } from "../utils/logout";
 import menu from "../utils/minimap.svg";
+import { FormContextProvider } from "../context/FormContextProvider";
 
 type Props = {
   children: React.ReactNode;
@@ -35,8 +36,8 @@ const CompanyAuth = ({ children, allowedRoles = [] }: Props) => {
           <Link to="/company" onClick={() => setMenu(false)}>
             Home
           </Link>
-          <Link to="/new" onClick={() => setMenu(false)}>
-            new
+          <Link to="/addform" onClick={() => setMenu(false)}>
+            Add form
           </Link>
           <button type="submit" onClick={handleLogout}>
             Sign out
@@ -64,7 +65,7 @@ const CompanyAuth = ({ children, allowedRoles = [] }: Props) => {
 
       <div className={`content ${isSideMenuOpen ? "squeezed" : ""}`}>
         <div className={`children ${isSideMenuOpen ? "squeezed" : ""}`}>
-          {children}
+          <FormContextProvider>{children}</FormContextProvider>
         </div>
       </div>
     </div>

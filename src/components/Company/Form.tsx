@@ -7,6 +7,7 @@ import {
   validationForSingleField,
 } from "../../formValidation/validation";
 import { UseFormContext } from "../../context/FormContextProvider";
+import { useNavigate } from "react-router-dom";
 
 const defaultForm: formInterface = {
   company: "",
@@ -19,8 +20,15 @@ const defaultForm: formInterface = {
 };
 
 const Form = () => {
+  //text igniter
+  // define features
+
+  //
+  const navigate = useNavigate();
   const formsCtx = UseFormContext();
   const [form, setForm] = useState<formInterface>(defaultForm);
+  const [openWarnModel, setOpenWarnModel] = useState(false);
+  const [isFormDirty, setIsdirty] = useState(true);
   //formInterface
   const [errors, setErrors] = useState<Partial<formInterface>>();
 
@@ -62,131 +70,172 @@ const Form = () => {
       return;
     }
     setErrors({});
+
     if (formsCtx?.createForms && !form.formID) {
+      console.log("addd", form);
       formsCtx.createForms(form);
     } else if (form.formID) {
+      console.log("update", form);
       formsCtx?.updateForm(form.formID, form);
     }
     setForm(defaultForm);
+  };
+  const handleBack = () => {
+    if (isFormDirty) {
+      setOpenWarnModel(true);
+      return;
+    }
+    navigate("/company");
   };
   useEffect(() => {
     if (formsCtx !== undefined && formsCtx.currentForm)
       setForm(formsCtx.currentForm);
   }, [formsCtx?.currentForm]);
+  useEffect(() => {
+    const dirty = Object.keys(defaultForm).some(
+      (key) =>
+        form[key as keyof formInterface] !==
+        defaultForm[key as keyof formInterface]
+    );
+    setIsdirty(dirty);
+  }, [form]);
 
   return (
     <div>
       <form>
         <div aria-label="Job application form" id={styles.applicationForm}>
-          <label htmlFor="company">Company Name:</label>
-          <input
-            id="company"
-            type="text"
-            placeholder="Company name"
-            name="company"
-            onChange={handleChange}
-            onBlur={validationCheck}
-            value={form.company}
-            style={{ borderColor: errors?.company ? "red" : "initial" }}
-          />
-          {errors?.company && (
-            <span className={styles.validation_error}>{errors?.company}</span>
-          )}
-          <label htmlFor="role">Role:</label>
-          <input
-            id="role"
-            type="text"
-            name="role"
-            placeholder="Enter role"
-            value={form.role}
-            onChange={handleChange}
-            onBlur={validationCheck}
-            style={{ borderColor: errors?.role ? "red" : "initial" }}
-          />
-          {errors?.role && (
-            <span className={styles.validation_error}>{errors?.role}</span>
-          )}
-          <label htmlFor="jobtype">Job Type:</label>
-          <select
-            id="jobtype"
-            name="jobType"
-            onChange={handleChange}
-            onBlur={validationCheck}
-            value={form.jobType}
-            style={{ borderColor: errors?.jobType ? "red" : "initial" }}>
-            <option value="" disabled>
-              Select job type
-            </option>
-            <option value="Remote">Remote</option>
-            <option value="Onsite">Onsite</option>
-            <option value="Hybrid">Hybrid</option>
-          </select>
-          {errors?.jobType && (
-            <span className={styles.validation_error}>{errors?.jobType}</span>
-          )}
+          <div className={styles.left_form}>
+            <label htmlFor="company">Company Name:</label>
+            <input
+              id="company"
+              type="text"
+              placeholder="Company name"
+              name="company"
+              onChange={handleChange}
+              onBlur={validationCheck}
+              value={form.company}
+              style={{ borderColor: errors?.company ? "red" : "initial" }}
+            />
+            {errors?.company && (
+              <span className={styles.validation_error}>{errors?.company}</span>
+            )}
+            <label htmlFor="role">Role:</label>
+            <input
+              id="role"
+              type="text"
+              name="role"
+              placeholder="Enter role"
+              value={form.role}
+              onChange={handleChange}
+              onBlur={validationCheck}
+              style={{ borderColor: errors?.role ? "red" : "initial" }}
+            />
+            {errors?.role && (
+              <span className={styles.validation_error}>{errors?.role}</span>
+            )}
+            <label htmlFor="jobtype">Job Type:</label>
+            <select
+              id="jobtype"
+              name="jobType"
+              onChange={handleChange}
+              onBlur={validationCheck}
+              value={form.jobType}
+              style={{ borderColor: errors?.jobType ? "red" : "initial" }}>
+              <option value="" disabled>
+                Select job type
+              </option>
+              <option value="Remote">Remote</option>
+              <option value="Onsite">Onsite</option>
+              <option value="Hybrid">Hybrid</option>
+            </select>
+            {errors?.jobType && (
+              <span className={styles.validation_error}>{errors?.jobType}</span>
+            )}
 
-          <label htmlFor="location">Location:</label>
-          <input
-            id="location"
-            type="text"
-            name="location"
-            placeholder="Enter location"
-            value={form.location}
-            onChange={handleChange}
-            onBlur={validationCheck}
-            disabled={form.jobType === "Remote" ? true : false}
-            style={{ borderColor: errors?.location ? "red" : "initial" }}
-          />
-          {errors?.location && (
-            <span className={styles.validation_error}>{errors?.location}</span>
-          )}
+            <label htmlFor="location">Location:</label>
+            <input
+              id="location"
+              type="text"
+              name="location"
+              placeholder="Enter location"
+              value={form.location}
+              onChange={handleChange}
+              onBlur={validationCheck}
+              disabled={form.jobType === "Remote" ? true : false}
+              style={{ borderColor: errors?.location ? "red" : "initial" }}
+            />
+            {errors?.location && (
+              <span className={styles.validation_error}>
+                {errors?.location}
+              </span>
+            )}
 
-          <label htmlFor="date">Application Date:</label>
-          <input
-            id="date"
-            type="date"
-            name="date"
-            onChange={handleChange}
-            onBlur={validationCheck}
-            value={form.date}
-            style={{ borderColor: errors?.date ? "red" : "initial" }}
-          />
-          {errors?.date && (
-            <span className={styles.validation_error}>{errors?.date}</span>
-          )}
+            <label htmlFor="date">Application Date:</label>
+            <input
+              id="date"
+              type="date"
+              name="date"
+              onChange={handleChange}
+              onBlur={validationCheck}
+              value={form.date}
+              style={{ borderColor: errors?.date ? "red" : "initial" }}
+            />
+            {errors?.date && (
+              <span className={styles.validation_error}>{errors?.date}</span>
+            )}
 
-          <label htmlFor="status">Application Status:</label>
-          <select
-            id="status"
-            name="status"
-            onChange={handleChange}
-            onBlur={validationCheck}
-            value={form.status}
-            style={{ borderColor: errors?.status ? "red" : "initial" }}>
-            <option value="" disabled>
-              Select status
-            </option>
-            <option value="Applied">Applied</option>
-            <option value="Interviewing">Interviewing</option>
-            <option value="Rejected">Rejected</option>
-            <option value="Hired">Hired</option>
-          </select>
-          {errors?.status && (
-            <span className={styles.validation_error}>{errors.status}</span>
-          )}
+            <label htmlFor="status">Application Status:</label>
+            <select
+              id="status"
+              name="status"
+              onChange={handleChange}
+              onBlur={validationCheck}
+              value={form.status}
+              style={{ borderColor: errors?.status ? "red" : "initial" }}>
+              <option value="" disabled>
+                Select status
+              </option>
+              <option value="Applied">Applied</option>
+              <option value="Interviewing">Interviewing</option>
+              <option value="Rejected">Rejected</option>
+              <option value="Hired">Hired</option>
+            </select>
+            {errors?.status && (
+              <span className={styles.validation_error}>{errors.status}</span>
+            )}
+          </div>
 
-          <label htmlFor="notes">Notes:</label>
-          <textarea
-            id="notes"
-            className={styles.notes}
-            name="notes"
-            value={form.notes}
-            onChange={handleChange}></textarea>
-          <button type="button" onClick={handleSubmit} id={styles.submitBtn}>
+          <div className={styles.right_form}>
+            <label htmlFor="notes">Notes:</label>
+            <textarea
+              id="notes"
+              className={styles.notes}
+              name="notes"
+              value={form.notes || ""}
+              onChange={handleChange}></textarea>
+          </div>
+        </div>
+        <div className={styles.footer}>
+          <button type="button" onClick={handleBack}>
+            Back
+          </button>
+          <button type="button" onClick={handleSubmit}>
             {form.formID ? "Update" : "Add"} Application
           </button>
         </div>
       </form>
+      {openWarnModel && (
+        <>
+          <div role="alert" id="myModal" className="modal">
+            <div className="modal-content">
+              <h2>Save or clear your form ! </h2>
+              <div className="buttons">
+                <button onClick={() => setOpenWarnModel(false)}>Close</button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

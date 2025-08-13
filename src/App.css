@@ -81,7 +81,7 @@ button {
   transition: all 0.3s ease-in-out;
 }
 button:hover {
-  transform: scale(0.9);
+  transform: scale(0.98);
   background-color: #004be0;
   cursor: pointer;
 }
@@ -238,7 +238,7 @@ label {
 }
 
 .dropdown-menu {
-  margin-top: 1rem;
+  margin-top: 0.4rem;
   position: absolute;
   right: 0;
   z-index: 10;
@@ -293,7 +293,7 @@ label {
   transition: all 0.3s ease;
   transform: translateX(-13vw);
   border-right: 1px solid rgb(167, 167, 167);
-  background-color: whitesmoke;
+  background-color: rgb(255, 255, 255);
 }
 
 .transition.open {
@@ -307,12 +307,18 @@ label {
   left: 0;
   height: 100%;
   padding: 2rem 0;
-  gap: 1rem;
+  gap: 0.2rem;
   width: 70%;
-  padding-left: 5%;
+  padding-left: 7px;
 }
 .sidebar-menu > a {
+  padding: 8px;
   text-decoration: none;
+  color: gray;
+  border-radius: 5px;
+}
+.sidebar-menu > a:hover {
+  background-color: rgb(216, 216, 214);
 }
 /* /*mobile toggel btn * */
 .sidbarMobile {
