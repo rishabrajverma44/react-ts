@@ -3,19 +3,17 @@ import styles from "../../Style/table.module.css";
 import type { formInterface } from "../../types";
 import { UseFormContext } from "../../context/FormContextProvider";
 import { ReadMore } from "../../utils/ReadMore";
+import { useNavigate } from "react-router-dom";
 const Table = () => {
   const formCtx = UseFormContext();
+  const navigate = useNavigate();
   const [openDeleteModel, setOpenDeleteModel] = useState(false);
-  const [openWarnModel, setOpenWarnModel] = useState(false);
   const [currentId, setCurrentId] = useState<string | null | undefined>(null);
-  const isFormDirty = formCtx?.isFormDirty;
 
-  function chechDurty(id: string | null | undefined, option: string) {
-    if (isFormDirty) {
-      setOpenWarnModel(true);
-      return;
-    } else if (option === "edit" && formCtx) {
+  function activeAction(id: string | null | undefined, option: string) {
+    if (option === "edit" && formCtx) {
       formCtx.setterFunction(id !== null ? id : "");
+      navigate("/addform");
     } else if (option === "delete" && formCtx) {
       setCurrentId(id !== null ? id : null);
       setOpenDeleteModel(true);
@@ -56,14 +54,14 @@ const Table = () => {
                   <div className={styles.action_inner}>
                     <button
                       onClick={() => {
-                        chechDurty(item.formID, "edit");
+                        activeAction(item.formID, "edit");
                       }}
                       className={styles.edit_btn}>
                       Edit
                     </button>
                     <button
                       onClick={() => {
-                        chechDurty(item.formID, "delete");
+                        activeAction(item.formID, "delete");
                       }}
                       className={styles.delete_btn}>
                       Delete
@@ -96,18 +94,6 @@ const Table = () => {
                   }}>
                   Yes
                 </button>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
-      {openWarnModel && (
-        <>
-          <div role="alert" id="myModal" className="modal">
-            <div className="modal-content">
-              <h2>Save your form first ! </h2>
-              <div className="buttons">
-                <button onClick={() => setOpenWarnModel(false)}>Close</button>
               </div>
             </div>
           </div>

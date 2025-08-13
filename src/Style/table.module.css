@@ -30,10 +30,8 @@ table {
 }
 .delete_btn,
 .edit_btn {
-  border: 1px solid rgb(0, 0, 0);
   border-radius: 8px;
   width: 60px;
-  height: 23px;
   cursor: pointer;
   font-size: 12px;
   box-shadow: 0 2px 2px bisque;

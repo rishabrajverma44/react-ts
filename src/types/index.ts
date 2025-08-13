@@ -32,7 +32,6 @@ export interface FormContextType {
   setSearchedQuery: React.Dispatch<SetStateAction<string>>;
   filteredData: formInterface[];
   headerData: Header | null;
-  isFormDirty: boolean;
 }
 
 export interface LoginForm {

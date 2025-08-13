@@ -10,6 +10,7 @@
 }
 .logo {
   height: 30px;
+  margin-bottom: 12px;
 }
 .loginHeader {
   text-align: center;
@@ -32,6 +33,7 @@ p {
 #form {
   width: 300px;
   background-color: white;
+  box-shadow: 1px 1px 15px 2px lightblue;
   border-radius: 12px;
   padding: 15px;
 }

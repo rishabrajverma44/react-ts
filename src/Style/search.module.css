@@ -1,3 +1,14 @@
+.filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 3%;
+}
+
+.addBtnContainer > button {
+  float: right;
+}
+
 .searchFileld {
   height: 28px;
   width: 220px;
@@ -8,10 +19,13 @@
 }
 .search_box {
   position: relative;
+  margin-top: 5px;
+  margin-left: 13px;
+  z-index: -1;
 }
 .clear {
   margin-left: 5px;
   position: absolute;
-  left: 180px;
-  top: 4px;
+  left: 200px;
+  top: 2px;
 }

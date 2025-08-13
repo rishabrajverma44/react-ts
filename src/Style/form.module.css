@@ -1,26 +1,31 @@
 /* form */
-form {
-  padding-right: 20px;
-}
 #applicationForm {
+  display: grid;
+  gap: 18px;
+  padding: 10px;
+  grid-template-columns: 1fr 1fr;
+}
+#applicationForm > .left_form {
   display: flex;
   flex-direction: column;
-  gap: 2px;
 }
-#applicationForm input,
-#applicationForm select,
+#applicationForm > .left_form input,
+#applicationForm > .left_form select,
 .notes {
   box-shadow: none;
   padding: 5px;
   font-size: 17px;
   border-radius: 8px;
-  border: 1px solid black;
   font-size: medium;
+  border: 1px solid;
 }
-
+#applicationForm > .right_form {
+  display: flex;
+  flex-direction: column;
+}
 .notes {
   font-size: 17px;
-  min-height: 50px;
+  min-height: 90px;
   border: 1px solid black;
   field-sizing: content;
 }
@@ -31,23 +36,13 @@ form {
 /*validation error */
 .validation_error {
   color: red;
+  margin-top: 6px;
   line-height: 0.7;
   font-size: medium;
 }
 
-/*Button CSS */
-#submitBtn {
-  background-color: rgb(10, 10, 10);
-  color: white;
-  padding-left: 4px;
-  padding-right: 4px;
-  margin-top: 12px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  border-radius: 8px;
-  font-size: 16px;
-}
-#submitBtn:hover {
-  background-color: rgb(109, 109, 109);
-  cursor: pointer;
+.footer {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 3px;
 }

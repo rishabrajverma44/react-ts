@@ -20,7 +20,7 @@ export function validationForSingleFieldRegister(
   switch (name) {
     case "userName":
       if (!form.userName.trim()) {
-        errors.userName = "userName is required !";
+        errors.userName = "Name is required !";
       } else {
         errors.userName = "";
       }
@@ -34,7 +34,7 @@ export function validationForSingleFieldRegister(
       break;
     case "userEmail":
       if (!form.userEmail.trim()) {
-        errors.userEmail = "userEmail is required !";
+        errors.userEmail = "Mail is required !";
       } else {
         errors.userEmail = "";
       }
@@ -42,7 +42,7 @@ export function validationForSingleFieldRegister(
 
     case "password":
       if (!form.password.trim()) {
-        errors.password = "password is required !";
+        errors.password = "Password is required !";
       } else {
         errors.password = "";
       }
