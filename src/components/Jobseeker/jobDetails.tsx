@@ -1,8 +1,5 @@
 const JobDetails = () => {
-  return (
-    <>
-      <div>job details page</div>
-    </>
-  );
+  return <div>JobDetails</div>;
 };
+
 export default JobDetails;
