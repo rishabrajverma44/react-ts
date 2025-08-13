@@ -1,0 +1,12 @@
+.main {
+  padding: 15px;
+  overflow: auto;
+}
+
+th {
+  color: #374151;
+}
+tbody > tr:hover {
+  background-color: #bdbdbd57;
+  cursor: pointer;
+}

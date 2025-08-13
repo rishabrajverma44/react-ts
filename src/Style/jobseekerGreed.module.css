@@ -64,24 +64,30 @@ table {
   transform: scale(1.02);
   cursor: pointer;
 }
-.applyBtn {
-  font-weight: 600;
-  height: fit-content;
+.header_card {
+  display: flex;
+  justify-content: space-between;
+}
+.Applied {
+  padding-left: 9px;
+  padding-right: 9px;
+  border-radius: 3px;
+  font-weight: 500;
+  background-color: rgb(122, 212, 122, 0.2);
 }
 .jobTypeBox {
   padding-left: 9px;
   padding-right: 9px;
   border-radius: 3px;
-  color: green;
+  color: rgb(13, 70, 13);
   font-weight: 500;
-  background-color: rgb(122, 212, 122, 0.2);
 }
 .role {
   font-size: large;
   color: #003296;
 }
 .company {
-  font-size: xx-large;
+  font-size: x-large;
 }
 
 .location_img {
@@ -98,12 +104,7 @@ table {
 .right {
   grid-column: span 2;
 }
-.footer {
-  margin-top: 5px;
-  display: grid;
-  gap: 2px;
-  grid-template-columns: repeat(4, 1fr);
-}
+
 .description {
   min-height: 60px;
   grid-column: span 3;

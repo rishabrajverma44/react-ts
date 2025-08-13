@@ -1,13 +1,14 @@
 import type React from "react";
 import styles from "../../Style/form.module.css";
 import type { formInterface } from "../../types";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   validationForForm,
   validationForSingleField,
 } from "../../formValidation/validation";
 import { UseFormContext } from "../../context/FormContextProvider";
 import { useNavigate } from "react-router-dom";
+import { TextIgniter } from "@mindfiredigital/react-text-igniter";
 
 const defaultForm: formInterface = {
   company: "",
@@ -21,7 +22,28 @@ const defaultForm: formInterface = {
 
 const Form = () => {
   //text igniter
-  // define features
+  const editorRef = useRef<any>(null);
+  const features = [
+    "heading",
+    "bold",
+    "italic",
+    "underline",
+    "orderedList",
+    "unorderedList",
+    "justifyLeft",
+    "justifyCenter",
+    "justifyRight",
+    "createLink",
+    "superscript",
+    "subscript",
+    "table",
+    "layout",
+  ];
+
+  // get JSON content
+  const handleGetJsonContent = () => {
+    if (editorRef.current) return editorRef.current.getHtml();
+  };
 
   //
   const navigate = useNavigate();
@@ -41,7 +63,6 @@ const Form = () => {
     if (name === "jobType" && value === "Remote") {
       form.location = "";
     }
-    //set all form values based on there names via controlled react form handler function
     setForm((pervious: formInterface) => ({
       ...pervious,
       [name]: value,
@@ -63,14 +84,14 @@ const Form = () => {
       return;
     }
   };
-  const handleSubmit = () => {
+  const onSubmit = () => {
     const validationErrors = validationForForm(form);
     if (Object.keys(validationErrors).length > 0) {
       if (validationErrors) setErrors(validationErrors);
       return;
     }
     setErrors({});
-
+    form.notes = handleGetJsonContent();
     if (formsCtx?.createForms && !form.formID) {
       console.log("addd", form);
       formsCtx.createForms(form);
@@ -81,28 +102,37 @@ const Form = () => {
     setForm(defaultForm);
   };
   const handleBack = () => {
-    if (isFormDirty) {
+    if (isFormDirty && !form.formID) {
       setOpenWarnModel(true);
       return;
     }
     navigate("/company");
+    formsCtx?.setCurrentForm(defaultForm);
   };
+
   useEffect(() => {
     if (formsCtx !== undefined && formsCtx.currentForm)
       setForm(formsCtx.currentForm);
+    if (formsCtx?.currentForm?.notes) {
+      document.querySelector("#editor")!.innerHTML =
+        formsCtx?.currentForm?.notes;
+      console.log(formsCtx?.currentForm?.notes);
+    }
   }, [formsCtx?.currentForm]);
   useEffect(() => {
-    const dirty = Object.keys(defaultForm).some(
-      (key) =>
+    const dirty = Object.keys(defaultForm).some((key) => {
+      return (
+        key !== "notes" &&
         form[key as keyof formInterface] !==
-        defaultForm[key as keyof formInterface]
-    );
+          defaultForm[key as keyof formInterface]
+      );
+    });
     setIsdirty(dirty);
   }, [form]);
 
   return (
     <div>
-      <form>
+      <div>
         <div aria-label="Job application form" id={styles.applicationForm}>
           <div className={styles.left_form}>
             <label htmlFor="company">Company Name:</label>
@@ -207,23 +237,30 @@ const Form = () => {
 
           <div className={styles.right_form}>
             <label htmlFor="notes">Notes:</label>
-            <textarea
+            {/* <textarea
               id="notes"
               className={styles.notes}
               name="notes"
               value={form.notes || ""}
-              onChange={handleChange}></textarea>
+              onChange={handleChange}></textarea> */}
+            <div className={styles.textEditor_container}>
+              <TextIgniter
+                ref={editorRef}
+                features={features}
+                height={"200px"}
+              />
+            </div>
           </div>
         </div>
         <div className={styles.footer}>
           <button type="button" onClick={handleBack}>
             Back
           </button>
-          <button type="button" onClick={handleSubmit}>
+          <button type="button" onClick={onSubmit}>
             {form.formID ? "Update" : "Add"} Application
           </button>
         </div>
-      </form>
+      </div>
       {openWarnModel && (
         <>
           <div role="alert" id="myModal" className="modal">

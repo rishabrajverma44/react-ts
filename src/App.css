@@ -355,5 +355,12 @@ label {
   .transition {
     transform: translateX(-100%);
     width: 66vw;
+    z-index: 2;
   }
+}
+
+/* table_footer_pagination */
+.table_footer_pagination {
+  display: flex;
+  justify-content: center;
 }
