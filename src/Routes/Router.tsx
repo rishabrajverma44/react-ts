@@ -7,6 +7,8 @@ import Registration from "../Pages/Registration";
 import CompanyAuth from "../Auth/CompanyAuth";
 import JobSeekerAuth from "../Auth/JobseekerAuth";
 import Form from "../components/Company/Form";
+import ApplyJob from "../components/Jobseeker/ApplyJob";
+import DashBoard from "../components/Jobseeker/DashBoard";
 
 // route configurations
 const Routes = [
@@ -37,10 +39,26 @@ const Routes = [
   },
   //jobseekers routes
   {
+    path: "/dash-board-jobseeker",
+    element: (
+      <JobSeekerAuth allowedRoles={["job_seeker"]}>
+        <DashBoard />
+      </JobSeekerAuth>
+    ),
+  },
+  {
     path: "/Jobseeker",
     element: (
       <JobSeekerAuth allowedRoles={["job_seeker"]}>
         <Jobseeker />
+      </JobSeekerAuth>
+    ),
+  },
+  {
+    path: "/jobApply",
+    element: (
+      <JobSeekerAuth allowedRoles={["job_seeker"]}>
+        <ApplyJob />
       </JobSeekerAuth>
     ),
   },

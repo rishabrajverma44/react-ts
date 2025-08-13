@@ -4,6 +4,7 @@ import { useState } from "react";
 import right from "../utils/applyNotConflictsRight.svg";
 import left from "../utils/applyNotConflictsLeft.svg";
 import { handleLogout } from "../utils/logout";
+import menu from "../utils/minimap.svg";
 
 type Props = {
   children: React.ReactNode;
@@ -32,12 +33,8 @@ const JobSeekerAuth = ({ children, allowedRoles = [] }: Props) => {
     <div className="layout">
       <div className={`transition ${isSideMenuOpen ? "open" : ""}`}>
         <section className="sidebar-menu">
-          <Link to="/company" onClick={() => setMenu(false)}>
-            Home
-          </Link>
-          <Link to="/new" onClick={() => setMenu(false)}>
-            new
-          </Link>
+          <Link to="/dash-board-jobseeker">Home</Link>
+          <Link to="/Jobseeker">Jobs</Link>
           <button type="submit" onClick={handleLogout}>
             Sign out
           </button>
@@ -51,6 +48,14 @@ const JobSeekerAuth = ({ children, allowedRoles = [] }: Props) => {
             )}
           </button>
         </div>
+      </div>
+      <div className="sidbarMobile">
+        <img
+          src={menu}
+          alt="menuBar"
+          className="mobilemenuimage"
+          onClick={toggleSidebar}
+        />
       </div>
       <JobseekerNav />
       <div className={`content ${isSideMenuOpen ? "squeezed" : ""}`}>

@@ -2,7 +2,6 @@ import { useState } from "react";
 import styles from "../../Style/table.module.css";
 import type { formInterface } from "../../types";
 import { UseFormContext } from "../../context/FormContextProvider";
-import { ReadMore } from "../../utils/ReadMore";
 import { useNavigate } from "react-router-dom";
 const Table = () => {
   const formCtx = UseFormContext();
@@ -31,7 +30,7 @@ const Table = () => {
             <th>Location</th>
             <th>Date</th>
             <th>status</th>
-            <th>notes</th>
+
             <th>Actions</th>
           </tr>
         </thead>
@@ -47,9 +46,7 @@ const Table = () => {
                 </td>
                 <td role="cell">{item.date}</td>
                 <td role="cell">{item.status}</td>
-                <td role="cell">
-                  <ReadMore id="read-more-text" text={item.notes} />
-                </td>
+
                 <td role="cell" className={styles.action}>
                   <div className={styles.action_inner}>
                     <button
