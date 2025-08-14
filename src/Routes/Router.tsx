@@ -6,9 +6,11 @@ import NotFound from "../Pages/NotFound";
 import Registration from "../Pages/Registration";
 import CompanyAuth from "../Auth/CompanyAuth";
 import JobSeekerAuth from "../Auth/JobseekerAuth";
-import Form from "../components/Company/Form";
 import ApplyJob from "../components/Jobseeker/ApplyJob";
-import DashBoard from "../components/Jobseeker/DashBoard";
+import Form from "../components/Company/Forms/Form";
+import AppliedJobs from "../components/Jobseeker/Applied/AppliedJobs";
+import DashBoardJob from "../components/Jobseeker/dashboard/DashBoardJob";
+import DashboardCompany from "../components/Company/dashBoard/DashboardCompany";
 
 // route configurations
 const Routes = [
@@ -22,7 +24,15 @@ const Routes = [
   },
   //company routes
   {
-    path: "/company",
+    path: "/dash-board",
+    element: (
+      <CompanyAuth allowedRoles={["company"]}>
+        <DashboardCompany />
+      </CompanyAuth>
+    ),
+  },
+  {
+    path: "/forms",
     element: (
       <CompanyAuth allowedRoles={["company"]}>
         <Employer />
@@ -42,7 +52,7 @@ const Routes = [
     path: "/dash-board-jobseeker",
     element: (
       <JobSeekerAuth allowedRoles={["job_seeker"]}>
-        <DashBoard />
+        <DashBoardJob />
       </JobSeekerAuth>
     ),
   },
@@ -59,6 +69,14 @@ const Routes = [
     element: (
       <JobSeekerAuth allowedRoles={["job_seeker"]}>
         <ApplyJob />
+      </JobSeekerAuth>
+    ),
+  },
+  {
+    path: "/appliedJobs",
+    element: (
+      <JobSeekerAuth allowedRoles={["job_seeker"]}>
+        <AppliedJobs />
       </JobSeekerAuth>
     ),
   },

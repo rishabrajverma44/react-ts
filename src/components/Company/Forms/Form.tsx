@@ -1,14 +1,13 @@
 import type React from "react";
-import styles from "../../Style/form.module.css";
-import type { formInterface } from "../../types";
+import styles from "../../../Style/form.module.css";
 import { useEffect, useRef, useState } from "react";
+import { TextIgniter } from "@mindfiredigital/react-text-igniter";
+import type { formInterface } from "../../../types";
+import { UseFormContext } from "../../../context/FormContextProvider";
 import {
   validationForForm,
   validationForSingleField,
-} from "../../formValidation/validation";
-import { UseFormContext } from "../../context/FormContextProvider";
-import { useNavigate } from "react-router-dom";
-import { TextIgniter } from "@mindfiredigital/react-text-igniter";
+} from "../../../formValidation/validation";
 
 const defaultForm: formInterface = {
   company: "",
@@ -46,11 +45,9 @@ const Form = () => {
   };
 
   //
-  const navigate = useNavigate();
   const formsCtx = UseFormContext();
   const [form, setForm] = useState<formInterface>(defaultForm);
   const [openWarnModel, setOpenWarnModel] = useState(false);
-  const [isFormDirty, setIsdirty] = useState(true);
   //formInterface
   const [errors, setErrors] = useState<Partial<formInterface>>();
 
@@ -101,14 +98,6 @@ const Form = () => {
     }
     setForm(defaultForm);
   };
-  const handleBack = () => {
-    if (isFormDirty && !form.formID) {
-      setOpenWarnModel(true);
-      return;
-    }
-    navigate("/company");
-    formsCtx?.setCurrentForm(defaultForm);
-  };
 
   useEffect(() => {
     if (formsCtx !== undefined && formsCtx.currentForm)
@@ -119,20 +108,19 @@ const Form = () => {
       console.log(formsCtx?.currentForm?.notes);
     }
   }, [formsCtx?.currentForm]);
+
   useEffect(() => {
-    const dirty = Object.keys(defaultForm).some((key) => {
-      return (
-        key !== "notes" &&
-        form[key as keyof formInterface] !==
-          defaultForm[key as keyof formInterface]
-      );
-    });
-    setIsdirty(dirty);
-  }, [form]);
+    const element = document.getElementsByClassName(
+      "editor-container"
+    )[0] as HTMLDivElement;
+    if (element?.style) {
+      element.style.width = "100%";
+    }
+  }, []);
 
   return (
     <div>
-      <div>
+      <div className={styles.mainform}>
         <div aria-label="Job application form" id={styles.applicationForm}>
           <div className={styles.left_form}>
             <label htmlFor="company">Company Name:</label>
@@ -200,7 +188,7 @@ const Form = () => {
               </span>
             )}
 
-            <label htmlFor="date">Application Date:</label>
+            <label htmlFor="date">Last Date Of Application :</label>
             <input
               id="date"
               type="date"
@@ -227,7 +215,6 @@ const Form = () => {
               </option>
               <option value="Applied">Applied</option>
               <option value="Interviewing">Interviewing</option>
-              <option value="Rejected">Rejected</option>
               <option value="Hired">Hired</option>
             </select>
             {errors?.status && (
@@ -237,12 +224,6 @@ const Form = () => {
 
           <div className={styles.right_form}>
             <label htmlFor="notes">Notes:</label>
-            {/* <textarea
-              id="notes"
-              className={styles.notes}
-              name="notes"
-              value={form.notes || ""}
-              onChange={handleChange}></textarea> */}
             <div className={styles.textEditor_container}>
               <TextIgniter
                 ref={editorRef}
@@ -253,14 +234,12 @@ const Form = () => {
           </div>
         </div>
         <div className={styles.footer}>
-          <button type="button" onClick={handleBack}>
-            Back
-          </button>
           <button type="button" onClick={onSubmit}>
             {form.formID ? "Update" : "Add"} Application
           </button>
         </div>
       </div>
+
       {openWarnModel && (
         <>
           <div role="alert" id="myModal" className="modal">

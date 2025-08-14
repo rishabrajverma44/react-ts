@@ -35,6 +35,7 @@ const JobSeekerAuth = ({ children, allowedRoles = [] }: Props) => {
         <section className="sidebar-menu">
           <Link to="/dash-board-jobseeker">Home</Link>
           <Link to="/Jobseeker">Jobs</Link>
+          <Link to="/appliedJobs">Applied Jobs</Link>
           <button type="submit" onClick={handleLogout}>
             Sign out
           </button>

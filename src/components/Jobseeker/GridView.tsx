@@ -25,24 +25,24 @@ export default function GridView({ jobs }: { jobs: JobSeeker[] }) {
             </div>
             <div className={styles.inner_card}>
               <span className={styles.jobTypeBox}>{job.jobType}</span>
-              <div className={styles.right}>
-                <div>
-                  <img
-                    className={styles.location_img}
-                    src={location}
-                    alt="location"
-                    style={{
-                      display: job.jobType === "Remote" ? "none" : "",
-                    }}
-                  />
-                  {job.location}
-                </div>
-              </div>
             </div>
           </div>
-          <div className={styles.company}>
-            <img className={styles.company_img} src={company} />
-            <span>{job.company}</span>
+          <div className={styles.footer}>
+            <div className={styles.company}>
+              <img className={styles.company_img} src={company} />
+              <span>{job.company}</span>
+            </div>
+            <div className={styles.loc}>
+              <img
+                className={styles.location_img}
+                src={location}
+                alt="location"
+                style={{
+                  display: job.jobType === "Remote" ? "none" : "",
+                }}
+              />
+              {job.location}
+            </div>
           </div>
         </div>
       ))}

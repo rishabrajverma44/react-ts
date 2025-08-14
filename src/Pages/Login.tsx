@@ -73,13 +73,18 @@ const Login = () => {
           const userRole = res.data?.role;
           userRole && localStorage.setItem("JOB_APP_ROLE", userRole);
           userRole === "company"
-            ? navigate("/company")
-            : navigate("/Jobseeker");
+            ? navigate("/dash-board")
+            : navigate("/dash-board-jobseeker");
         }
       })
       .catch((error) => {
         setLoading(false);
-        if (error.response?.status >= 400 || error.response?.status < 500) {
+        if (error.response.status === 500) {
+          toast(error.response.statusText);
+        } else if (
+          error.response?.status >= 400 ||
+          error.response?.status < 500
+        ) {
           toast.error(error.response.data);
         } else toast("Somthing went wrong !");
         console.log("error", error);

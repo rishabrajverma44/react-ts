@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { UseFormContext } from "../../context/FormContextProvider";
-import styles from "../../Style/search.module.css";
+import styles from "../../../Style/search.module.css";
+import { UseFormContext } from "../../../context/FormContextProvider";
 
 const Filter = () => {
   const navigate = useNavigate();
@@ -23,7 +23,13 @@ const Filter = () => {
         </button>
       </div>
       <div className={styles.addBtnContainer}>
-        <button onClick={() => navigate("/addform")}>Add Form</button>
+        <button
+          onClick={() => {
+            navigate("/addform");
+            formCTX?.setCurrentForm(null);
+          }}>
+          Add Form
+        </button>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import type { JobSeeker } from "../../types";
 import GridView from "./GridView";
 import TableView from "./TableView";
+import styles from "../../Style/jobpages.module.css";
 import { getAllForms } from "../../Api/ApiCall/jobSeekers";
 
 export default function JobsPage() {
@@ -34,8 +35,10 @@ export default function JobsPage() {
   }, [search, page]);
 
   return (
-    <div className="p-4">
-      {/* <input
+    <>
+      {jobs.length > 0 ? (
+        <div className="p-4">
+          {/* <input
         type="text"
         placeholder="Search jobs..."
         value={search}
@@ -43,47 +46,53 @@ export default function JobsPage() {
           setSearch(e.target.value);
           setPage(1);
         }}
-        className="border p-2 mb-4 w-full"
+        className=""
       /> */}
 
-      <div className="" style={{ marginTop: "10px", marginLeft: "30px" }}>
-        <button onClick={() => setViewType("grid")} className="">
-          Grid View
-        </button>
-        <button
-          style={{ marginLeft: "13px" }}
-          onClick={() => setViewType("table")}>
-          Table View
-        </button>
-      </div>
+          <div className="" style={{ marginTop: "10px", marginLeft: "30px" }}>
+            <button onClick={() => setViewType("grid")} className="">
+              Grid View
+            </button>
+            <button
+              style={{ marginLeft: "13px" }}
+              onClick={() => setViewType("table")}>
+              Table View
+            </button>
+          </div>
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : viewType === "grid" ? (
-        <GridView jobs={jobs} />
+          {loading ? (
+            <p>Loading...</p>
+          ) : viewType === "grid" ? (
+            <GridView jobs={jobs} />
+          ) : (
+            <TableView jobs={jobs} />
+          )}
+
+          {viewType === "table" && (
+            <div className="table_footer_pagination">
+              <button
+                disabled={page <= 1}
+                onClick={() => setPage((p) => p - 1)}
+                className="">
+                Prev
+              </button>
+              <span>
+                Page {page} of {totalPages}
+              </span>
+              <button
+                disabled={page >= totalPages}
+                onClick={() => setPage((p) => p + 1)}
+                className="">
+                Next
+              </button>
+            </div>
+          )}
+        </div>
       ) : (
-        <TableView jobs={jobs} />
-      )}
-
-      {viewType === "table" && (
-        <div className="table_footer_pagination">
-          <button
-            disabled={page <= 1}
-            onClick={() => setPage((p) => p - 1)}
-            className="">
-            Prev
-          </button>
-          <span>
-            Page {page} of {totalPages}
-          </span>
-          <button
-            disabled={page >= totalPages}
-            onClick={() => setPage((p) => p + 1)}
-            className="">
-            Next
-          </button>
+        <div>
+          <h2 className={styles.nojobs}>no jobs posted yet !</h2>
         </div>
       )}
-    </div>
+    </>
   );
 }

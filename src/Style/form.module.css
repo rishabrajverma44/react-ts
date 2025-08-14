@@ -1,13 +1,19 @@
 /* form */
+.mainform {
+  margin-bottom: 40px;
+}
 #applicationForm {
   display: grid;
   gap: 18px;
   padding: 10px;
   grid-template-columns: 1fr 1fr;
+  margin-bottom: 30px;
 }
 #applicationForm > .left_form {
   display: flex;
   flex-direction: column;
+  border-right: 2px solid #cccccc;
+  padding-right: 30px;
 }
 #applicationForm > .left_form input,
 #applicationForm > .left_form select,
@@ -53,5 +59,11 @@
 @media screen and (max-width: 768px) {
   #applicationForm {
     grid-template-columns: 1fr;
+  }
+  #applicationForm > .left_form {
+    border-right: none;
+    border-bottom: 2px solid #cccccc;
+    padding: 0px;
+    padding-bottom: 20px;
   }
 }

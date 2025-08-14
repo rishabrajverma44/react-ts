@@ -1,4 +1,7 @@
 /* table css */
+.table {
+  padding: 5px;
+}
 td {
   padding: 2px;
   text-align: start;

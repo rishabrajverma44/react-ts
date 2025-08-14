@@ -64,8 +64,10 @@ const Registration = () => {
           toast("Registed successfully !");
           setForm(defaultForm);
           navigate("/");
-        } else if (res.status !== 201) {
+        } else if (res.status === 200) {
           toast.warn(res.data);
+        } else {
+          toast.error("Somthing went wrong !");
         }
       })
       .catch(() => {
