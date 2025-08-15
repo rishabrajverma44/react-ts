@@ -32,12 +32,8 @@ const CompanyAuth = ({ children, allowedRoles = [] }: Props) => {
     <div className="layout">
       <div className={`transition ${isSideMenuOpen ? "open" : ""}`}>
         <section className="sidebar-menu">
-          <Link to="/company" onClick={() => setMenu(false)}>
-            Home
-          </Link>
-          <Link to="/addform" onClick={() => setMenu(false)}>
-            Add form
-          </Link>
+          <Link to="/dash-board">Home</Link>
+          <Link to="/forms">Forms</Link>
           <button type="submit" onClick={handleLogout}>
             Sign out
           </button>

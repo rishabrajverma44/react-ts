@@ -154,6 +154,7 @@ label {
   cursor: pointer;
   background-color: rgb(207, 207, 207);
 }
+
 .dropdown-menu > li {
   padding: 7px;
   font-size: large;
@@ -163,7 +164,6 @@ label {
   height: 30px;
   margin-bottom: 12px;
 }
-
 .sidebar-open-btn {
   border: 1px solid rgb(202, 202, 202);
   margin-right: 3px;
@@ -319,6 +319,9 @@ label {
 }
 .sidebar-menu > a:hover {
   background-color: rgb(216, 216, 214);
+}
+.sidebar-menu > button {
+  margin-top: 30px;
 }
 /* /*mobile toggel btn * */
 .sidbarMobile {

@@ -42,7 +42,7 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
     const res = await addFormData(currentForm);
     if (res.company) {
       getFormData();
-      navigate("/company");
+      navigate("/forms");
     }
     setCurrentForm(null);
   };
@@ -57,7 +57,7 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
     updateFormData(id, form);
     setCurrentForm(null);
     getFormData();
-    navigate("/company");
+    navigate("/forms");
   };
   //search context
   const searchContext = () => {

@@ -21,11 +21,12 @@
   position: relative;
   margin-top: 5px;
   margin-left: 13px;
-  z-index: -1;
 }
 .clear {
+  padding-top: 3px;
+  padding-bottom: 3px;
   margin-left: 5px;
   position: absolute;
   left: 200px;
-  top: 2px;
+  top: 5px;
 }
