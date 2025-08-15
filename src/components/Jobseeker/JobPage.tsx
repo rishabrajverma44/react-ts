@@ -7,10 +7,8 @@ import { getAllForms } from "../../Api/ApiCall/jobSeekers";
 
 export default function JobsPage() {
   const [jobs, setJobs] = useState<JobSeeker[]>([]);
-  const [search, setSearch] = useState("");
   const [viewType, setViewType] = useState("grid");
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
 
   const fetchJobs = async () => {
@@ -32,7 +30,7 @@ export default function JobsPage() {
 
   useEffect(() => {
     fetchJobs();
-  }, [search, page]);
+  }, [page]);
 
   return (
     <>
@@ -77,10 +75,10 @@ export default function JobsPage() {
                 Prev
               </button>
               <span>
-                Page {page} of {totalPages}
+                Page {page} of {1}
               </span>
               <button
-                disabled={page >= totalPages}
+                disabled={page >= 1}
                 onClick={() => setPage((p) => p + 1)}
                 className="">
                 Next
