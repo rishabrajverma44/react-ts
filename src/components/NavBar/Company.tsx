@@ -22,7 +22,7 @@ const CompanyNav = () => {
           <div className="navbar-container">
             <section className="navbar-section">
               <div className="logo-container">
-                <Link to="/mobilehome">
+                <Link to="/dash-board">
                   <img src={logo} alt="logo" className="logo" />
                 </Link>
               </div>

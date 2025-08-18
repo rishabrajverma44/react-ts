@@ -9,18 +9,19 @@ export default function TableView({ jobs }: { jobs: JobSeeker[] }) {
       <table>
         <thead>
           <tr>
-            <th>Company</th>
+            <th>Company name</th>
             <th>Role</th>
             <th>jobType</th>
             <th>Location</th>
             <th>Status</th>
-            {/* <th>applied</th> */}
             <th>Last date</th>
           </tr>
         </thead>
         <tbody>
           {jobs.map((job) => (
-            <tr key={job.formID} onClick={() => navigate("/jobApply")}>
+            <tr
+              key={job.formID}
+              onClick={() => navigate(`/jobApply/${job.formID}`)}>
               <td>{job.company}</td>
               <td>{job.role}</td>
               <td>{job.jobType}</td>
@@ -28,7 +29,6 @@ export default function TableView({ jobs }: { jobs: JobSeeker[] }) {
                 {job.jobType === "Remote" ? "remote location" : job.location}
               </td>
               <td>{job.status}</td>
-              {/* <td>{job.applied ? "Applied" : "Not Applied"}</td> */}
               <td>{job.date}</td>
             </tr>
           ))}

@@ -1,6 +1,8 @@
 /* table css */
 .table {
-  padding: 5px;
+  margin: 15px;
+  margin-top: 0px;
+  background-color: white;
 }
 td {
   padding: 2px;
@@ -39,7 +41,12 @@ table {
   font-size: 12px;
   box-shadow: 0 2px 2px bisque;
 }
-
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  gap: 5px;
+}
 /* media queies */
 @media screen and (max-width: 1000px) {
   .action {

@@ -1,6 +1,6 @@
 /* card design */
 .card_container {
-  padding: 2%;
+  padding: 15px;
   display: grid;
   gap: 13px;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -11,8 +11,11 @@
   grid-template-columns: 1fr 2fr;
 }
 .card {
+  background-color: white;
   border: 1px solid #ccc;
+  border-left: 4px solid #ccc;
   padding: 8px;
+  padding-top: 0px;
   height: max-content;
   border-radius: 8px;
   transition: ease-in, 0.3s;
@@ -26,27 +29,28 @@
   justify-content: space-between;
 }
 .Applied {
-  height: 24px;
-  width: 80px;
+  height: 27px;
+  width: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 3px;
-  background-color: rgb(122, 212, 122, 0.2);
+  border-radius: 0 0 3px 3px;
+  background-color: rgba(122, 212, 122, 0.548);
 }
 .jobTypeBox {
   color: rgb(13, 70, 13);
   font-weight: 500;
 }
 .role {
-  font-size: 23px;
+  font-size: 21px;
   font-weight: 600;
-  color: #003296;
+  color: #002368;
 }
 
 .company {
-  font-size: large;
+  font-size: 16px;
   display: flex;
+  gap: 4px;
 }
 .loc {
   font-size: small;

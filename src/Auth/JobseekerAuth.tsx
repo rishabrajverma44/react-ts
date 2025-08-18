@@ -59,9 +59,11 @@ const JobSeekerAuth = ({ children, allowedRoles = [] }: Props) => {
         />
       </div>
       <JobseekerNav />
-      <div className={`content ${isSideMenuOpen ? "squeezed" : ""}`}>
-        <div className={`children ${isSideMenuOpen ? "squeezed" : ""}`}>
-          {children}
+      <div className="main-page-content">
+        <div className={`content ${isSideMenuOpen ? "squeezed" : ""}`}>
+          <div className={`children ${isSideMenuOpen ? "squeezed" : ""}`}>
+            {children}
+          </div>
         </div>
       </div>
     </div>

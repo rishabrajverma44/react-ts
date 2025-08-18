@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import JobsPage from "../components/Jobseeker/JobPage";
-import { getUserAppliedFormNumber } from "../Api/ApiCall/jobSeekers";
+import { getNumbersOfFormApplied } from "../Api/ApiCall/jobSeekers";
 
 const JobSeeker = () => {
-  const [userAppliedFormNumber, setUserAppliedFormNumber] = useState<number>();
+  const [NumbersOfFormApplied, setNumbersOfFormApplied] = useState<number>();
 
   const getAppliedForms = async () => {
-    const appliedForm = await getUserAppliedFormNumber();
-    setUserAppliedFormNumber(appliedForm);
+    const appliedForm = await getNumbersOfFormApplied();
+    setNumbersOfFormApplied(appliedForm);
   };
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const JobSeeker = () => {
       <nav role="banner" className="banner">
         <div className="header">
           <h2>Job Application Tracker</h2>
-          <p>Total Applied Jobs : {userAppliedFormNumber}</p>
+          <p>Total Applied Jobs : {NumbersOfFormApplied}</p>
         </div>
       </nav>
       <div>

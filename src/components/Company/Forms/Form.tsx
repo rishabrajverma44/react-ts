@@ -8,6 +8,7 @@ import {
   validationForForm,
   validationForSingleField,
 } from "../../../formValidation/validation";
+import { toast } from "react-toastify";
 
 const defaultForm: formInterface = {
   company: "",
@@ -90,10 +91,10 @@ const Form = () => {
     setErrors({});
     form.notes = handleGetJsonContent();
     if (formsCtx?.createForms && !form.formID) {
-      console.log("addd", form);
+      toast("New form added successfuly !");
       formsCtx.createForms(form);
     } else if (form.formID) {
-      console.log("update", form);
+      toast("Form updated successfuly !");
       formsCtx?.updateForm(form.formID, form);
     }
     setForm(defaultForm);

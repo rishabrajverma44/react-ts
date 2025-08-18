@@ -32,6 +32,8 @@ export interface FormContextType {
   setSearchedQuery: React.Dispatch<SetStateAction<string>>;
   filteredData: formInterface[];
   headerData: Header | null;
+  currentPage: number;
+  setCurrentPage: React.Dispatch<SetStateAction<number>>;
 }
 
 export interface LoginForm {
@@ -56,4 +58,8 @@ export interface JobSeeker {
   date: string;
   notes: string;
   applied: boolean;
+}
+//company details interface
+export interface CompanyDetails {
+  userName: string;
 }
