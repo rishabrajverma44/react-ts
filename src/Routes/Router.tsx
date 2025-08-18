@@ -11,7 +11,6 @@ import Form from "../components/Company/Forms/Form";
 import AppliedJobs from "../components/Jobseeker/Applied/AppliedJobs";
 import DashBoardJob from "../components/Jobseeker/dashboard/DashBoardJob";
 import DashboardCompany from "../components/Company/dashBoard/DashboardCompany";
-import ReceivedForms from "../components/Company/ReceivedForms/ReceivedForms";
 
 // route configurations
 const Routes = [
@@ -48,14 +47,7 @@ const Routes = [
       </CompanyAuth>
     ),
   },
-  {
-    path: "/received",
-    element: (
-      <CompanyAuth allowedRoles={["company"]}>
-        <ReceivedForms />
-      </CompanyAuth>
-    ),
-  },
+
   //jobseekers routes
   {
     path: "/dash-board-jobseeker",
