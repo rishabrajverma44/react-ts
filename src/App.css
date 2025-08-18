@@ -270,6 +270,9 @@ label {
   border: none;
   cursor: pointer;
 }
+.dropdown-item:hover {
+  background-color: #e0e0e06b;
+}
 /* /*----------------------------------------------* */
 /*side bar */
 .children {
@@ -366,4 +369,12 @@ label {
     width: 66vw;
     z-index: 2;
   }
+}
+
+/* loading */
+.loading {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  min-height: 80vh;
 }

@@ -47,6 +47,7 @@ const Routes = [
       </CompanyAuth>
     ),
   },
+
   //jobseekers routes
   {
     path: "/dash-board-jobseeker",

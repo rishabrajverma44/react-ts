@@ -78,21 +78,23 @@ const Table = () => {
             </tbody>
           </table>
 
-          <div className={styles.pagination}>
-            <button
-              disabled={formCtx?.currentPage! === 1}
-              onClick={() => formCtx?.setCurrentPage((prev) => prev - 1)}>
-              Prev
-            </button>
-            <span>
-              Page {formCtx?.currentPage!} of {totalPages}
-            </span>
-            <button
-              disabled={formCtx?.currentPage! === totalPages}
-              onClick={() => formCtx?.setCurrentPage((prev) => prev + 1)}>
-              Next
-            </button>
-          </div>
+          {totalForms > 9 && (
+            <div className={styles.pagination}>
+              <button
+                disabled={formCtx?.currentPage! === 1}
+                onClick={() => formCtx?.setCurrentPage((prev) => prev - 1)}>
+                Prev
+              </button>
+              <span>
+                Page {formCtx?.currentPage!} of {totalPages}
+              </span>
+              <button
+                disabled={formCtx?.currentPage! === totalPages}
+                onClick={() => formCtx?.setCurrentPage((prev) => prev + 1)}>
+                Next
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div className="no_forms">

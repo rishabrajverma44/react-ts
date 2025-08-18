@@ -7,6 +7,7 @@ import {
   isAppliedForm,
 } from "../../Api/ApiCall/jobSeekers";
 import type { CompanyDetails, formInterface } from "../../types";
+import company from "../../utils/office.png";
 import { toast } from "react-toastify";
 
 const defaultForm: formInterface = {
@@ -67,7 +68,13 @@ const ApplyJob = () => {
             Company Name: <strong>{companyDetails?.userName || "N/A"}</strong>
           </span>
           <span>Role: {formDetails.role}</span>
-          <span>Location: {formDetails.location}</span>
+          <span>job-Type: {formDetails.jobType}</span>
+          <div>
+            <span>
+              <img className={styles.company_img} src={company} />
+            </span>
+            <span>{formDetails.location}</span>
+          </div>
           <div className={styles.apply}>
             <button onClick={() => navigate("/Jobseeker")}>Back</button>
             <button
@@ -83,7 +90,7 @@ const ApplyJob = () => {
           <div
             dangerouslySetInnerHTML={{
               __html:
-                formDetails.notes || "<p>No additional details provided.</p>",
+                formDetails.notes || "<p>No details provided by company.</p>",
             }}
           />
         </div>
