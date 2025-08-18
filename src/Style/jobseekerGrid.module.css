@@ -16,7 +16,8 @@
   border-left: 4px solid #ccc;
   padding: 8px;
   padding-top: 0px;
-  height: max-content;
+  height: 100px;
+  overflow: hidden;
   border-radius: 8px;
   transition: ease-in, 0.3s;
 }
@@ -71,4 +72,7 @@
 .footer {
   display: flex;
   justify-content: space-between;
+}
+.notes {
+  font-weight: 400;
 }

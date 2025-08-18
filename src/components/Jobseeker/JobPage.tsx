@@ -16,14 +16,24 @@ export default function JobsPage() {
   const [totalCount, setTotalCount] = useState(null);
   const [size, setTotalSize] = useState<number>(20);
   const [hasmore, setHasMore] = useState<boolean>(true);
+  const [sortBy, setSortBy] = useState<string>("updatedAt");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const lastJobRef = useRef<HTMLDivElement | null>(null);
 
   const fetchJobs = async () => {
     setLoading(true);
-    const responseData = await getAllForms(page, size, search);
+    const responseData = await getAllForms(
+      page,
+      size,
+      search,
+      sortBy,
+      sortOrder
+    );
     if (responseData) {
       setJobs((prevJobs) =>
-        page === 1 ? responseData.data : [...prevJobs, ...responseData.data]
+        page === 1 || viewType === "table"
+          ? responseData.data
+          : [...prevJobs, ...responseData.data]
       );
       setHasMore(responseData.hasMore);
       setTotalCount(responseData.total);
@@ -37,9 +47,20 @@ export default function JobsPage() {
     setJobs([]);
   };
 
+  const handleSort = (column: string) => {
+    if (sortBy === column) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortBy(column);
+      setSortOrder("asc");
+    }
+    setPage(1);
+    setJobs([]);
+  };
+
   useEffect(() => {
     fetchJobs();
-  }, [page, size, search]);
+  }, [page, size, search, sortOrder]);
 
   //scroll
   useEffect(() => {
@@ -113,46 +134,58 @@ export default function JobsPage() {
             </button>
           </div>
         </div>
-        {loading && (
-          <div>
-            <h2 className={styles.nojobs}>Loading....</h2>
-          </div>
-        )}
 
         {viewType === "grid" ? (
           <GridView jobs={jobs} lastJobRef={lastJobRef} />
         ) : (
-          <TableView jobs={jobs} />
+          <TableView
+            jobs={jobs}
+            sortBy={sortBy}
+            sortOrder={sortOrder}
+            onSort={handleSort}
+          />
         )}
 
-        {jobs.length > 0 ? (
-          <div className="">
-            {viewType === "table" && loading != true && (
-              <div className={styles.table_footer_pagination}>
-                <div className={styles.table_page}>
-                  <button
-                    disabled={page <= 1}
-                    onClick={() => setPage((currentPage) => currentPage - 1)}
-                    className="">
-                    Prev
-                  </button>
-                  <span>
-                    Page {page} of {Math.ceil(totalCount! / size)}
-                  </span>
-                  <button
-                    disabled={hasmore === false}
-                    onClick={() => setPage((currentPage) => currentPage + 1)}
-                    className="">
-                    Next
-                  </button>
-                </div>
-              </div>
-            )}
+        {loading ? (
+          <div>
+            <h2 className={styles.nojobs}>Loading....</h2>
           </div>
         ) : (
-          <div>
-            <h2 className={styles.nojobs}>No jobs found !</h2>
-          </div>
+          <>
+            {jobs.length > 0 ? (
+              <div className="">
+                {viewType === "table" && (
+                  <div className={styles.table_footer_pagination}>
+                    <div className={styles.table_page}>
+                      <button
+                        disabled={page <= 1}
+                        onClick={() =>
+                          setPage((currentPage) => currentPage - 1)
+                        }
+                        className="">
+                        Prev
+                      </button>
+                      <span>
+                        Page {page} of {Math.ceil(totalCount! / size)}
+                      </span>
+                      <button
+                        disabled={hasmore === false}
+                        onClick={() =>
+                          setPage((currentPage) => currentPage + 1)
+                        }
+                        className="">
+                        Next
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div>
+                <h2 className={styles.nojobs}>No jobs found !</h2>
+              </div>
+            )}
+          </>
         )}
       </div>
     </>

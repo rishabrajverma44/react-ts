@@ -15,7 +15,7 @@ export default function GridView({ jobs, lastJobRef }: GridViewProps) {
   return (
     <div className={styles.card_container}>
       {jobs.map((job, index) => {
-        // Attach lastJobRef to the last job card
+        // Attach last JobRef to the last job card
         const isLastJob = index === jobs.length - 1;
 
         return (
@@ -53,6 +53,13 @@ export default function GridView({ jobs, lastJobRef }: GridViewProps) {
                 />
                 {job.location}
               </div>
+            </div>
+            <div className={styles.notes}>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: job.notes || "<p>No additional details provided.</p>",
+                }}
+              />
             </div>
           </div>
         );

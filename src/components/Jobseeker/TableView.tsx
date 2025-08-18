@@ -2,15 +2,32 @@ import type { JobSeeker } from "../../types";
 import styles from "../../Style/jobseekerTable.module.css";
 import { useNavigate } from "react-router-dom";
 
-export default function TableView({ jobs }: { jobs: JobSeeker[] }) {
+type TableViewProps = {
+  jobs: JobSeeker[];
+  sortBy: string;
+  sortOrder: "asc" | "desc";
+  onSort: (column: string) => void;
+};
+
+export default function TableView({
+  jobs,
+  sortBy,
+  sortOrder,
+  onSort,
+}: TableViewProps) {
   const navigate = useNavigate();
   return (
     <div className={styles.main}>
       <table>
         <thead>
           <tr>
-            <th>Company name</th>
-            <th>Role</th>
+            <th onClick={() => onSort("company")}>
+              Company name
+              {sortBy === "company" ? (sortOrder === "asc" ? "↑" : "↓") : ""}
+            </th>
+            <th onClick={() => onSort("role")}>
+              Role {sortBy === "role" ? (sortOrder === "asc" ? "↑" : "↓") : ""}
+            </th>
             <th>jobType</th>
             <th>Location</th>
             <th>Status</th>

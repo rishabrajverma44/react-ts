@@ -3,10 +3,14 @@ import axiosInstance from "../axiosInstance";
 export const getAllForms = async (
   page: number,
   size: number,
-  search: string
+  search: string,
+  sortBy: string,
+  sortOrder: string
 ) => {
   const response = await axiosInstance
-    .get(`/job_seeker?page=${page}&size=${size}&search=${search}`)
+    .get(
+      `/job_seeker?page=${page}&size=${size}&search=${search}&sortBy=${sortBy}&sortOrder=${sortOrder}`
+    )
     .then((res) => {
       if (res.status === 200) {
         return res.data;
@@ -87,9 +91,17 @@ export const isAppliedForm = async (formId: string) => {
 
   return response;
 };
-export const appliedJobs = async () => {
+export const appliedJobs = async (
+  page: number,
+  size: number,
+  search: string,
+  sortBy: string,
+  sortOrder: string
+) => {
   const response = await axiosInstance
-    .get("/job_seeker/appliedForms")
+    .get(
+      `/job_seeker/appliedForms?page=${page}&size=${size}&search=${search}&sortBy=${sortBy}&sortOrder=${sortOrder}`
+    )
     .then((res) => {
       if (res.status === 200) {
         return res.data;
