@@ -35,7 +35,7 @@ export default function ApplieJobs() {
 
   useEffect(() => {
     getAppliedForms();
-  }, []);
+  }, [page]);
 
   return (
     <div className={styles.main}>
@@ -47,75 +47,87 @@ export default function ApplieJobs() {
         </>
       ) : (
         <>
-          <div className={styles.main_table}>
-            <table>
-              <thead>
-                <tr>
-                  <th>Company name</th>
-                  <th>Role</th>
-                  <th>jobType</th>
-                  <th>Location</th>
-                  <th>Status</th>
-                  <th>Last date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {jobs.map((job) => (
-                  <tr
-                    key={job.formID}
-                    onClick={() => navigate(`/jobApply/${job.formID}`)}>
-                    <td>{job.company}</td>
-                    <td>{job.role}</td>
-                    <td>{job.jobType}</td>
-                    <td>
-                      {job.jobType === "Remote"
-                        ? "remote location"
-                        : job.location}
-                    </td>
-                    <td>{job.status}</td>
-                    <td>{job.date}</td>
+          {jobs.length > 0 ? (
+            <div className={styles.main_table}>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Company name</th>
+                    <th>Role</th>
+                    <th>jobType</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th>Last date</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-            <div>
-              <div className={styles.table_page}>
-                <div className={styles.pagination}>
-                  <button
-                    disabled={page <= 1}
-                    onClick={() => setPage((currentPage) => currentPage - 1)}
-                    className="">
-                    Prev
-                  </button>
-                  <span>
-                    Page {page} of {Math.ceil(totalCount! / size)}
-                  </span>
-                  <button
-                    disabled={hasmore === false}
-                    onClick={() => setPage((currentPage) => currentPage + 1)}
-                    className="">
-                    Next
-                  </button>
-                </div>
+                </thead>
+                <tbody>
+                  {jobs.map((job) => (
+                    <tr
+                      key={job.formID}
+                      onClick={() => navigate(`/jobApply/${job.formID}`)}>
+                      <td>{job.company}</td>
+                      <td>{job.role}</td>
+                      <td>{job.jobType}</td>
+                      <td>
+                        {job.jobType === "Remote"
+                          ? "remote location"
+                          : job.location}
+                      </td>
+                      <td>{job.status}</td>
+                      <td>{job.date}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {jobs.length > 10 && (
+                <div>
+                  <div className={styles.table_page}>
+                    <div className={styles.pagination}>
+                      <button
+                        disabled={page <= 1}
+                        onClick={() =>
+                          setPage((currentPage) => currentPage - 1)
+                        }
+                        className="">
+                        Prev
+                      </button>
+                      <span>
+                        Page {page} of {Math.ceil(totalCount! / size)}
+                      </span>
+                      <button
+                        disabled={hasmore === false}
+                        onClick={() =>
+                          setPage((currentPage) => currentPage + 1)
+                        }
+                        className="">
+                        Next
+                      </button>
+                    </div>
 
-                <span className={styles.table_filter}>
-                  <select
-                    name="selectFilterCount"
-                    id="count"
-                    value={size}
-                    onChange={handleFilter}>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                    <option value="40">40</option>
-                    <option value="50">50</option>
-                    <option value="60">60</option>
-                    <option value="70">70</option>
-                  </select>
-                </span>
-              </div>
+                    <span className={styles.table_filter}>
+                      <select
+                        name="selectFilterCount"
+                        id="count"
+                        value={size}
+                        onChange={handleFilter}>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="40">40</option>
+                        <option value="50">50</option>
+                        <option value="60">60</option>
+                        <option value="70">70</option>
+                      </select>
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
+          ) : (
+            <div className="loading">
+              <h2>No data !</h2>
+            </div>
+          )}
         </>
       )}
     </div>

@@ -63,3 +63,15 @@ export interface JobSeeker {
 export interface CompanyDetails {
   userName: string;
 }
+//applied jobs
+export interface AppliedJobs {
+  formID: string;
+  company: string;
+  role: string;
+  jobType: string;
+  location: string;
+  status: string;
+  date: string;
+  notes: string;
+  applied: boolean;
+}

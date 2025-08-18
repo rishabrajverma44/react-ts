@@ -37,9 +37,12 @@ const CompanyNav = () => {
                     {isOpen && (
                       <div className="dropdown-menu">
                         <div className="dropdown-content">
+                          <button className="dropdown-item">Profile</button>
+                        </div>
+
+                        <div className="dropdown-content">
                           <button
-                            type="submit"
-                            className="dropdown-item none_btn"
+                            className="dropdown-item"
                             onClick={handleLogout}>
                             Sign out
                           </button>

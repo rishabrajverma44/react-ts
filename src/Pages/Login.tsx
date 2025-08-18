@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import logo from "../utils/logo.png";
 
 const defaultForm: LoginForm = {
-  userEmail: "emp1@gmail.com",
+  userEmail: "jobseeker1@gmail.com",
   password: "1234",
 };
 

@@ -59,6 +59,7 @@
 .textEditor_container {
   z-index: 0;
 }
+
 @media screen and (max-width: 768px) {
   #applicationForm {
     grid-template-columns: 1fr;

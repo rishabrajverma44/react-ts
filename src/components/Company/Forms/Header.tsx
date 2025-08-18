@@ -1,4 +1,4 @@
-import { UseFormContext } from "../../context/FormContextProvider";
+import { UseFormContext } from "../../../context/FormContextProvider";
 const Header = () => {
   const formCtx = UseFormContext();
   const data = formCtx?.headerData;
@@ -20,9 +20,6 @@ const Header = () => {
           <span aria-label="Total job hired">
             {" "}
             Hired: <span>{data?.totalHired}</span>{" "}
-          </span>
-          <span aria-label="Total job rejected">
-            Rejected: <span>{data?.totalRejected}</span>
           </span>
         </p>
       </div>
