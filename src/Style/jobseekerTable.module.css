@@ -2,11 +2,27 @@
   padding: 15px;
   overflow: auto;
 }
-
-th {
-  color: #374151;
+.main > table {
+  background-color: white;
+  border-collapse: collapse;
+}
+th,
+td {
+  border: none;
+}
+table thead {
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+table td {
+  padding: 5px;
+}
+table tbody tr {
+  font-weight: 400;
+  color: #686868;
+  border-bottom: 1px solid #e5e7eb;
 }
 tbody > tr:hover {
-  background-color: #bdbdbd57;
+  background-color: #f5f5f5f6;
   cursor: pointer;
 }

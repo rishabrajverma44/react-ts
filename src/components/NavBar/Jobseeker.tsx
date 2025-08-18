@@ -22,7 +22,7 @@ const JobseekerNav = () => {
           <div className="navbar-container">
             <section className="navbar-section">
               <div className="logo-container">
-                <Link to="/mobilehome">
+                <Link to="/dash-board-jobseeker">
                   <img src={logo} alt="logo" className="logo" />
                 </Link>
               </div>

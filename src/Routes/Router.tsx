@@ -65,7 +65,7 @@ const Routes = [
     ),
   },
   {
-    path: "/jobApply",
+    path: "/jobApply/:formID",
     element: (
       <JobSeekerAuth allowedRoles={["job_seeker"]}>
         <ApplyJob />

@@ -1,8 +1,12 @@
 import axiosInstance from "../axiosInstance";
 
-export const getAllForms = async () => {
+export const getAllForms = async (
+  page: number,
+  size: number,
+  search: string
+) => {
   const response = await axiosInstance
-    .get("/job_seeker")
+    .get(`/job_seeker?page=${page}&size=${size}&search=${search}`)
     .then((res) => {
       if (res.status === 200) {
         return res.data;
@@ -18,15 +22,15 @@ export const applyFormByFormID = async (formId: string) => {
     .post(`job_seeker/apply/${formId}`)
     .then((res) => {
       if (res.status === 200) {
-        return true;
+        return res;
       }
     })
-    .catch(() => {
-      return null;
+    .catch((err) => {
+      console.log("error in applying", err);
+      return err;
     });
   return response;
 };
-
 export const getUserName = async () => {
   const response = await axiosInstance
     .get("/job_seeker/useDetails")
@@ -40,8 +44,50 @@ export const getUserName = async () => {
     });
   return response;
 };
+export const getNumbersOfFormApplied = async () => {
+  const response = await axiosInstance
+    .get("/job_seeker/numbersOfFormApplied")
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      }
+    })
+    .catch(() => {
+      return null;
+    });
+  return response;
+};
+export const getFormByFormId = async (formId: string) => {
+  const response = axiosInstance
+    .get(`/job_seeker/forms/${formId}`)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      }
+    })
+    .catch((err) => {
+      console.log("error in getting form", err);
+      return null;
+    });
 
-export const getUserAppliedFormNumber = async () => {
+  return response;
+};
+export const isAppliedForm = async (formId: string) => {
+  const response = await axiosInstance
+    .post(`job_seeker/applied/${formId}`)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      }
+    })
+    .catch((err) => {
+      console.log("error", err);
+      return err;
+    });
+
+  return response;
+};
+export const appliedJobs = async () => {
   const response = await axiosInstance
     .get("/job_seeker/appliedForms")
     .then((res) => {

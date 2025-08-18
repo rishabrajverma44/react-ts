@@ -57,10 +57,11 @@ const CompanyAuth = ({ children, allowedRoles = [] }: Props) => {
         />
       </div>
       <CompanyNav />
-
-      <div className={`content ${isSideMenuOpen ? "squeezed" : ""}`}>
-        <div className={`children ${isSideMenuOpen ? "squeezed" : ""}`}>
-          <FormContextProvider>{children}</FormContextProvider>
+      <div className="main-page-content">
+        <div className={`content ${isSideMenuOpen ? "squeezed" : ""}`}>
+          <div className={`children ${isSideMenuOpen ? "squeezed" : ""}`}>
+            <FormContextProvider>{children}</FormContextProvider>
+          </div>
         </div>
       </div>
     </div>

@@ -30,6 +30,7 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
   const [searchedQuery, setSearchedQuery] = useState<string>("");
   const [filteredData, setFilterdData] = useState<formInterface[]>([]);
   const [headerData, setHeaderData] = useState<Header | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const setterFunction = (formID?: string) => {
     if (formID) {
@@ -62,6 +63,7 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
   //search context
   const searchContext = () => {
     const allTableData: formInterface[] = forms;
+    setCurrentPage(1);
     if (!(searchedQuery.trim() === "")) {
       const filteredData = allTableData.filter((element: formInterface) => {
         return (
@@ -70,7 +72,7 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
           element.location
             .toLowerCase()
             .includes(searchedQuery.toLowerCase()) ||
-          element.notes.toLowerCase().includes(searchedQuery.toLowerCase())
+          element.role.toLowerCase().includes(searchedQuery.toLowerCase())
         );
       });
       setFilterdData(filteredData);
@@ -104,7 +106,7 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
 
   useEffect(() => {
     searchContext();
-  }, [searchedQuery]);
+  }, [searchedQuery, forms]);
 
   useEffect(() => {
     getFormData();
@@ -124,6 +126,8 @@ export const FormContextProvider: React.FC<FormContextProps> = (props) => {
         setSearchedQuery,
         filteredData,
         headerData,
+        currentPage,
+        setCurrentPage,
       }}>
       {props.children}
     </FormContext.Provider>
