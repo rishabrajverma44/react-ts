@@ -70,7 +70,10 @@ const Registration = () => {
           toast.error("Somthing went wrong !");
         }
       })
-      .catch(() => {
+      .catch((e) => {
+        if (e.status === 409) {
+          toast.warn(e.response.data);
+        }
         return null;
       });
   };

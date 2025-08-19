@@ -70,3 +70,17 @@ export const deleteFormData = async (formID: string) => {
       return null;
     });
 };
+
+export const getChartData = async () => {
+  const res = axiosInstance
+    .get(`/company/user/getchart`)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      }
+    })
+    .catch(() => {
+      return null;
+    });
+  return res;
+};

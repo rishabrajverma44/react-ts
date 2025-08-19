@@ -378,3 +378,18 @@ label {
   background-color: white;
   min-height: 80vh;
 }
+/*chart*/
+
+.chartContainer {
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chart {
+  background-color: white;
+  border-radius: 15px;
+  border: 1px solid gainsboro;
+  width: 450px;
+  height: 450px;
+}

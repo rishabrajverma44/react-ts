@@ -112,3 +112,17 @@ export const appliedJobs = async (
     });
   return response;
 };
+
+export const getChartData = async () => {
+  const res = axiosInstance
+    .get(`/job_seeker/getChart`)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      }
+    })
+    .catch(() => {
+      return null;
+    });
+  return res;
+};
